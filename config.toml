@@ -10,8 +10,8 @@ theme = "hugo-theme-hello-friend-ng"
 metaDataFormat = "yaml"
 pygmentsUseClasses = true
 pygmentCodeFences = true
-#disqusShortname = "XXX"
-#googleAnalytics = "XXX"
+#disqusShortname = "https-shaaf-dev"
+googleAnalytics = "UA-58961685-1"
 
 
 [params]
