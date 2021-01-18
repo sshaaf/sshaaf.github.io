@@ -1,0 +1,63 @@
+---
+title: Command
+tags: [computers, design, design-patterns, gof, howto, java, patterns, programming, software, software-development, command]
+date: 2008-10-31 20:45:04 +01:00
+
+---
+
+
+By using the command pattern you are seperating the operation from the invoking object. And just because of that it becomes easier to change the command without chagning the caller/s.
+This means that you could use Command pattern when you might have the following situation
+
+You want to parameterize objects to perform an action
+You want to specify, execute and queue requests at different times.
+
+Just to quickly start you need a command object, An interface will keep it easy going in this case, thus providing you with the option of extending other classes e.g. Swing MenuItem or Button.
+Below the execute Method is the one invoked to do something when this command is called or asked to do its stuff.
+Where as the getCommandName is assumed as a unique name how ever I am sure we can always come up with a better implementation for uniqueness.
+
+'''
+	public interface Command {
+		public void execute();
+    		public String getCommandName();
+
+	}
+'''
+
+And example implementation of the Command should look as follows
+A Command Name, and and execute Method to tell what happens when this command is called.
+
+'''
+	public class ForwardCmd implements Command {
+
+   		private String COMMAND_NAME = "Back";
+
+   		public BackCmd() {
+       			super();
+   		}
+
+   		public String getCommandName() {
+       		return COMMAND_NAME;
+    		}
+
+    		public void execute() {
+        		System.out.println("Your wish, my command");
+    		}
+	}
+'''
+
+The command manager is the controller in this case. It registers command objects. the "registerCommand" will simply take a command and store it in a list or something alike. This means you could load it out of a jar file, or an xml or path and just pass the object to the "registerCommand" AS a command offcourse.
+
+the "execute" Command will simply execute the Command passed to it.
+
+And the "getCommand" returns a command by looking up a COMMAND_NAME. So if you provide a name to it through you system it should give you an object of type Command and simple pass it to execute. Again this would be a controller logic and not the client one.
+
+'''
+	public abstract class AbstractCommandManager {
+
+    		public abstract void registerCommand(Command command);
+    		public abstract Collection getAllCommands();
+    		public abstract void execute(Command command);
+    		public abstract Command getCommand(String name);
+	}
+'''
