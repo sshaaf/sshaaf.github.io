@@ -5,6 +5,8 @@ tags: [config, docker, fedora, install]
 date: 2020-01-18
 ---
 
+I use Fedora as my regular Linux. And I have been doing that for years now, even though I am a developer its simple and straight forward enough to get my way around. It has some great features and spins. You should check it out at [Fedora project](https://getfedora.org/)
+
 Here is a quick list of things that worked for me to setup docker on Fedora 33.
 I followed the guidelines [here](https://docs.docker.com/engine/install/fedora/).
 Plus some more to config the firewall and user access.
@@ -39,4 +41,4 @@ newgrp docker
 docker run hello-world
 ```
 
-The last command should print a nice standard output from the hello-world container. 
+The last command should print a nice standard output from the hello-world container.
