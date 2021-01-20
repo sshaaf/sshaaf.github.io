@@ -39,4 +39,4 @@ newgrp docker
 docker run hello-world
 ```
 
-This should be it.
+The last command should print a nice standard output from the hello-world container. 
