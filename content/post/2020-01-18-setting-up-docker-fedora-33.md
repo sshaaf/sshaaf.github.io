@@ -42,3 +42,8 @@ docker run hello-world
 ```
 
 The last command should print a nice standard output from the hello-world container.
+
+Also:
+- this nice guide in 
+[Fedora Magazine](https://fedoramagazine.org/docker-and-fedora-32/) uses the Moby project. 
+- There are also alternatives, like [Podman](https://podman.io/getting-started/) and [Buildah](https://buildah.io/)
