@@ -1,38 +1,21 @@
 baseurl = "https://shaaf.dev"
-languageCode = "en-us"
-contentdir    = "content"
-layoutdir     = "layouts"
-publishdir    = "public"
-title = "Shaaf's Blog"
-theme = "hugo-theme-hello-friend-ng"
-defaultContentLanguage = "en"
-metaDataFormat = "yaml"
-pygmentsUseClasses = true
-pygmentCodeFences = true
-rssLimit = 10  # Maximum number of items in the RSS feed.
-copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This message is only used by the RSS template.
-enableEmoji = true  # Shorthand emojis in content files - https://gohugo.io/functions/emojify/
-disqusShortname = "https-shaaf-dev"
-googleAnalytics = "UA-58961685-1"
-
-[author]
-  name = "Syed M Shaaf"
-
-[blackfriday]
-  # hrefTargetBlank = true
-  # noreferrerLinks = true
-  # nofollowLinks = true
+theme = "anatole"
 
 
 
 [params]
+  title = "I'm Jane Doe"
+  author = "Jane Doe"
+  description = "Call me Jane"
+  profilePicture = "images/profile.jpg"
+  disqusShortname = "https-shaaf-dev"
+  googleAnalytics = "UA-58961685-1"
+
+
   dateform        = "Jan 2, 2006"
   dateformShort   = "Jan 2"
   dateformNum     = "2006-01-02"
   dateformNumTime = "2006-01-02 15:04"
-  # "light" or "dark"
-  # defaultTheme = "dark"
-  # Enable to show reading time in minutes for posts
   showReadingTime = true
 
   # Subtitle for home
@@ -57,6 +40,8 @@ googleAnalytics = "UA-58961685-1"
   disable404     = false
   disableHugoGeneratorInject = false
 
+  profilePicture = "images/profile.jpg"
+  copyright = "2020-2021"
   # Colors for favicons
    #
    [params.favicon.color]
@@ -64,23 +49,28 @@ googleAnalytics = "UA-58961685-1"
      msapplication = "#1b1c1d"
      theme = "#1b1c1d"
 
-   # Social icons
-   [[params.social]]
-     name = "twitter"
-     url  = "https://twitter.com/syshaaf"
 
-   [[params.social]]
-     name = "gitlab"
-     url  = "https://gitlab.com/shaaf"
+## Math settings
+[math]
+enable = false  # options: true, false. Enable math support globally, default: false. You can always enable math on per page.
+use = "katex"  # options: "katex", "mathjax". default is "katex".
 
-   [[params.social]]
-     name = "github"
-     url  = "https://github.com/sshaaf"
+## Social links
+# use 'fab' when brand icons, use 'fas' when standard solid icons.
+[[socialIcons]]
+icon = "fab fa-linkedin"
+title = "Linkedin"
+url = "https://dk.linkedin.com/in/shaaf"
 
-   [[params.social]]
-     name = "linkedin"
-     url  = "https://dk.linkedin.com/in/shaaf"
+[[socialIcons]]
+icon = "fab fa-github"
+title = "GitHub"
+url = "https://github.com/sshaaf"
 
+[[socialIcons]]
+icon = "fab fa-twitter"
+title = "Twitter"
+url = "https://twitter.com/syshaaf"
 
 [taxonomies]
     category = "posts"
@@ -105,14 +95,6 @@ googleAnalytics = "UA-58961685-1"
        logoCursorColor    = "#67a2c9"
       # Set to a valid CSS time value to change the animation duration, "0s" to disable.
        logoCursorAnimate  = "2s"
-
-#    [languages.en.params.logo]
-#      logoText = "Hello friend!"
-#      logoHomeLink = "/"
-    # or
-    #
-    # path = "/img/your-example-logo.svg"
-    # alt = "Your example logo alt text"
 
   # And you can even create generic menu
   [[menu.main]]
