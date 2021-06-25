@@ -5,7 +5,7 @@ copyright = "2020-2021"
 description = "programming, linux, java and other things.."
 profilePicture = "images/profile.jpg"
 keywords = ""
-favicon = "images/"
+favicon = "favicon/"
 # example ["css/custom.css"]
 customCss = []
 # example ["js/custom.js"]

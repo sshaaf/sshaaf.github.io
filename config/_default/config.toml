@@ -1,19 +1,74 @@
 baseURL = "https://shaaf.dev"
-languageCode = "en"
-DefaultContentLanguage = "en"
+languageCode = "en-us"
 title = "Shaaf's Blog"
-theme = "anatole"
-summarylength = 10
-enableEmoji = true
-enableRobotsTXT = true
-
-# Enable Disqus
-disqusShortname = "https-shaaf-dev"
-
+theme = "cactus"
 # Google Analytics
 googleAnalytics = "UA-58961685-1"
 
-# Syntax highlighting
-pygmentsUseClasses = true
-pygmentsCodeFences = true
-pygmentsCodefencesGuessSyntax = true
+# Main menu which appears below site header.
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "Writings"
+url = "/posts"
+weight = 2
+
+[[menu.main]]
+name = "Tags"
+url = "/tags"
+weight = 3
+
+[[menu.main]]
+name = "About"
+url = "/about"
+weight = 4
+
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 4
+    ordered = false
+    startLevel = 2
+
+[params]
+
+  colortheme = "dark" # dark, light, white, or classic
+  rss = true # generate rss feed. default value is false
+  googleAnalyticsAsync = true # use asynchronous tracking. Synchronous tracking by default
+
+  # Home page settings
+  description = "programming, linux, java, opensource and other things"
+  mainSection = "posts" # your main section
+  showAllPostsOnHomePage = false # default
+  postsOnHomePage = 5 # this option will be ignored if showAllPostsOnHomePage is set to true
+  tagsOverview = true # show tags overview by default.
+#  showProjectsList = true # show projects list by default (if projects data file exists).
+#  projectsUrl = "https://github.com/gohugoio" # title link for projects list
+
+  # https://gohugo.io/functions/format/#hugo-date-and-time-templating-reference
+  dateFormat = "2006-01-02" # default
+
+  # Post page settings
+  show_updated = true # default
+  showReadTime = true # default
+
+  [params.comments]
+    enabled = false # default
+    engine = "disqus" # more supported engines will be added.
+
+
+  # the value of name should be an valid font awesome icon name (brands type)
+  # https://fontawesome.com/icons?d=gallery&s=brands
+  [[params.social]]
+    name = "github"
+    link = "https://github.com/sshaaf"
+  [[params.social]]
+    name = "linkedin"
+    link = "https://www.linkedin.com/in/shaaf/"
+  [[params.social]]
+    name = "twitter"
+    link = "https://twitter.com/syshaaf"  # no need for "mailto:" in the head
+
