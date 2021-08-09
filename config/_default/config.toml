@@ -1,7 +1,7 @@
 baseURL = "https://shaaf.dev"
 languageCode = "en-us"
 title = "Shaaf's Blog"
-theme = "cactus"
+theme = "PaperMod"
 # Google Analytics
 googleAnalytics = "UA-58961685-1"
 
