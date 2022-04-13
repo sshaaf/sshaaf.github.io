@@ -98,7 +98,7 @@ public class QMain implements QuarkusApplication {
 I am now going to run this app in a terminal. And the command should initiate a livecoding session as the app is started. 
 
 
-## Initiate Live Coding
+### Initiate Live Coding
 
 ```
 ~/demos/getting-started mvn quarkus:dev
