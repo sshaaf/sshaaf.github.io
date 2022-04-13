@@ -10,6 +10,7 @@ buildFuture: false
 buildExpired: false
 enableEmoji: true
 googleAnalytics: UA-58961685-1
+disqusShortname: https-shaaf-dev
 
 minify:
     disableXML: true
@@ -37,12 +38,14 @@ outputs:
         - RSS
         - JSON
 
+ 
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
     description: "Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"
-    author: Theme PaperMod
+    author: Shaaf, Syed
     # author: ["Me", "You"] # multiple authors
 
+    comments: true
     defaultTheme: auto
     # disableThemeToggle: true
     ShowShareButtons: true
