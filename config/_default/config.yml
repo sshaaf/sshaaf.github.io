@@ -45,7 +45,7 @@ params:
     author: Shaaf, Syed
     # author: ["Me", "You"] # multiple authors
 
-    comments: true
+    comments: false
     defaultTheme: auto
     # disableThemeToggle: true
     ShowShareButtons: true
