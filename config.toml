@@ -13,17 +13,7 @@ hasCJKLanguage = true
 home = ["HTML", "RSS", "Algolia"]
 
 
-[params.giscus]
-  data_repo="sshaaf/sshaaf.github.io"
-  data_repo_id="R_kgDOI8ZtWg"
-  data_category="General"
-  data_category_id="DIC_kwDOI8ZtWs4CUIWL"
-  data_mapping="pathname"
-  data_reactions_enabled="1"
-  data_emit_metadata="0"
-  data_theme="light"
-  data_lang="en"
-  crossorigin="anonymous"
+
 
 [params]
   header_image = "images/fano-summer.jpeg"
@@ -32,6 +22,7 @@ home = ["HTML", "RSS", "Algolia"]
   keyword = "Java, developers, devops, , kubernetes, redhat, Shaaf Blog, Web, keycloak, PaaS, Istio, Kubernetes, infinispan, Microservice"
   slogan = "A technical blog about Java, Kubernetes and things that matter"
 
+  plantuml = true
   image_404 = "img/404-bg.jpg"
   title_404 = "Something was lost... :("
   omit_categories = false
@@ -126,6 +117,18 @@ home = ["HTML", "RSS", "Algolia"]
   [[params.addtional_menus]]
   title =  "ABOUT"
   href =  "/about/"
+
+[params.giscus]
+data_repo="sshaaf/sshaaf.github.io"
+data_repo_id="R_kgDOI8ZtWg"
+data_category="General"
+data_category_id="DIC_kwDOI8ZtWs4CUIWL"
+data_mapping="pathname"
+data_reactions_enabled="1"
+data_emit_metadata="0"
+data_theme="light"
+data_lang="en"
+crossorigin="anonymous"
 
 [outputFormats.Algolia]
 baseName = "algolia"
