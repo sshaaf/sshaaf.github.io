@@ -1,0 +1,102 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:site_name" content="Shaaf, Syed's blog"><meta property="og:type" content="article"><meta property="og:image" content="https://shaaf.dev/images/fano-summer.jpeg"><meta property="twitter:image" content="https://shaaf.dev/images/fano-summer.jpeg"><meta name=title content="Crocus - CSV Reader"><meta property="og:title" content="Crocus - CSV Reader"><meta property="twitter:title" content="Crocus - CSV Reader"><meta name=description content="A technical blog about Java, Kubernetes and things that matter"><meta property="og:description" content="A technical blog about Java, Kubernetes and things that matter"><meta property="twitter:description" content="A technical blog about Java, Kubernetes and things that matter"><meta property="twitter:card" content="summary"><meta name=keyword content="Java, developers, devops, , kubernetes, redhat, Shaaf Blog, Web, keycloak, PaaS, Istio, Kubernetes, infinispan, Microservice"><link rel="shortcut icon" href=/img/favicon.ico><title>Crocus - CSV Reader | A developers blog | Shaaf, Syed Blog</title><link rel=canonical href=/post/2008-10-03-crocus-csv-reader/><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/hugo-theme-cleanwhite.min.css><link rel=stylesheet href=/css/zanshang.css><link href=https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css rel=stylesheet type=text/css><script src=/js/jquery.min.js></script>
+<script src=/js/bootstrap.min.js></script>
+<script src=/js/hux-blog.min.js></script>
+<script src=/js/lazysizes.min.js></script></head><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-58961685-1","auto"),ga("send","pageview"))</script><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button>
+<a class=navbar-brand href=/>Shaaf, Syed's blog</a></div><div id=huxblog_navbar><div class=navbar-collapse><ul class="nav navbar-nav navbar-right"><li><a href=/>All Posts</a></li><li><a href=/archive/>ARCHIVE</a></li><li><a href=/about/>ABOUT</a></li><li><a href=/search><i class="fa fa-search"></i></a></li></ul></div></div></div></nav><script>var $body=document.body,$toggle=document.querySelector(".navbar-toggle"),$navbar=document.querySelector("#huxblog_navbar"),$collapse=document.querySelector(".navbar-collapse");$toggle.addEventListener("click",handleMagic);function handleMagic(){$navbar.className.indexOf("in")>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf("in")<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script><style type=text/css>header.intro-header{background-image:url(/images/fano-summer.jpeg)}</style><header class=intro-header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><div class=tags><a class=tag href=/tags/java title=java>java</a>
+<a class=tag href=/tags/programming title=programming>programming</a>
+<a class=tag href=/tags/software title=software>software</a>
+<a class=tag href=/tags/csv title=csv>csv</a>
+<a class=tag href=/tags/utils title=utils>utils</a>
+<a class=tag href=/tags/how-to title=how-to>how-to</a>
+<a class=tag href=/tags/api title=api>api</a></div><h1>Crocus - CSV Reader</h1><h2 class=subheading></h2><span class=meta>Posted by
+Shaaf, Syed's blog
+on
+Friday, October 3, 2008</span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+post-container"><p>Easy to use ready to go CSV File Reading utility. Read One or Multiple files into a RecordManager, quick access to the file with segmentation into Fields and Records. Merge Multiple CSV files in one. Listener to CSV Files.</p><p><a href="https://sourceforge.net/project/platformdownload.php?group_id=172152">Download Here</a></p><p>Organization:
+A CSV file is broken up as follows
+A CSVField has a group of characters
+A CSVRecord has a group of CSVFields
+A CSVFile has a group of record</p><p>How To Use:</p><p>Reading a Single CSVFile into a RecordManager</p><p>&rsquo;&rsquo;'
+// Creating a single file interface
+CSVSingleFileInterface fileInterface = new CSVSingleFileInterface("/media/data/dev/workspace/crocus/testData/drupal-sample.csv",CSVConstants.COMMA);
+// Calling the read returns a CSVRecordManager i.e. in memory
+AbstractCSVRecordManager manager = fileInterface.read();
+&rsquo;''</p><p>Reading multiple files into one RecordManager</p><p>&rsquo;&rsquo;'
+// Specify a FileSet
+AbstractCSVFileSet fileSet = new CSVFileSet();</p><pre><code>// Add files to the set
+fileSet.addFile(&quot;testData/drupal-sample.csv&quot;);
+fileSet.addFile(&quot;testData/countries.csv&quot;);
+
+// Add the fileSet to a Reading Interface
+CSVFileSetInterface fileSetInterface = new CSVFileSetInterface(fileSet);
+
+//  Reading returns a manager same as in a Single file case.
+AbstractCSVRecordManager manager = fileSetInterface.read();
+</code></pre><p>&rsquo;''</p><p>This functionality is not complete but a peak is available.
+You can now specify a Listener to Pre, Post and On Add of a record.</p><p>Setting up a Listener.</p><p>To add you listener simply implement the RecordListener class</p><p>&rsquo;&rsquo;'
+// Get a Record Manager
+AbstractCSVRecordManager manager = fileInterface.getRecordManager();</p><pre><code>// Add a listener to the Manager.
+manager.addRecordListener(this);
+// Implement an event listening method for listening to the RecordEvent.
+public void eventPerformed(RecordEvent recordEvent) {
+System.out.println(recordEvent.toString());
+
+}
+</code></pre><p>&rsquo;''</p><p>The Build System:</p><p>The build script supports the following targets</p><p>Build: init, clean, compile, jar, javadoc, tests</p><p>Including, Excluding files while creating compile, jar, tests</p><p>FILE DETAILS (Paths and description):</p><p>PRE RULES:</p><hr><p>CROCUS_DEV = the main directory i.e. examples from here onwards this will be the variable used for describing details.</p><p>You will need to set CROCUS_DEV env variable inorder to run the build process</p><p>Also you would need to set ANT_HOME for usage of ant. I have used Ant 1.6.5 for builds.</p><p>$CROCUS_DEV/src Holds the source code i.e. java files</p><p>$CROCUS_DEV/build Carries all the build related files</p><p>$CROCUS_DEV/build/build.xml Main build script</p><p>$CROCUS_DEV/build/include.xml patterns for inclusion of java files at the time of compilation</p><p>$CROCUS_DEV/build/exclude.xml patterns for exclusion of java files at the time of compilation</p><p>$CROCUS_DEV/build/tests_include.xml patterns for inclusion of test java files at the time of compilation</p><p>$CROCUS_DEV/build/tests_exclude.xml patterns for exclusion of test java files at the time of compilation</p><p>$CROCUS_DEV/build/tools tools used during build.</p><p>$CROCUS_DEV/build/jar_buildfiles you can simply specify a txt file with some wild card matches and name it as yourjar.jar for the build system to recognize that &ldquo;yourjar.jar&rdquo; will be the name for this jar that should have the packages in it as specified in this txt(yourjar.jar)</p><p>$CROCUS_DEV/build/bin Holds the uniz script and the bat file for developers to run the build script more or less as:</p><p>Windows: %CROCUS_DEV%/build all</p><p>Linux: $CROCUS_DEV/build.sh all</p><p>$CROCUS_DEV/build_results Holds all the results of the builds</p><p>$CROCUS_DEV/build_results/docs Created java docs</p><p>$CROCUS_DEV/build_results/classes Created classes</p><p>$CROCUS_DEV/build_results/tests Unit test results</p><p>$CROCUS_DEV/build_results/jars the jars created by the system</p><p>$CROCUS_DEV/jars/ Is the directory for jars related information</p><p>$CROCUS_DEV/jars/manifests Holds the manifests for the $CROCUS_DEV/build/jar_buildfiles.</p><p>Conventionally should use: Manifest.jarName</p><p>$CROCUS_DEV/jars/original3rdparty Holds any 3rd party vendor jars that might be used for putting in the classpath for the build system</p><p>$CROCUS_DEV/testData logically should hold all testData no matter how that might be. currently I have placed a few csv files (tabbed,comma,semicolon).</p><hr><ul class=pager><li class=previous><a href=/post/2008-08-25-svn-some-quick-commands-during-merge/ data-toggle=tooltip data-placement=top title="SVN - some quick commands during merge">&larr;
+Previous Post</a></li><li class=next><a href=/post/2008-10-10-abstract-factory-pattern/ data-toggle=tooltip data-placement=top title="Abstract Factory pattern">Next
+Post &rarr;</a></li></ul><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//https-shaaf-dev.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="col-lg-2 col-lg-offset-0
+visible-lg-block
+sidebar-container
+catalog-container"><div class=side-catalog><hr class="hidden-sm hidden-xs"><h5><a class=catalog-toggle href=#>CATALOG</a></h5><ul class=catalog-body></ul></div></div><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+sidebar-container"><section><hr class="hidden-sm hidden-xs"><h5><a href=/tags/>FEATURED TAGS</a></h5><div class=tags><a href=/tags/administrator title=administrator>administrator</a>
+<a href=/tags/ant title=ant>ant</a>
+<a href=/tags/automation title=automation>automation</a>
+<a href=/tags/build title=build>build</a>
+<a href=/tags/ci title=ci>ci</a>
+<a href=/tags/command title=command>command</a>
+<a href=/tags/computers title=computers>computers</a>
+<a href=/tags/continous title=continous>continous</a>
+<a href=/tags/design title=design>design</a>
+<a href=/tags/design-patterns title=design-patterns>design-patterns</a>
+<a href=/tags/docker title=docker>docker</a>
+<a href=/tags/engineering title=engineering>engineering</a>
+<a href=/tags/fedora title=fedora>fedora</a>
+<a href=/tags/gof title=gof>gof</a>
+<a href=/tags/how-to title=how-to>how-to</a>
+<a href=/tags/howto title=howto>howto</a>
+<a href=/tags/ibm title=ibm>ibm</a>
+<a href=/tags/integration title=integration>integration</a>
+<a href=/tags/jacl title=jacl>jacl</a>
+<a href=/tags/java title=java>java</a>
+<a href=/tags/jdbc title=jdbc>jdbc</a>
+<a href=/tags/jython title=jython>jython</a>
+<a href=/tags/mq title=mq>mq</a>
+<a href=/tags/patterns title=patterns>patterns</a>
+<a href=/tags/programming title=programming>programming</a>
+<a href=/tags/quarkus title=quarkus>quarkus</a>
+<a href=/tags/redhat title=redhat>redhat</a>
+<a href=/tags/rhel title=rhel>rhel</a>
+<a href=/tags/scm title=scm>scm</a>
+<a href=/tags/scripting title=scripting>scripting</a>
+<a href=/tags/singleton title=singleton>singleton</a>
+<a href=/tags/singleton-pattern title=singleton-pattern>singleton-pattern</a>
+<a href=/tags/software title=software>software</a>
+<a href=/tags/software-development title=software-development>software-development</a>
+<a href=/tags/svn title=svn>svn</a>
+<a href=/tags/sysadmin title=sysadmin>sysadmin</a>
+<a href=/tags/tips title=tips>tips</a>
+<a href=/tags/utils title=utils>utils</a>
+<a href=/tags/websphere title=websphere>websphere</a>
+<a href=/tags/wsadmin title=wsadmin>wsadmin</a></div></section><section><hr><h5>FRIENDS</h5><ul class=list-inline></ul></section></div></div></div></article><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a target=_blank href=https://github.com/sshaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://www.linkedin.com/in/shaaf/><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://stackoverflow.com/users/243185/syed-m-shaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://fosstodon.org/@shaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-mastodon fa-stack-1x fa-inverse"></i></span></a></li><li><a href rel=alternate type=application/rss+xml title="Shaaf, Syed's blog"><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-rss fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; Shaaf, Syed's blog 2023<br><a href=https://themes.gohugo.io/hugo-theme-cleanwhite>CleanWhite Hugo Theme</a> by <a href=https://zhaohuabing.com>Huabing</a> |
+<iframe style=margin-left:2px;margin-bottom:-5px frameborder=0 scrolling=0 width=100px height=20px src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true"></iframe></p></div></div></div></footer><script>function loadAsync(e,t){var s=document,o="script",n=s.createElement(o),i=s.getElementsByTagName(o)[0];n.src=e,t&&n.addEventListener("load",function(e){t(null,e)},!1),i.parentNode.insertBefore(n,i)}</script><script>$("#tag_cloud").length!==0&&loadAsync("/js/jquery.tagcloud.js",function(){$.fn.tagcloud.defaults={color:{start:"#bbbbee",end:"#0085a1"}},$("#tag_cloud a").tagcloud()})</script><script>loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js",function(){var e=document.querySelector("nav");e&&FastClick.attach(e)})</script><script type=text/javascript>function generateCatalog(e){_containerSelector="div.post-container";var t,n,s,o,i,a=$(_containerSelector),r=a.find("h1,h2,h3,h4,h5,h6");return $(e).html(""),r.each(function(){t=$(this).prop("tagName").toLowerCase(),o="#"+$(this).prop("id"),n=$(this).text(),i=$('<a href="'+o+'" rel="nofollow">'+n+"</a>"),s=$('<li class="'+t+'_nav"></li>').append(i),$(e).append(s)}),!0}generateCatalog(".catalog-body"),$(".catalog-toggle").click(function(e){e.preventDefault(),$(".side-catalog").toggleClass("fold")}),loadAsync("/js/jquery.nav.js",function(){$(".catalog-body").onePageNav({currentClass:"active",changeHash:!1,easing:"swing",filter:"",scrollSpeed:700,scrollOffset:0,scrollThreshold:.2,begin:null,end:null,scrollChange:null,padding:80})})</script></body></html>

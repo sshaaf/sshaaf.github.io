@@ -1,0 +1,125 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:site_name" content="Shaaf, Syed's blog"><meta property="og:type" content="article"><meta property="og:image" content="https://shaaf.dev/images/fano-summer.jpeg"><meta property="twitter:image" content="https://shaaf.dev/images/fano-summer.jpeg"><meta name=title content="Automation with Selenium,Junit, Ant"><meta property="og:title" content="Automation with Selenium,Junit, Ant"><meta property="twitter:title" content="Automation with Selenium,Junit, Ant"><meta name=description content="A technical blog about Java, Kubernetes and things that matter"><meta property="og:description" content="A technical blog about Java, Kubernetes and things that matter"><meta property="twitter:description" content="A technical blog about Java, Kubernetes and things that matter"><meta property="twitter:card" content="summary"><meta name=keyword content="Java, developers, devops, , kubernetes, redhat, Shaaf Blog, Web, keycloak, PaaS, Istio, Kubernetes, infinispan, Microservice"><link rel="shortcut icon" href=/img/favicon.ico><title>Automation with Selenium,Junit, Ant | A developers blog | Shaaf, Syed Blog</title><link rel=canonical href=/post/2009-01-19-automation-with-seleniumjunit-ant/><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/hugo-theme-cleanwhite.min.css><link rel=stylesheet href=/css/zanshang.css><link href=https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css rel=stylesheet type=text/css><script src=/js/jquery.min.js></script>
+<script src=/js/bootstrap.min.js></script>
+<script src=/js/hux-blog.min.js></script>
+<script src=/js/lazysizes.min.js></script></head><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-58961685-1","auto"),ga("send","pageview"))</script><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button>
+<a class=navbar-brand href=/>Shaaf, Syed's blog</a></div><div id=huxblog_navbar><div class=navbar-collapse><ul class="nav navbar-nav navbar-right"><li><a href=/>All Posts</a></li><li><a href=/archive/>ARCHIVE</a></li><li><a href=/about/>ABOUT</a></li><li><a href=/search><i class="fa fa-search"></i></a></li></ul></div></div></div></nav><script>var $body=document.body,$toggle=document.querySelector(".navbar-toggle"),$navbar=document.querySelector("#huxblog_navbar"),$collapse=document.querySelector(".navbar-collapse");$toggle.addEventListener("click",handleMagic);function handleMagic(){$navbar.className.indexOf("in")>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf("in")<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script><style type=text/css>header.intro-header{background-image:url(/images/fano-summer.jpeg)}</style><header class=intro-header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><div class=tags><a class=tag href=/tags/software title=software>software</a>
+<a class=tag href=/tags/ant title=ant>ant</a>
+<a class=tag href=/tags/build title=build>build</a>
+<a class=tag href=/tags/engineering title=engineering>engineering</a>
+<a class=tag href=/tags/continous title=continous>continous</a>
+<a class=tag href=/tags/ci title=ci>ci</a>
+<a class=tag href=/tags/integration title=integration>integration</a>
+<a class=tag href=/tags/scm title=scm>scm</a>
+<a class=tag href=/tags/selenium title=selenium>selenium</a>
+<a class=tag href=/tags/testing title=testing>testing</a>
+<a class=tag href=/tags/automated-testing title=automated-testing>automated-testing</a>
+<a class=tag href=/tags/junit title=junit>junit</a></div><h1>Automation with Selenium,Junit, Ant</h1><h2 class=subheading></h2><span class=meta>Posted by
+Shaaf, Syed's blog
+on
+Monday, January 19, 2009</span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+post-container"><p>Much of the technologies above do not or will not need an introduction if you already know them or can read them from the links above.</p><p>More over today&rsquo;s article is more about how we can use all the three selenium, ant and junit to come up with an automated solution for regressive testing.</p><p>Please refer to the documentation links above for the basic knowledge on any of the used tools.</p><p>I am assuming that you know how to record a test in selenium if you dont then go
+[here]:(&ldquo;<a href=http://selenium-ide.seleniumhq.org/>http://selenium-ide.seleniumhq.org/</a>)</p><p>Now that you do know how to record and save the tests simply save them in any directory structure you like as long as they follow the right package convention. like com.foo.bar
+this would mean the file should be in directory like com/foo/bar. Conventionally and logically today that is how the TestCase is compiled through the ant script. If the package is not the right path then compile time errors will occur.</p><p>My calling target for running the whole procedure should look like this</p><pre><code>&lt; target name=&quot;build_tests&quot; depends=&quot;clean, compile, start-server,  tests, stop-server&quot; / &gt;
+</code></pre><p>Details of the depending targets are as follows.
+clean: would clean the entire build directories etc to make sure nothing from our past is carried forward into the future.</p><p>compile: should compile</p><p>start-server: should start the selenium server.</p><p>tests: should run the selenium tests.</p><p>stop-server: should stop the selenium server once all tests have been executed.</p><p>How to start a selenium server from Ant?</p><pre><code>&lt; target name=&quot;start-server&quot; &gt;
+    	&lt; java jar=&quot;lib/selenium-server.jar&quot; fork=&quot;true&quot; spawn=&quot;true&quot; &gt;
+        		&lt; arg line=&quot;-timeout 30&quot; / &gt;
+        		&lt; jvmarg value=&quot;-Dhttp.proxyHost=proxy.proxyhost.com&quot; / &gt;
+        		&lt; jvmarg value=&quot;-Dhttp.proxyPort=44444&quot; / &gt;
+    	&lt; / java &gt;
+&lt; / target &gt;
+</code></pre><p>The target above is simply taking the selenium-server.jar which is in the classpath and running the main-class from it. the proxy parameters are optional.</p><p>How to stop the server from Ant?</p><pre><code>&lt; target name=&quot;stop-server&quot; &gt;
+    	&lt; get taskname=&quot;selenium-shutdown&quot;
+			src=&quot;http://localhost:4444/selenium-server/driver/?cmd=shutDown&quot;
+        		dest=&quot;result.txt&quot; ignoreerrors=&quot;true&quot; / &gt;
+    	&lt; echo taskname=&quot;selenium-shutdown&quot; message=&quot;DGF Errors during shutdown are expected&quot; / &gt;
+&lt; / target &gt;
+</code></pre><p>The selenium server starts on port 4444 by default and to tell it to shutdown is simple, the command in the src is passed to it. cmd=shutDown
+That should just shutdown the server.</p><p>Executing the test cases?
+Selenium Test cases are Junit tests cases and that&rsquo;s how they are treated in this tutorial.
+Thus some of you will be very much familiar with the ant targets</p><p><a href=http://ant.apache.org/manual/OptionalTasks/junit.html>Junit</a>
+and
+<a href=http://ant.apache.org/manual/OptionalTasks/junitreport.html>junitreport</a></p><p>However I will describe how the following is working. The following target will run the selenium tests and print a summary report to the ${dir}. The includes and excludes, simply tell the target which files to include or exclude while running the test cases. This is typically done when you don&rsquo;t want some tests cases to be included or your source for tests and the application are in the same directory and you only want to include something like <em>Test*.class</em>.</p><pre><code>&lt; target name=&quot;tests&quot; depends=&quot;compileonly&quot; description=&quot;runs JUnit tests&quot; &gt;
+	&lt; echo message=&quot;running JUnit tests&quot; / &gt;
+	&lt; junit printsummary=&quot;on&quot; dir=&quot;..&quot; haltonfailure=&quot;off&quot; haltonerror=&quot;off&quot; timeout=&quot;${junit.timeout}&quot; fork=&quot;on&quot; maxmemory=&quot;512m&quot; showoutput=&quot;true&quot; &gt;
+	&lt; formatter type=&quot;plain&quot; usefile=&quot;false&quot; / &gt;
+	&lt; formatter type=&quot;xml&quot; usefile=&quot;true&quot; / &gt;
+	&lt; batchtest todir=&quot;${testoutput}&quot; filtertrace=&quot;on&quot; &gt;
+    	&lt; fileset dir=&quot;${src}&quot; &gt;
+      		&lt; includesfile name=&quot;${tests.include}&quot; / &gt;
+      		&lt; excludesfile name=&quot;${tests.exclude}&quot; / &gt;
+    	&lt; / fileset &gt;
+  		&lt; / batchtest &gt;
+  		&lt; classpath &gt;
+    		&lt; pathelement path=&quot;${classes}&quot; / &gt;
+    		&lt; pathelement path=&quot;${build.classpath}&quot; / &gt;
+  		&lt; / classpath &gt;
+	&lt; / junit &gt;
+</code></pre><p>The following will take the formatted output from the lines above and generate a report out of it in xml and html and place the results in the ${reports}/index.html
+A sample Junit test report might look like
+<a href=http://studios.thoughtworks.com/cruise-continuous-integration/1.0/help/resources/images/cruise/tab-with-junit.png>this</a></p><p>&lt; echo message=&ldquo;running JUnit Reports&rdquo; / >
+&lt; junitreport todir="${reports}&rdquo; >
+&lt; fileset dir="${reportdir}" >
+&lt; include name=&ldquo;Test*.xml&rdquo; / >
+&lt; / fileset >
+&lt; report format=&ldquo;frames&rdquo; todir="${reports}" / >
+&lt; / junitreport >
+&lt; echo message=&ldquo;To see your Junit results, please open ${reports}/index.html}&rdquo; / >
+&lt; / target ></p><p>In general you can add all of this to your nightly build through any of the CI servers like Cruise Control. Also as a general practice you will need to do a little more then just executing this target every night depending on your application. For instance cleaning up of resource centers like Databases etc.</p><hr><ul class=pager><li class=previous><a href=/post/2008-12-11-calling-wsadmin-scripts-from-ant/ data-toggle=tooltip data-placement=top title="Calling wsadmin scripts from ant">&larr;
+Previous Post</a></li><li class=next><a href=/post/2009-06-22-keep-it-simple-short-and-stupid/ data-toggle=tooltip data-placement=top title="Keep it simple, short and stupid (KISS)">Next
+Post &rarr;</a></li></ul><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//https-shaaf-dev.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="col-lg-2 col-lg-offset-0
+visible-lg-block
+sidebar-container
+catalog-container"><div class=side-catalog><hr class="hidden-sm hidden-xs"><h5><a class=catalog-toggle href=#>CATALOG</a></h5><ul class=catalog-body></ul></div></div><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+sidebar-container"><section><hr class="hidden-sm hidden-xs"><h5><a href=/tags/>FEATURED TAGS</a></h5><div class=tags><a href=/tags/administrator title=administrator>administrator</a>
+<a href=/tags/ant title=ant>ant</a>
+<a href=/tags/automation title=automation>automation</a>
+<a href=/tags/build title=build>build</a>
+<a href=/tags/ci title=ci>ci</a>
+<a href=/tags/command title=command>command</a>
+<a href=/tags/computers title=computers>computers</a>
+<a href=/tags/continous title=continous>continous</a>
+<a href=/tags/design title=design>design</a>
+<a href=/tags/design-patterns title=design-patterns>design-patterns</a>
+<a href=/tags/docker title=docker>docker</a>
+<a href=/tags/engineering title=engineering>engineering</a>
+<a href=/tags/fedora title=fedora>fedora</a>
+<a href=/tags/gof title=gof>gof</a>
+<a href=/tags/how-to title=how-to>how-to</a>
+<a href=/tags/howto title=howto>howto</a>
+<a href=/tags/ibm title=ibm>ibm</a>
+<a href=/tags/integration title=integration>integration</a>
+<a href=/tags/jacl title=jacl>jacl</a>
+<a href=/tags/java title=java>java</a>
+<a href=/tags/jdbc title=jdbc>jdbc</a>
+<a href=/tags/jython title=jython>jython</a>
+<a href=/tags/mq title=mq>mq</a>
+<a href=/tags/patterns title=patterns>patterns</a>
+<a href=/tags/programming title=programming>programming</a>
+<a href=/tags/quarkus title=quarkus>quarkus</a>
+<a href=/tags/redhat title=redhat>redhat</a>
+<a href=/tags/rhel title=rhel>rhel</a>
+<a href=/tags/scm title=scm>scm</a>
+<a href=/tags/scripting title=scripting>scripting</a>
+<a href=/tags/singleton title=singleton>singleton</a>
+<a href=/tags/singleton-pattern title=singleton-pattern>singleton-pattern</a>
+<a href=/tags/software title=software>software</a>
+<a href=/tags/software-development title=software-development>software-development</a>
+<a href=/tags/svn title=svn>svn</a>
+<a href=/tags/sysadmin title=sysadmin>sysadmin</a>
+<a href=/tags/tips title=tips>tips</a>
+<a href=/tags/utils title=utils>utils</a>
+<a href=/tags/websphere title=websphere>websphere</a>
+<a href=/tags/wsadmin title=wsadmin>wsadmin</a></div></section><section><hr><h5>FRIENDS</h5><ul class=list-inline></ul></section></div></div></div></article><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a target=_blank href=https://github.com/sshaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://www.linkedin.com/in/shaaf/><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://stackoverflow.com/users/243185/syed-m-shaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://fosstodon.org/@shaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-mastodon fa-stack-1x fa-inverse"></i></span></a></li><li><a href rel=alternate type=application/rss+xml title="Shaaf, Syed's blog"><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-rss fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; Shaaf, Syed's blog 2023<br><a href=https://themes.gohugo.io/hugo-theme-cleanwhite>CleanWhite Hugo Theme</a> by <a href=https://zhaohuabing.com>Huabing</a> |
+<iframe style=margin-left:2px;margin-bottom:-5px frameborder=0 scrolling=0 width=100px height=20px src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true"></iframe></p></div></div></div></footer><script>function loadAsync(e,t){var s=document,o="script",n=s.createElement(o),i=s.getElementsByTagName(o)[0];n.src=e,t&&n.addEventListener("load",function(e){t(null,e)},!1),i.parentNode.insertBefore(n,i)}</script><script>$("#tag_cloud").length!==0&&loadAsync("/js/jquery.tagcloud.js",function(){$.fn.tagcloud.defaults={color:{start:"#bbbbee",end:"#0085a1"}},$("#tag_cloud a").tagcloud()})</script><script>loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js",function(){var e=document.querySelector("nav");e&&FastClick.attach(e)})</script><script type=text/javascript>function generateCatalog(e){_containerSelector="div.post-container";var t,n,s,o,i,a=$(_containerSelector),r=a.find("h1,h2,h3,h4,h5,h6");return $(e).html(""),r.each(function(){t=$(this).prop("tagName").toLowerCase(),o="#"+$(this).prop("id"),n=$(this).text(),i=$('<a href="'+o+'" rel="nofollow">'+n+"</a>"),s=$('<li class="'+t+'_nav"></li>').append(i),$(e).append(s)}),!0}generateCatalog(".catalog-body"),$(".catalog-toggle").click(function(e){e.preventDefault(),$(".side-catalog").toggleClass("fold")}),loadAsync("/js/jquery.nav.js",function(){$(".catalog-body").onePageNav({currentClass:"active",changeHash:!1,easing:"swing",filter:"",scrollSpeed:700,scrollOffset:0,scrollThreshold:.2,begin:null,end:null,scrollChange:null,padding:80})})</script></body></html>

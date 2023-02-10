@@ -1,0 +1,215 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:site_name" content="Shaaf, Syed's blog"><meta property="og:type" content="article"><meta property="og:image" content="https://shaaf.dev/images/fano-summer.jpeg"><meta property="twitter:image" content="https://shaaf.dev/images/fano-summer.jpeg"><meta name=title content="Processing images in Java with OpenCV and Quarkus"><meta property="og:title" content="Processing images in Java with OpenCV and Quarkus"><meta property="twitter:title" content="Processing images in Java with OpenCV and Quarkus"><meta name=description content="A technical blog about Java, Kubernetes and things that matter"><meta property="og:description" content="A technical blog about Java, Kubernetes and things that matter"><meta property="twitter:description" content="A technical blog about Java, Kubernetes and things that matter"><meta property="twitter:card" content="summary"><meta name=keyword content="Java, developers, devops, , kubernetes, redhat, Shaaf Blog, Web, keycloak, PaaS, Istio, Kubernetes, infinispan, Microservice"><link rel="shortcut icon" href=/img/favicon.ico><title>Processing images in Java with OpenCV and Quarkus | A developers blog | Shaaf, Syed Blog</title><link rel=canonical href=/post/2022-04-11-processing-images-in-java-with-opencv-and-quarkus/><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/hugo-theme-cleanwhite.min.css><link rel=stylesheet href=/css/zanshang.css><link href=https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css rel=stylesheet type=text/css><script src=/js/jquery.min.js></script>
+<script src=/js/bootstrap.min.js></script>
+<script src=/js/hux-blog.min.js></script>
+<script src=/js/lazysizes.min.js></script></head><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-58961685-1","auto"),ga("send","pageview"))</script><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button>
+<a class=navbar-brand href=/>Shaaf, Syed's blog</a></div><div id=huxblog_navbar><div class=navbar-collapse><ul class="nav navbar-nav navbar-right"><li><a href=/>All Posts</a></li><li><a href=/archive/>ARCHIVE</a></li><li><a href=/about/>ABOUT</a></li><li><a href=/search><i class="fa fa-search"></i></a></li></ul></div></div></div></nav><script>var $body=document.body,$toggle=document.querySelector(".navbar-toggle"),$navbar=document.querySelector("#huxblog_navbar"),$collapse=document.querySelector(".navbar-collapse");$toggle.addEventListener("click",handleMagic);function handleMagic(){$navbar.className.indexOf("in")>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf("in")<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script><style type=text/css>header.intro-header{background-image:url(/images/fano-summer.jpeg)}</style><header class=intro-header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><div class=tags><a class=tag href=/tags/java title=java>java</a>
+<a class=tag href=/tags/opencv title=opencv>opencv</a>
+<a class=tag href=/tags/programming title=programming>programming</a>
+<a class=tag href=/tags/quarkus title=quarkus>quarkus</a></div><h1>Processing images in Java with OpenCV and Quarkus</h1><h2 class=subheading></h2><span class=meta>Posted by
+Shaaf, Syed's blog
+on
+Monday, April 11, 2022</span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+post-container"><p>If you are into Computer vision, you probably are familiar with <a href=https://opencv.org/>OpenCV</a>. Its an amazing library that has almost everything one needs to do 2D and 3D processing and much more. Gesture recognition, face detection, Motion tracking, think of anything related to image processing and OpenCV can be your goto. Its based on the BSD license, so you can just download it and start using it.</p><p>OpenCV is written in C, and there are nice Java bindings for it too. If you are a Java developer like me and dont want to get into all the loading and building native bindings etc., then read on. In this article I will show how you can use OpenCV with the popular new framework Quarkus, without worrying about installing libraries or reloading the entire app.</p><p><a href=https://quarkus.io/>Quarkus</a> is a container first, Kubernetes native framework that was started by Red Hat and it focuses purely on <a href=https://quarkus.io/developer-joy/>Developer Joy</a>. The fun part IMHO is the live coding feature, which we will see in our app. I dont really need to keep on building and reloading my app, even though it uses JNI, and I can just simply keep chugging along and coding with ease. I just love this! It makes life simpler.</p><h2 id=setting-up><strong>Setting up</strong></h2><p>Assuming you have a working Java environment. that would mean a Java runtime, a Maven or Gradle system for build. You might be thinking that you need to download the OpenCV libraries for JNI to work etc.. well guess what you dont need to! Quarkus OpenCV extension will take care of it. Quarkus extensions are a way of enabling more functionality to the core Quarkus framework. Quarkiverse is the hub that holds all extensions. So if you are e.g. looking for a nice framework to generate docs, or fuzzy search with hibernate-search or Amazon services integration etc etc.. Well take a look for yourself <a href=https://github.com/quarkiverse>here</a></p><p>Okay so we are going to use the Quarkus-OpenCV <a href=https://github.com/quarkiverse/quarkus-opencv>extension</a>.
+To do this we will first create the a simple Java cli project from code.quarkus.io</p><p>There&rsquo;s a couple of ways to get started. One could just head over to code.quarkus.io and create a project there or run local maven command or use the Quarkus cli. I am going to take the approach that I am most well known too. Lets start with maven.</p><pre tabindex=0><code>&lt;1&gt; mvn io.quarkus.platform:quarkus-maven-plugin:2.7.5.Final:create \
+                    -DprojectGroupId=org.acme \
+                    -DprojectArtifactId=getting-started \
+                    -Dextensions=&#34;resteasy&#34;
+
+&lt;2&gt; cd getting-started                    
+
+&lt;3&gt; ./mvnw quarkus:add-extension -Dextensions=&#34;io.quarkiverse.opencv:quarkus-opencv&#34;
+</code></pre><ul><li>&lt;1> - here we download the starter project from code.quarkus.io. The project name is <code>getting-started</code>.</li><li>&lt;2> - I am changing directory into the newly created project.</li><li>&lt;3> - And finally I am also adding the OpenCV extension from Quarkiverse to our project.</li></ul><p>Perfect now we should have a project to get to work. Lets open it up in an IDE. Then</p><p>Lets check the pom.xml that it has the right dependencies. If you are following this along, make sure the following is the list of dependencies in the pom.xml.</p><pre tabindex=0><code>  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+      &lt;artifactId&gt;quarkus-arc&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;io.quarkiverse.opencv&lt;/groupId&gt;
+      &lt;artifactId&gt;quarkus-opencv&lt;/artifactId&gt;
+      &lt;version&gt;LATEST&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+      &lt;artifactId&gt;quarkus-junit5&lt;/artifactId&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;io.rest-assured&lt;/groupId&gt;
+      &lt;artifactId&gt;rest-assured&lt;/artifactId&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+</code></pre><p>Next, since I have removed the rest-easy dependency, I shall also remove the REST end point. in <code>org.acme.GreetingResource.java</code> and the Tests thereof.</p><p>Perfect so now we have a clean project to get started. Here</p><h3 id=create-the-cli-main>Create the CLI Main</h3><p>Quarkus provides the option to create command line apps, and this is so kool, since you can also compile these into native. We are just going to make simple app for demo purpose in this blog. But if you are looking into creating some serious nirvana of cli apps take a look at <a href=https://quarkus.io/guides/picocli>this guide</a> at quarkus.io using picocli or <a href=https://jbang.dev>JBang</a></p><p>In my app I try to keep it simple. Lets create the barebones QMain Class.</p><pre tabindex=0><code>package org.acme;
+
+import io.quarkus.runtime.QuarkusApplication;
+import io.quarkus.runtime.annotations.QuarkusMain;
+
+@QuarkusMain
+public class QMain implements QuarkusApplication {
+
+    @Override
+    public int run(String... args) throws Exception {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+}
+</code></pre><p>I am now going to run this app in a terminal. And the command should initiate a livecoding session as the app is started.</p><h3 id=initiate-live-coding>Initiate Live Coding</h3><pre tabindex=0><code>~/demos/getting-started mvn quarkus:dev
+</code></pre><p><figure><img src=/images/quarkus-livecode.png alt=alt_text>
+<center><figcaption>Quarkus started</figcaption></center></figure></p><p><em>So what&rsquo;s live coding?</em> Well just keep on coding, dont worry about restarting your app, or adding new dependencies and config or rebuidling.. etc. You just dont need to restart the app everytime! (*almost)</p><p>I am going to leave the terminal running and get back to coding in QMain.</p><p>I am going to add two class level properties, one to read an image from and the second to save an image to. Quarkus via the Microprofile APIs provdies the <code>@ConfigProperty</code>. This enables me to inject config properties into my app. Here is how I do it.</p><pre tabindex=0><code>    // Set these in your application.properties
+    @ConfigProperty(name = &#34;cli.sourceImagePath&#34;)
+    String testImage;
+
+    // Set these in your application.properties
+    @ConfigProperty(name = &#34;cli.targetImagePath&#34;)
+    String targetImage;
+</code></pre><p>And in my application.properties I add the path to these files</p><pre tabindex=0><code>cli.sourceImagePath=images/testImage.jpg
+cli.targetImagePath=images/testImageDetected-output.jpg
+</code></pre><p>One is the <code>cli.sourceImagePath</code>, this has to be present in order for it to be processed. And the <code>cli.targetImagePath</code> doesnt need to be present since I will save the image there. In my case I have added the images into the root of my project, hence the path <code>images/</code></p><h3 id=load-and-save-images>Load and Save images</h3><p>Now back to QMain. I am going to add the save and load methods for these paths.</p><pre tabindex=0><code>    /**
+     * Loading the image
+     */
+    public Mat loadImage(String imagePath) {
+        Imgcodecs imageCodecs = new Imgcodecs();
+        return imageCodecs.imread(imagePath);
+    }
+
+
+
+    /**
+     * Save the image to the targetPath
+     */
+    public void saveImage(Mat imageMatrix, String targetPath) {
+        Imgcodecs imgcodecs = new Imgcodecs();
+        imgcodecs.imwrite(targetPath, imageMatrix);
+    }
+</code></pre><p>Mat has two parts the Image headers, and the data matrix.The header is constant but the size of the matrix will depend on the image. Mat is used to load the images from a path and Mat forms the basic construct for us to perform operations on the image.</p><h3 id=defining-the-filter-interface>Defining the Filter Interface</h3><p>And to make multiple Filters to process images, I am going to define an interface that takes Mat as a source, processes it and then returns Mat. This way I can apply multiple filters on an image before I save them.</p><pre tabindex=0><code>package org.acme;
+
+import org.opencv.core.Mat;
+
+public interface Filter {
+
+    public Mat process(Mat src);
+
+}
+</code></pre><h3 id=connecting-the-dots>Connecting the dots</h3><p>And finally lets try to connect the structure by adding the methods calls to the QMain&rsquo;s run method.And spark some joy!</p><pre tabindex=0><code>    @Override
+    public int run(String... args) throws Exception {
+        Mat m = loadImage(testImage);
+        
+        saveImage(m, targetImage);
+        return 0;
+    }
+</code></pre><p>Simple, all I do above is load the image and save the image. No processing yet. How do you test that. Remember the terminal where we ran <code>mvn quarkus:dev</code></p><p>Press space on that. And the program will just continue executing. How kool is that! No need to rebuild, all the config, the new classes everything just worked. Thats what sparks the <code>Developer Joy!</code> , with Quarkus!</p><p><figure><img src=/images/quarkus-livecode-2.png alt=alt_text>
+<center><figcaption>Quarkus started</figcaption></center></figure></p><p>Checkout the logs. It states <code>File change detected</code> for the application.properties, more over It also lists the Classes that have changed.</p><p>So what just happened?
+Quarkus runtime just executed the cli app. which means that if I goto <code>cli.targetImagePath</code> I should see an image created there. At this point it will look the same as the source image, since I havent processed anything on it yet. Guess what? thats exactly whatI plan to do now.</p><p>Moving on, the image I am using today is provided by Shuttergames on Unsplash</p><p><figure><img src=/images/testImage.jpg alt=alt_text>
+<center><figcaption>Quarkus Base Image</figcaption></center></figure></p><h3 id=gaussian-blur>Gaussian Blur</h3><p>The first filter I create is a <code>GaussianBlur</code>filter. Its a <a href=https://en.wikipedia.org/wiki/Low-pass_filter>low-pass filter</a> meaning that it attenuates higher frequency signals. The overall visual effect would be a smooth blur.</p><pre tabindex=0><code>package org.acme;
+
+
+
+import org.opencv.core.Mat;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
+
+public class GaussianBlur implements Filter {
+
+    @Override
+    public Mat process(Mat src) {
+        
+        if(src != null) {
+            int MAX_KERNEL_LENGTH = 45;
+            Mat dst = new Mat();
+            for (int i = 1; i &lt; MAX_KERNEL_LENGTH; i = i + 2) {
+                Imgproc.GaussianBlur(src, dst, new Size(i, i), 0, 0);
+            }
+            return dst;
+        }
+        
+        else throw new IllegalArgumentException(&#34;Looking for Mat nothing found!, try passing org.opencv.core.Mat to process&#34;);
+    }
+}
+</code></pre><p>Above we define a kernel size. Kernel is a matrix that defines how an anchored pixel and its surrounding pixels are changed based on the function provided.</p><p>The kernels will define the size of the convolution, the weights, and an anchor point positioned at the center. The process method takes a Mat object applies the GuassianBlur filter with the Kernel size, and finally returns the Mat object back.</p><h3 id=rgb2grey>RGB2Grey</h3><p>Adding the following to the run mehtod in QMain so I can call my Filter.</p><pre tabindex=0><code>    @Override
+    public int run(String... args) throws Exception {
+        Mat m = loadImage(testImage);
+   
+        m = new GaussianBlur().process(m);
+   
+        saveImage(m, targetImage);
+        return 0;
+    }
+</code></pre><p>Perfect, now if I press the space bar again on the terminal, its should execute all my changes. Resulting in the blur as shown below. The blur is smooth, almost like if its been overlayed with a lense.</p><p><figure><img src=/images/GaussianBlur.png alt=alt_text>
+<center><figcaption>Quarkus Gaussian Blur</figcaption></center></figure></p><p>Next, lets make another filter. this time how about I make the image Grey. To do that OpenCV already provides a simple function. Again I am using the Fitler interface for this hence passing a Mat and recieving one back.</p><pre tabindex=0><code>package org.acme;
+
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
+
+
+public class RGB2Grey implements Filter{
+
+    @Override
+    public Mat process(Mat src) {
+        if(src != null) {
+            Mat dst = src;
+            Imgproc.cvtColor(src, dst, Imgproc.COLOR_RGB2GRAY);
+            return dst;
+        }
+        else throw new IllegalArgumentException(&#34;Looking for Mat nothing found!, try passing org.opencv.core.Mat to process&#34;);
+    }
+}
+</code></pre><p>Above code using <code>ImgProc</code> that provides this operation to move all pixels from RGB to Grey.</p><pre tabindex=0><code> m = new RGB2Grey().process(m);
+</code></pre><p>Adding the above to my run method and pressing the space bar again in the terminal should execute all my cahnges again. and Vola! I have a Grey tone image.</p><p><figure><img src=/images/RGB2Grey.png alt=alt_text>
+<center><figcaption>Quarkus RGB2Grey</figcaption></center></figure></p><p>Hope you enjoyed this run through on how to use Quarkus and OpenCV together. For more examples take a look at the <a href=https://github.com/sshaaf/quarkus-opencv-examples>github repo with code examples</a>.</p><hr><ul class=pager><li class=previous><a href=/post/2022-02-24-sql-cache-stores-and-more-data-grid-83/ data-toggle=tooltip data-placement=top title="SQL cache stores and more in Data Grid 8.3">&larr;
+Previous Post</a></li></ul><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//https-shaaf-dev.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="col-lg-2 col-lg-offset-0
+visible-lg-block
+sidebar-container
+catalog-container"><div class=side-catalog><hr class="hidden-sm hidden-xs"><h5><a class=catalog-toggle href=#>CATALOG</a></h5><ul class=catalog-body></ul></div></div><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+sidebar-container"><section><hr class="hidden-sm hidden-xs"><h5><a href=/tags/>FEATURED TAGS</a></h5><div class=tags><a href=/tags/administrator title=administrator>administrator</a>
+<a href=/tags/ant title=ant>ant</a>
+<a href=/tags/automation title=automation>automation</a>
+<a href=/tags/build title=build>build</a>
+<a href=/tags/ci title=ci>ci</a>
+<a href=/tags/command title=command>command</a>
+<a href=/tags/computers title=computers>computers</a>
+<a href=/tags/continous title=continous>continous</a>
+<a href=/tags/design title=design>design</a>
+<a href=/tags/design-patterns title=design-patterns>design-patterns</a>
+<a href=/tags/docker title=docker>docker</a>
+<a href=/tags/engineering title=engineering>engineering</a>
+<a href=/tags/fedora title=fedora>fedora</a>
+<a href=/tags/gof title=gof>gof</a>
+<a href=/tags/how-to title=how-to>how-to</a>
+<a href=/tags/howto title=howto>howto</a>
+<a href=/tags/ibm title=ibm>ibm</a>
+<a href=/tags/integration title=integration>integration</a>
+<a href=/tags/jacl title=jacl>jacl</a>
+<a href=/tags/java title=java>java</a>
+<a href=/tags/jdbc title=jdbc>jdbc</a>
+<a href=/tags/jython title=jython>jython</a>
+<a href=/tags/mq title=mq>mq</a>
+<a href=/tags/patterns title=patterns>patterns</a>
+<a href=/tags/programming title=programming>programming</a>
+<a href=/tags/quarkus title=quarkus>quarkus</a>
+<a href=/tags/redhat title=redhat>redhat</a>
+<a href=/tags/rhel title=rhel>rhel</a>
+<a href=/tags/scm title=scm>scm</a>
+<a href=/tags/scripting title=scripting>scripting</a>
+<a href=/tags/singleton title=singleton>singleton</a>
+<a href=/tags/singleton-pattern title=singleton-pattern>singleton-pattern</a>
+<a href=/tags/software title=software>software</a>
+<a href=/tags/software-development title=software-development>software-development</a>
+<a href=/tags/svn title=svn>svn</a>
+<a href=/tags/sysadmin title=sysadmin>sysadmin</a>
+<a href=/tags/tips title=tips>tips</a>
+<a href=/tags/utils title=utils>utils</a>
+<a href=/tags/websphere title=websphere>websphere</a>
+<a href=/tags/wsadmin title=wsadmin>wsadmin</a></div></section><section><hr><h5>FRIENDS</h5><ul class=list-inline></ul></section></div></div></div></article><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a target=_blank href=https://github.com/sshaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://www.linkedin.com/in/shaaf/><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://stackoverflow.com/users/243185/syed-m-shaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://fosstodon.org/@shaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-mastodon fa-stack-1x fa-inverse"></i></span></a></li><li><a href rel=alternate type=application/rss+xml title="Shaaf, Syed's blog"><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-rss fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; Shaaf, Syed's blog 2023<br><a href=https://themes.gohugo.io/hugo-theme-cleanwhite>CleanWhite Hugo Theme</a> by <a href=https://zhaohuabing.com>Huabing</a> |
+<iframe style=margin-left:2px;margin-bottom:-5px frameborder=0 scrolling=0 width=100px height=20px src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true"></iframe></p></div></div></div></footer><script>function loadAsync(e,t){var s=document,o="script",n=s.createElement(o),i=s.getElementsByTagName(o)[0];n.src=e,t&&n.addEventListener("load",function(e){t(null,e)},!1),i.parentNode.insertBefore(n,i)}</script><script>$("#tag_cloud").length!==0&&loadAsync("/js/jquery.tagcloud.js",function(){$.fn.tagcloud.defaults={color:{start:"#bbbbee",end:"#0085a1"}},$("#tag_cloud a").tagcloud()})</script><script>loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js",function(){var e=document.querySelector("nav");e&&FastClick.attach(e)})</script><script type=text/javascript>function generateCatalog(e){_containerSelector="div.post-container";var t,n,s,o,i,a=$(_containerSelector),r=a.find("h1,h2,h3,h4,h5,h6");return $(e).html(""),r.each(function(){t=$(this).prop("tagName").toLowerCase(),o="#"+$(this).prop("id"),n=$(this).text(),i=$('<a href="'+o+'" rel="nofollow">'+n+"</a>"),s=$('<li class="'+t+'_nav"></li>').append(i),$(e).append(s)}),!0}generateCatalog(".catalog-body"),$(".catalog-toggle").click(function(e){e.preventDefault(),$(".side-catalog").toggleClass("fold")}),loadAsync("/js/jquery.nav.js",function(){$(".catalog-body").onePageNav({currentClass:"active",changeHash:!1,easing:"swing",filter:"",scrollSpeed:700,scrollOffset:0,scrollThreshold:.2,begin:null,end:null,scrollChange:null,padding:80})})</script></body></html>

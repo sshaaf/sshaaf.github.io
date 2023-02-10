@@ -1,0 +1,171 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:site_name" content="Shaaf, Syed's blog"><meta property="og:type" content="article"><meta property="og:image" content="https://shaaf.dev/images/fano-summer.jpeg"><meta property="twitter:image" content="https://shaaf.dev/images/fano-summer.jpeg"><meta name=title content="Creating and deploying a Java 8 runtime container image"><meta property="og:title" content="Creating and deploying a Java 8 runtime container image"><meta property="twitter:title" content="Creating and deploying a Java 8 runtime container image"><meta name=description content="A technical blog about Java, Kubernetes and things that matter"><meta property="og:description" content="A technical blog about Java, Kubernetes and things that matter"><meta property="twitter:description" content="A technical blog about Java, Kubernetes and things that matter"><meta property="twitter:card" content="summary"><meta name=keyword content="Java, developers, devops, , kubernetes, redhat, Shaaf Blog, Web, keycloak, PaaS, Istio, Kubernetes, infinispan, Microservice"><link rel="shortcut icon" href=/img/favicon.ico><title>Creating and deploying a Java 8 runtime container image | A developers blog | Shaaf, Syed Blog</title><link rel=canonical href=/post/2019-02-26-create-java-8-runtime-container-image/><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/hugo-theme-cleanwhite.min.css><link rel=stylesheet href=/css/zanshang.css><link href=https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css rel=stylesheet type=text/css><script src=/js/jquery.min.js></script>
+<script src=/js/bootstrap.min.js></script>
+<script src=/js/hux-blog.min.js></script>
+<script src=/js/lazysizes.min.js></script></head><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-58961685-1","auto"),ga("send","pageview"))</script><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button>
+<a class=navbar-brand href=/>Shaaf, Syed's blog</a></div><div id=huxblog_navbar><div class=navbar-collapse><ul class="nav navbar-nav navbar-right"><li><a href=/>All Posts</a></li><li><a href=/archive/>ARCHIVE</a></li><li><a href=/about/>ABOUT</a></li><li><a href=/search><i class="fa fa-search"></i></a></li></ul></div></div></div></nav><script>var $body=document.body,$toggle=document.querySelector(".navbar-toggle"),$navbar=document.querySelector("#huxblog_navbar"),$collapse=document.querySelector(".navbar-collapse");$toggle.addEventListener("click",handleMagic);function handleMagic(){$navbar.className.indexOf("in")>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf("in")<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script><style type=text/css>header.intro-header{background-image:url(/images/fano-summer.jpeg)}</style><header class=intro-header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><div class=tags><a class=tag href=/tags/microprofile title=microprofile>microprofile</a>
+<a class=tag href=/tags/java title=java>java</a>
+<a class=tag href=/tags/redhat title=redhat>redhat</a>
+<a class=tag href=/tags/rhel title=rhel>rhel</a>
+<a class=tag href=/tags/programming title=programming>programming</a>
+<a class=tag href=/tags/docker title=docker>docker</a>
+<a class=tag href=/tags/container title=container>container</a></div><h1>Creating and deploying a Java 8 runtime container image</h1><h2 class=subheading></h2><span class=meta>Posted by
+Shaaf, Syed's blog
+on
+Tuesday, February 26, 2019</span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+post-container"><blockquote><p><em>Orignally posted at</em> <a href=https://developers.redhat.com/blog/2019/02/26/create-java-8-runtime-container-image>Red Hat Developers</a></p></blockquote><p>A Java runtime environment should be able to run compiled source code, whereas a development kit, for example, OpenJDK, would include all the libraries/binaries to compile and run the source code. Essentially the latter is a superset of the runtime environment. More details on OpenJDK support and lifecycle can be found <a href=https://access.redhat.com/articles/1299013>here</a>.</p><p>Red Hat ships and supports container images with OpenJDK for both Java 8 and 11. More details are <a href=https://access.redhat.com/containers/#/search/openjdk>here</a>. If you are using Red Hat Middleware, the s2i images shipped are also useful to deploy, for example, on Red Hat Openshift Container Platform.</p><p>Note that Red Hat only provides OpenJDK-based Java 8 and 11 images. With that said, there will certainly be situations where developers would like to create their own Java runtime images. For example, there could be reasons such as minimizing storage to run a runtime image. On the other hand, a lot of manual work around libraries such as Jolokio or Hawkular and even security parameters would need to be set up as well. If you&rsquo;d prefer not to get into those details, I would recommend using the container images for OpenJDK shipped by Red Hat.</p><p>In this article we will:</p><pre><code>- Build an image with Docker as well as Buildah.
+- We will run that image with Docker as well as Podman on localhost.
+- We will push our image to Quay.
+- Finally, we will run our app by importing a stream into OpenShift.
+</code></pre><p>This article was written for both OpenShift 3.11 and 4.0 beta. Let&rsquo;s jump right into it.</p><h2 id=setting-up>Setting up</h2><p>To use our images and see how they work, we&rsquo;ll use a web app as part of our bundle. Recently Microprofile.io launched the <a href=https://start.microprofile.io/>MicroProfile Starter beta</a>, which helps you get started with MicroProfile by creating a downloadable package. Head out to <a href=https://start.microprofile.io/>Microprofile.io</a> and get the package for MicroProfile with Thorntail V2.</p><p><figure><img src=/images/mp-starter-page.png alt=alt_text>
+<center><figcaption>image_tooltip</figcaption></center></figure></p><p>Getting the package for MicroProfile with Thorntail V2</p><p>Click the Download button to get the archive file.</p><p>On my Red Hat Enterprise Linux (RHEL) machine, I first create a temp directory, for example, demoapp, and unarchive the downloaded artifacts into it.</p><p>In my temp directory, I run:</p><pre tabindex=0><code>$ mvn clean compile package
+</code></pre><p>Now we should have a built demo app with a fat jar that we can call to run Thorntail.</p><p>Let’s copy the <code>target/demo-thorntail.jar</code> to the temp directory.</p><p>Here is the <code>Dockerfile</code> with comments on each layer. The source code of this file can also be found here on GitHub.</p><pre tabindex=0><code># A Java 8 runtime example
+# The official Red Hat registry and the base image
+FROM registry.access.redhat.com/rhel7-minimal
+USER root
+# Install Java runtime
+RUN microdnf --enablerepo=rhel-7-server-rpms \
+install java-1.8.0-openjdk --nodocs ;\
+microdnf clean all
+# Set the JAVA_HOME variable to make it clear where Java is located
+ENV JAVA_HOME /etc/alternatives/jre
+# Dir for my app
+RUN mkdir -p /app
+# Expose port to listen to
+EXPOSE 8080
+# Copy the MicroProfile starter app
+COPY demo-thorntail.jar /app/
+# Copy the script from the source; run-java.sh has specific parameters to run a Thorntail app from the command line in a container. More on the script can be found at https://github.com/sshaaf/rhel7-jre-image/blob/master/run-java.sh
+COPY run-java.sh /app/
+# Setting up permissions for the script to run
+RUN chmod 755 /app/run-java.sh
+# Finally, run the script
+CMD [ &#34;/app/run-java.sh&#34; ]
+</code></pre><p>Now that we have the Dockerfile details, let&rsquo;s go ahead and build the image.</p><p>One important point to note is that the OpenJDK Java runtime is packaged as &ldquo;java-1.8.0-openjdk&rdquo;; this does not include the compiler and other development libraries which are in the -devel package.</p><p>The above Dockerfile is built on RHEL, which means I do not need to register with subscription-manager, since the host already has the subscriptions attached.</p><p>Below you will find two ways to build this. If you are running RHEL like I am, you can choose any of the two binaries to deploy from. Both of them should be in rhel7-server-extras-rpms.</p><p>You can enable the extras repo like this:</p><pre tabindex=0><code># subscription-manager repos --enable rhel-7-server-extras-rpms 
+</code></pre><h2 id=build-and-run-images-locally>Build and run images locally</h2><p>Building the image with docker:</p><pre tabindex=0><code>$ docker build -t quay.io/sshaaf/rhel7-jre8-mpdemo:latest .
+</code></pre><p>Running the image with docker and pointing localhost:8080 to the container port 8080:</p><pre tabindex=0><code>$ docker run -d -t -p 8080:8080 -i quay.io/sshaaf/rhel7-jre8-mpdemo:latest
+</code></pre><p>We can also use the buildah command, which helps to create container images from a working container, from a Dockerfile or from scratch. The resulting images are OCI-compliant, so they will work on any runtimes that meet the OCI Runtime Specification (such as Docker and CRI-O).</p><p>Building with buildah:</p><pre tabindex=0><code>$ buildah bud -t rhel7-jre8-mpdemo .
+</code></pre><p>Creating a container with buildah:</p><pre tabindex=0><code>$ buildah from rhel7-jre8-mpdemo
+</code></pre><p>Now we can also run the container with Podman, which complements Buildah and Skopeo by offering an experience similar to the Docker command line: allowing users to run standalone (non-orchestrated) containers. And Podman doesn’t require a daemon to run containers and pods. Podman is also part of the extras channel and the following command should run the container.</p><pre tabindex=0><code>$ podman run -d -t -p 8080:8080 -i quay.io/sshaaf/rhel7-jre8-mpdemo:latest
+</code></pre><p>More details on Podman can be found in Containers without daemons: Podman and Buildah available in RHEL 7.6 and RHEL 8 Beta and Podman and Buildah for Docker users.</p><p>Now that we have an image, we would also like to deploy it to OpenShift and test our app. For that, we need the oc client libraries. I have my own cluster setup; you could choose to use Red Hat Container Development Kit (CDK)/minishift, Red Hat OpenShift Online, or your own cluster. The procedure should be the same.</p><h2 id=deploying-to-openshift>Deploying to OpenShift</h2><p>To deploy to OpenShift, we need to have the following few constructs:</p><pre><code>An image stream for our newly created container image
+Deployment configuration for OpenShift
+Service and routing configurations
+</code></pre><h3 id=image-stream>Image stream</h3><p>To create the image stream, my OpenShift cluster should be able to pull the container image from somewhere. Up until now, the image has been residing on my own machine. Let&rsquo;s push it to Quay. The Red Hat Quay container and application registry provides secure storage, distribution, and deployment of containers on any infrastructure. It is available as a standalone component or in conjunction with OpenShift.</p><p>First I need to log in to Quay, which I can do as follows:</p><pre tabindex=0><code>$ docker login -u=&#34;sshaaf&#34; -p=&#34;XXXX&#34; quay.io
+</code></pre><p>And then we push our newly created image to Quay:</p><pre tabindex=0><code>$ docker push quay.io/sshaaf/rhel7-jre8-mpdemo
+</code></pre><p>Let&rsquo;s take a look at the constructs before we deploy. For the anxious, you can skip the details on the deployment template and head down to project creation.</p><p>Now that we have the image, we define our stream:</p><pre tabindex=0><code>- apiVersion: v1
+kind: ImageStream
+metadata:
+name: rhel7-jre8-mpdemo
+spec:
+dockerImageRepository: quay.io/sshaaf/rhel7-jre8-mpdemo
+</code></pre><p>Again, you can see above we point directly to our image repository at Quay.io.
+Deployment config</p><p>Next up is the deployment config, which sets up our pods and triggers and points to our newly created stream, etc.</p><p>If you are new to containers and OpenShift deployments, you might want to look at this useful <a href=https://www.openshift.com/deploying-to-openshift/>ebook</a>.</p><pre tabindex=0><code>- apiVersion: v1
+kind: DeploymentConfig
+metadata:
+name: rhel7-jre8-mpdemo
+spec:
+template:
+metadata:
+labels:
+name: rhel7-jre8-mpdemo
+spec:
+containers:
+- image: quay.io/sshaaf/rhel7-jre8-mpdemo:latest
+name: rhel7-jre8-mpdemo
+ports:
+- containerPort: 8080
+protocol: TCP
+replicas: 1
+triggers:
+- type: ConfigChange
+- imageChangeParams:
+automatic: true
+containerNames:
+- rhel7-jre8-mpdemo
+from:
+kind: ImageStreamTag
+name: rhel7-jre8-mpdemo:latest
+type: ImageChange
+</code></pre><h3 id=the-service>The service</h3><p>Now that have our deployment, we also want to define a service that will ensure internal load balancing, IP addresses for the pods, etc. A service is important if we want our newly created app to be finally exposed to outside traffic.</p><pre tabindex=0><code>- apiVersion: v1
+kind: Service
+metadata:
+name: rhel7-jre8-mpdemo
+spec:
+ports:
+- name: 8080-tcp
+port: 8080
+protocol: TCP
+targetPort: 8080
+selector:
+deploymentconfig: rhel7-jre8-mpdemo
+</code></pre><p>The route</p><p>And the final piece of our deployment is the route. It&rsquo;s time we expose or app to the outside world with the route. We can define which internal service this route points to and which port to target. OpenShift will give it a friendly URL that we will be able to point to and see our resulting MicroProfile app running on our newly created Java 8 runtime–based deployment.</p><pre tabindex=0><code>- apiVersion: v1
+kind: Route
+metadata:
+name: rhel7-jre8-mpdemo
+spec:
+port:
+targetPort: 8080-tcp
+to:
+kind: Service
+name: rhel7-jre8-mpdemo
+weight: 100
+</code></pre><p>The complete template for the above can be found <a href=https://raw.githubusercontent.com/sshaaf/rhel7-jre-image/master/deployment.yaml>here on GitHub</a>.</p><p>Let’s also create a project in OpenShift like this:</p><pre tabindex=0><code>$ oc new-project jredemos
+</code></pre><p>And now we process the template and get our demo with the Java 8 runtime on OpenShift. To do that, run the following command:</p><pre tabindex=0><code>$ oc process -f deployment.yaml  | oc create -f -
+</code></pre><p>This will create the entire deployment, and you should be able to see something like this:</p><p>Results of creating the entire deployment</p><p>Now run the following command:</p><pre tabindex=0><code>$ oc get routes
+</code></pre><p>This will show the routes, as follows:</p><h3 id=the-routes>The routes</h3><p>Let&rsquo;s copy the route into our browser and we should see the web app deployed running on RHEL 7 with the Java 8 runtime. (The address below is specific to test the cluster only and will be different per cluster.)</p><p><a href=http://rhel7-jre8-mpdemo-jredemos.apps.cluster-1fda.1fda.openshiftworkshop.com/>http://rhel7-jre8-mpdemo-jredemos.apps.cluster-1fda.1fda.openshiftworkshop.com/</a></p><h2 id=summary>Summary</h2><p>We have successfully built and created a Java 8 runtime container image with Docker or Buildah. Be aware of the following:</p><ul><li>It&rsquo;s important to note that this image is to show how this can be done; it doesn&rsquo;t include things like Jolokio or Hawkular, which could be necessary for deployments.</li><li>Moreover, it does not take into consideration parameters required for running Java apps in containers, which are very well explained in this <a href=https://developers.redhat.com/blog/2017/03/14/java-inside-docker/>article</a> by Rafael Benevides.</li><li>Furthermore, when deploying your own container images, always remember to check the support and lifecycle policy, if you are running Red Hat’s build of OpenJDK.</li></ul><p>We then deployed this to OpenShift with our basic MicroProfile demo app from the <a href=https://start.microprofile.io/>MicroProfile Starter beta</a>.</p><p>If you are looking into creating a more comprehensive demo application, the following are great resources:</p><ul><li><a href=https://developers.redhat.com/blog/2018/10/17/microprofile-apps-azure-open-service-broker/>Deploying MicroProfile apps on Microsoft Azure using the Azure Open Service Broker</a></li><li>The MicroProfile ebook <a href=http://bit.ly/MP-ebook>here</a></li></ul><p>The entire resources for this article can be found here.</p><hr><ul class=pager><li class=previous><a href=/post/2016-04-06-installing-fedora-on-virtualbox-windows10/ data-toggle=tooltip data-placement=top title="Install log; fedora 23, Virtualbox and windows 10">&larr;
+Previous Post</a></li><li class=next><a href=/post/2020-01-18-setting-up-docker-fedora-33/ data-toggle=tooltip data-placement=top title="Setup docker on Fedora 33">Next
+Post &rarr;</a></li></ul><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//https-shaaf-dev.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="col-lg-2 col-lg-offset-0
+visible-lg-block
+sidebar-container
+catalog-container"><div class=side-catalog><hr class="hidden-sm hidden-xs"><h5><a class=catalog-toggle href=#>CATALOG</a></h5><ul class=catalog-body></ul></div></div><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+sidebar-container"><section><hr class="hidden-sm hidden-xs"><h5><a href=/tags/>FEATURED TAGS</a></h5><div class=tags><a href=/tags/administrator title=administrator>administrator</a>
+<a href=/tags/ant title=ant>ant</a>
+<a href=/tags/automation title=automation>automation</a>
+<a href=/tags/build title=build>build</a>
+<a href=/tags/ci title=ci>ci</a>
+<a href=/tags/command title=command>command</a>
+<a href=/tags/computers title=computers>computers</a>
+<a href=/tags/continous title=continous>continous</a>
+<a href=/tags/design title=design>design</a>
+<a href=/tags/design-patterns title=design-patterns>design-patterns</a>
+<a href=/tags/docker title=docker>docker</a>
+<a href=/tags/engineering title=engineering>engineering</a>
+<a href=/tags/fedora title=fedora>fedora</a>
+<a href=/tags/gof title=gof>gof</a>
+<a href=/tags/how-to title=how-to>how-to</a>
+<a href=/tags/howto title=howto>howto</a>
+<a href=/tags/ibm title=ibm>ibm</a>
+<a href=/tags/integration title=integration>integration</a>
+<a href=/tags/jacl title=jacl>jacl</a>
+<a href=/tags/java title=java>java</a>
+<a href=/tags/jdbc title=jdbc>jdbc</a>
+<a href=/tags/jython title=jython>jython</a>
+<a href=/tags/mq title=mq>mq</a>
+<a href=/tags/patterns title=patterns>patterns</a>
+<a href=/tags/programming title=programming>programming</a>
+<a href=/tags/quarkus title=quarkus>quarkus</a>
+<a href=/tags/redhat title=redhat>redhat</a>
+<a href=/tags/rhel title=rhel>rhel</a>
+<a href=/tags/scm title=scm>scm</a>
+<a href=/tags/scripting title=scripting>scripting</a>
+<a href=/tags/singleton title=singleton>singleton</a>
+<a href=/tags/singleton-pattern title=singleton-pattern>singleton-pattern</a>
+<a href=/tags/software title=software>software</a>
+<a href=/tags/software-development title=software-development>software-development</a>
+<a href=/tags/svn title=svn>svn</a>
+<a href=/tags/sysadmin title=sysadmin>sysadmin</a>
+<a href=/tags/tips title=tips>tips</a>
+<a href=/tags/utils title=utils>utils</a>
+<a href=/tags/websphere title=websphere>websphere</a>
+<a href=/tags/wsadmin title=wsadmin>wsadmin</a></div></section><section><hr><h5>FRIENDS</h5><ul class=list-inline></ul></section></div></div></div></article><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a target=_blank href=https://github.com/sshaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://www.linkedin.com/in/shaaf/><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://stackoverflow.com/users/243185/syed-m-shaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://fosstodon.org/@shaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-mastodon fa-stack-1x fa-inverse"></i></span></a></li><li><a href rel=alternate type=application/rss+xml title="Shaaf, Syed's blog"><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-rss fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; Shaaf, Syed's blog 2023<br><a href=https://themes.gohugo.io/hugo-theme-cleanwhite>CleanWhite Hugo Theme</a> by <a href=https://zhaohuabing.com>Huabing</a> |
+<iframe style=margin-left:2px;margin-bottom:-5px frameborder=0 scrolling=0 width=100px height=20px src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true"></iframe></p></div></div></div></footer><script>function loadAsync(e,t){var s=document,o="script",n=s.createElement(o),i=s.getElementsByTagName(o)[0];n.src=e,t&&n.addEventListener("load",function(e){t(null,e)},!1),i.parentNode.insertBefore(n,i)}</script><script>$("#tag_cloud").length!==0&&loadAsync("/js/jquery.tagcloud.js",function(){$.fn.tagcloud.defaults={color:{start:"#bbbbee",end:"#0085a1"}},$("#tag_cloud a").tagcloud()})</script><script>loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js",function(){var e=document.querySelector("nav");e&&FastClick.attach(e)})</script><script type=text/javascript>function generateCatalog(e){_containerSelector="div.post-container";var t,n,s,o,i,a=$(_containerSelector),r=a.find("h1,h2,h3,h4,h5,h6");return $(e).html(""),r.each(function(){t=$(this).prop("tagName").toLowerCase(),o="#"+$(this).prop("id"),n=$(this).text(),i=$('<a href="'+o+'" rel="nofollow">'+n+"</a>"),s=$('<li class="'+t+'_nav"></li>').append(i),$(e).append(s)}),!0}generateCatalog(".catalog-body"),$(".catalog-toggle").click(function(e){e.preventDefault(),$(".side-catalog").toggleClass("fold")}),loadAsync("/js/jquery.nav.js",function(){$(".catalog-body").onePageNav({currentClass:"active",changeHash:!1,easing:"swing",filter:"",scrollSpeed:700,scrollOffset:0,scrollThreshold:.2,begin:null,end:null,scrollChange:null,padding:80})})</script></body></html>

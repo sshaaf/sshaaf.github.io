@@ -1,0 +1,104 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:site_name" content="Shaaf, Syed's blog"><meta property="og:type" content="article"><meta property="og:image" content="https://shaaf.dev/images/fano-summer.jpeg"><meta property="twitter:image" content="https://shaaf.dev/images/fano-summer.jpeg"><meta name=title content="Continous Integration - A blast from the past"><meta property="og:title" content="Continous Integration - A blast from the past"><meta property="twitter:title" content="Continous Integration - A blast from the past"><meta name=description content="A technical blog about Java, Kubernetes and things that matter"><meta property="og:description" content="A technical blog about Java, Kubernetes and things that matter"><meta property="twitter:description" content="A technical blog about Java, Kubernetes and things that matter"><meta property="twitter:card" content="summary"><meta name=keyword content="Java, developers, devops, , kubernetes, redhat, Shaaf Blog, Web, keycloak, PaaS, Istio, Kubernetes, infinispan, Microservice"><link rel="shortcut icon" href=/img/favicon.ico><title>Continous Integration - A blast from the past | A developers blog | Shaaf, Syed Blog</title><link rel=canonical href=/post/2008-11-12-continous-integration-a-blast-from-the-past/><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/hugo-theme-cleanwhite.min.css><link rel=stylesheet href=/css/zanshang.css><link href=https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css rel=stylesheet type=text/css><script src=/js/jquery.min.js></script>
+<script src=/js/bootstrap.min.js></script>
+<script src=/js/hux-blog.min.js></script>
+<script src=/js/lazysizes.min.js></script></head><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-58961685-1","auto"),ga("send","pageview"))</script><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button>
+<a class=navbar-brand href=/>Shaaf, Syed's blog</a></div><div id=huxblog_navbar><div class=navbar-collapse><ul class="nav navbar-nav navbar-right"><li><a href=/>All Posts</a></li><li><a href=/archive/>ARCHIVE</a></li><li><a href=/about/>ABOUT</a></li><li><a href=/search><i class="fa fa-search"></i></a></li></ul></div></div></div></nav><script>var $body=document.body,$toggle=document.querySelector(".navbar-toggle"),$navbar=document.querySelector("#huxblog_navbar"),$collapse=document.querySelector(".navbar-collapse");$toggle.addEventListener("click",handleMagic);function handleMagic(){$navbar.className.indexOf("in")>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf("in")<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script><style type=text/css>header.intro-header{background-image:url(/images/fano-summer.jpeg)}</style><header class=intro-header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><div class=tags><a class=tag href=/tags/software title=software>software</a>
+<a class=tag href=/tags/build title=build>build</a>
+<a class=tag href=/tags/engineering title=engineering>engineering</a>
+<a class=tag href=/tags/continous title=continous>continous</a>
+<a class=tag href=/tags/ci title=ci>ci</a>
+<a class=tag href=/tags/integration title=integration>integration</a>
+<a class=tag href=/tags/scm title=scm>scm</a></div><h1>Continous Integration - A blast from the past</h1><h2 class=subheading></h2><span class=meta>Posted by
+Shaaf, Syed's blog
+on
+Wednesday, November 12, 2008</span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+post-container"><p>Although this didn&rsquo;t happen a decade ago but still has been a good case for me to learn and realize how Continuous Integration brings value addition to our work.</p><p>As I recall it was like this when they were teenagers :D
+Few teams working on different modules of same application, deployed together.
+No build process formalized
+No builds except for the ones that need major milestone deployments.
+No feedback, reports, reviews etc.</p><p>So virtually there was no build eco system.</p><p>Which meant hideous amounts of communication, tons of trouble shooting, last minute show stoppers, And extermely unhappy end users/stake holders.</p><p>So what exactly was going wrong.</p><p>There was no Configuration Control i.e. No way to figure out the changes that will be part of the release and no controls to include or exclude them.
+No Status accounting i.e. No feedback or status of anything as a whole product.
+No management of Environment meant no one knew what hardware/software they were using and sometimes why?
+No team work whatsoever meant no guided processes, reviews or tracebility of issues and pitfalls.</p><p>So virtually a release day was the doomsday!</p><p>It took some time for developers to realize that how important the following were.</p><pre><code>* Configuration identification - What code are we working with?
+
+* Configuration control - Controlling the release of a product and its changes.
+
+* Status accounting - Recording and reporting the status of components.
+
+* Review - Ensuring completeness and consistency among components.
+
+* Build management - Managing the process and tools used for builds.
+
+* Process management - Ensuring adherence to the organization's development process.
+
+* Environment management - Managing the software and hardware that host our system.
+
+* Teamwork - Facilitate team interactions related to the process.
+
+* Defect tracking - Making sure every defect has traceability back to the source
+</code></pre><p>And after all it takes some time but the day to day flow looked like the figure below.
+<img src=/uploads/2008/11/build-300x221.png alt="Alt text"></p><p>[Download Image] (/uploads/2008/11/build.png)</p><p>Importantly
++ Developers are distributed on different locations in different teams.
++ There is an SCM team that takes care of the SCM activities i.e. Configuration Identification, Control, Build Management etc.
++ There is one single repository for all developers.
++ A process is defined for Product integration and its checked whenever some one checks in.
++ And hourly build is dont to check the sanity of the system with the unit tests.
++ A Nightly build is done with all full blown unit tests, coverage reports, Automated tests and installers and upgrades.
++ More over all of the above is shown on an FTP/HTTP site. FTP for installer/binary/archive pickup and HTTP for detailed view of builds/feedbacks etc.</p><p>All of the above meant strength and health of the build eco system. And more trust in the system that it will report failures along the way.</p><hr><ul class=pager><li class=previous><a href=/post/2008-11-12-doing-the-locale-danmark/ data-toggle=tooltip data-placement=top title="Doing the Locale - Danmark">&larr;
+Previous Post</a></li><li class=next><a href=/post/2008-11-17-command-singleton-jmenuitem-jbutton-abstractbutton-one-listener-for-the-app/ data-toggle=tooltip data-placement=top title="Command, Singleton, JMenuItem, JButton, AbstractButton - One Listener for the app">Next
+Post &rarr;</a></li></ul><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//https-shaaf-dev.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="col-lg-2 col-lg-offset-0
+visible-lg-block
+sidebar-container
+catalog-container"><div class=side-catalog><hr class="hidden-sm hidden-xs"><h5><a class=catalog-toggle href=#>CATALOG</a></h5><ul class=catalog-body></ul></div></div><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+sidebar-container"><section><hr class="hidden-sm hidden-xs"><h5><a href=/tags/>FEATURED TAGS</a></h5><div class=tags><a href=/tags/administrator title=administrator>administrator</a>
+<a href=/tags/ant title=ant>ant</a>
+<a href=/tags/automation title=automation>automation</a>
+<a href=/tags/build title=build>build</a>
+<a href=/tags/ci title=ci>ci</a>
+<a href=/tags/command title=command>command</a>
+<a href=/tags/computers title=computers>computers</a>
+<a href=/tags/continous title=continous>continous</a>
+<a href=/tags/design title=design>design</a>
+<a href=/tags/design-patterns title=design-patterns>design-patterns</a>
+<a href=/tags/docker title=docker>docker</a>
+<a href=/tags/engineering title=engineering>engineering</a>
+<a href=/tags/fedora title=fedora>fedora</a>
+<a href=/tags/gof title=gof>gof</a>
+<a href=/tags/how-to title=how-to>how-to</a>
+<a href=/tags/howto title=howto>howto</a>
+<a href=/tags/ibm title=ibm>ibm</a>
+<a href=/tags/integration title=integration>integration</a>
+<a href=/tags/jacl title=jacl>jacl</a>
+<a href=/tags/java title=java>java</a>
+<a href=/tags/jdbc title=jdbc>jdbc</a>
+<a href=/tags/jython title=jython>jython</a>
+<a href=/tags/mq title=mq>mq</a>
+<a href=/tags/patterns title=patterns>patterns</a>
+<a href=/tags/programming title=programming>programming</a>
+<a href=/tags/quarkus title=quarkus>quarkus</a>
+<a href=/tags/redhat title=redhat>redhat</a>
+<a href=/tags/rhel title=rhel>rhel</a>
+<a href=/tags/scm title=scm>scm</a>
+<a href=/tags/scripting title=scripting>scripting</a>
+<a href=/tags/singleton title=singleton>singleton</a>
+<a href=/tags/singleton-pattern title=singleton-pattern>singleton-pattern</a>
+<a href=/tags/software title=software>software</a>
+<a href=/tags/software-development title=software-development>software-development</a>
+<a href=/tags/svn title=svn>svn</a>
+<a href=/tags/sysadmin title=sysadmin>sysadmin</a>
+<a href=/tags/tips title=tips>tips</a>
+<a href=/tags/utils title=utils>utils</a>
+<a href=/tags/websphere title=websphere>websphere</a>
+<a href=/tags/wsadmin title=wsadmin>wsadmin</a></div></section><section><hr><h5>FRIENDS</h5><ul class=list-inline></ul></section></div></div></div></article><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a target=_blank href=https://github.com/sshaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://www.linkedin.com/in/shaaf/><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://stackoverflow.com/users/243185/syed-m-shaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://fosstodon.org/@shaaf><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-mastodon fa-stack-1x fa-inverse"></i></span></a></li><li><a href rel=alternate type=application/rss+xml title="Shaaf, Syed's blog"><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-rss fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; Shaaf, Syed's blog 2023<br><a href=https://themes.gohugo.io/hugo-theme-cleanwhite>CleanWhite Hugo Theme</a> by <a href=https://zhaohuabing.com>Huabing</a> |
+<iframe style=margin-left:2px;margin-bottom:-5px frameborder=0 scrolling=0 width=100px height=20px src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true"></iframe></p></div></div></div></footer><script>function loadAsync(e,t){var s=document,o="script",n=s.createElement(o),i=s.getElementsByTagName(o)[0];n.src=e,t&&n.addEventListener("load",function(e){t(null,e)},!1),i.parentNode.insertBefore(n,i)}</script><script>$("#tag_cloud").length!==0&&loadAsync("/js/jquery.tagcloud.js",function(){$.fn.tagcloud.defaults={color:{start:"#bbbbee",end:"#0085a1"}},$("#tag_cloud a").tagcloud()})</script><script>loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js",function(){var e=document.querySelector("nav");e&&FastClick.attach(e)})</script><script type=text/javascript>function generateCatalog(e){_containerSelector="div.post-container";var t,n,s,o,i,a=$(_containerSelector),r=a.find("h1,h2,h3,h4,h5,h6");return $(e).html(""),r.each(function(){t=$(this).prop("tagName").toLowerCase(),o="#"+$(this).prop("id"),n=$(this).text(),i=$('<a href="'+o+'" rel="nofollow">'+n+"</a>"),s=$('<li class="'+t+'_nav"></li>').append(i),$(e).append(s)}),!0}generateCatalog(".catalog-body"),$(".catalog-toggle").click(function(e){e.preventDefault(),$(".side-catalog").toggleClass("fold")}),loadAsync("/js/jquery.nav.js",function(){$(".catalog-body").onePageNav({currentClass:"active",changeHash:!1,easing:"swing",filter:"",scrollSpeed:700,scrollOffset:0,scrollThreshold:.2,begin:null,end:null,scrollChange:null,padding:80})})</script></body></html>
