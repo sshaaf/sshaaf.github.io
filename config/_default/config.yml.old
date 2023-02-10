@@ -1,7 +1,7 @@
 baseURL: "https://shaaf.dev"
 title: "Shaaf's Blog"
 paginate: 5
-theme: soho
+theme: mainroad
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
@@ -32,6 +32,7 @@ params:
       - css/blog.css
     customJs:
       - js/blog.js
+    themeColor: ".theme-base-08"
 
     socialIcons:
         - name: github
