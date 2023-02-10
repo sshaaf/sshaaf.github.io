@@ -3,7 +3,7 @@ title = "Shaaf, Syed's blog"
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
 # Enable comments by entering your Disqus shortname
-disqusShortname = "https-shaaf-dev"
+#disqusShortname = "https-shaaf-dev"
 googleAnalytics = "UA-58961685-1"
 preserveTaxonomyNames = true
 paginate = 5 #frontpage pagination
@@ -11,6 +11,19 @@ hasCJKLanguage = true
 
 [outputs]
 home = ["HTML", "RSS", "Algolia"]
+
+
+[params.giscus]
+  data_repo="sshaaf/sshaaf.github.io"
+  data_repo_id="R_kgDOI8ZtWg"
+  data_category="General"
+  data_category_id="DIC_kwDOI8ZtWs4CUIWL"
+  data_mapping="pathname"
+  data_reactions_enabled="1"
+  data_emit_metadata="0"
+  data_theme="light"
+  data_lang="en"
+  crossorigin="anonymous"
 
 [params]
   header_image = "images/fano-summer.jpeg"
