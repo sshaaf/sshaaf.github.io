@@ -119,16 +119,17 @@ home = ["HTML", "RSS", "Algolia"]
   href =  "/about/"
 
 [params.giscus]
-data_repo="sshaaf/sshaaf.github.io"
-data_repo_id="R_kgDOI8ZtWg"
-data_category="General"
-data_category_id="DIC_kwDOI8ZtWs4CUIWL"
-data_mapping="pathname"
-data_reactions_enabled="1"
-data_emit_metadata="0"
-data_theme="light"
-data_lang="en"
-crossorigin="anonymous"
+data_repo = "sshaaf/sshaaf.github.io"
+data_repo_id = "R_kgDOI8ZtWg"
+data_category = "Announcements"
+data_category_id = "DIC_kwDOI8ZtWs4CUIWK"
+data_mapping = "pathname"
+data_reactions_enabled = "1"
+data_emit_metadata = "0"
+data_theme = "light"
+data_lang = "en"
+crossorigin = "anonymous"
+
 
 [outputFormats.Algolia]
 baseName = "algolia"
