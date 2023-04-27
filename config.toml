@@ -111,12 +111,22 @@ home = ["HTML", "RSS", "Algolia"]
   [[params.addtional_menus]]
   title =  "ARCHIVE"
   href =  "/archive/"
+
 #  [[params.addtional_menus]]
 #  title =  "NOTES"
 #  href =  "/notes/"
+
+  [[params.addtional_menus]]
+  title =  "PHOTOS"
+  href =  "/photos/"
+
   [[params.addtional_menus]]
   title =  "ABOUT"
   href =  "/about/"
+
+ [[params.addtional_menus]]
+  title =  "SEARCH"
+  href =  "/search/"
 
 [params.giscus]
 data_repo = "sshaaf/sshaaf.github.io"
