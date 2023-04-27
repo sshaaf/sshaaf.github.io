@@ -1,5 +1,5 @@
 baseurl = "https://shaaf.dev"
-title = "Shaaf, Syed's blog"
+title = "Shaaf blog"
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
 # Enable comments by entering your Disqus shortname
@@ -34,9 +34,9 @@ home = ["HTML", "RSS", "Algolia"]
 
   # algolia site search
   algolia_search = true
-  algolia_appId = ""
-  algolia_indexName = ""
-  algolia_apiKey = ""
+  algolia_appId = "WJ4GQV8C8J"
+  algolia_indexName = "dev_shaaf"
+  algolia_apiKey = "49ebe99eba591b32ef02c82ede21718a"
 
   # Sidebar settings
   sidebar_about_description = "Software developer, architect, opensource enthusiast, cricket coach"

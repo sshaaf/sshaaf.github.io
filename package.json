@@ -1,0 +1,15 @@
+{
+  "name": "sshaaf.github.io",
+  "version": "1.0.0",
+  "description": "![Build Status](https://gitlab.com/pages/hugo/badges/master/build.svg)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "algolia": "atomic-algolia"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "atomic-algolia": "^0.3.19"
+  }
+}
