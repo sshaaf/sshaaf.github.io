@@ -1,6 +1,7 @@
 ---
 title: "About"
 date: "2014-04-09"
+layout: page
 ---
 <h1 align="center">Hi 👋, I'm <a href="https://shaaf.dev" target="blank">
 Shaaf</a></h1>
