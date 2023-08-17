@@ -25,8 +25,8 @@ htpasswd -c -B -b myhttpasswdfile.htpasswd mydesireduser mypassword
 
 Okay now that we have a simple htpasswd file with one user. Lets add it to OpenShift. 
 
-Login to your OpenShift Console and hit this URL:
-`<Your OpenShift Console>/k8s/cluster/config.openshift.io~v1~OAuth/cluster`
+Login to your OpenShift Console and hit this URL:\
+ `<Your OpenShift Console>/k8s/cluster/config.openshift.io~v1~OAuth/cluster`
 
 Or Goto `Adminsitration > Cluster Settings >` Tab "Configuration" and Select OAuth. like the following screenshot
 
@@ -41,8 +41,8 @@ And then lets just browse to the htpasswd file created and press add. This will 
 ![alt_text](/images/2023/08/17/OpenShift-OAuth-htpasswd-config.png "OpenShift Config")
 
 You should now be able to login via `oc login` or via the OpenShift console. 
-Incase of any issues check the tips [here for diagnostics] (https://access.redhat.com/solutions/4110561)
+Incase of any issues check the tips [here for diagnostics](https://access.redhat.com/solutions/4110561) or [docs](https://docs.openshift.com/container-platform/4.13/authentication/identity_providers/configuring-htpasswd-identity-provider.html)
 
 
-Header background image by [Brett Jordan]("https://unsplash.com/@brett_jordan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+Header background image by [Brett Jordan](https://unsplash.com/@brett_jordan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
   
