@@ -60,6 +60,11 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./public
+      - name: 'Create env file'
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env    
+      - name: Algolia upload
+        run: "npm run algolia"
 
   # Deployment job
   deploy:
