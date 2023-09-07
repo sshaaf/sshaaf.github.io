@@ -1,5 +1,5 @@
 baseurl = "https://shaaf.dev"
-title = "Shaaf blog"
+title = "Shaaf's blog"
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
 # Enable comments by entering your Disqus shortname
