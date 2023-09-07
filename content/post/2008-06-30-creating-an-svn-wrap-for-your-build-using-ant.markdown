@@ -92,7 +92,7 @@ Hopefully this should get you started with doing some bit of svn commands from a
 
 The complete code listing of the build file is as follows.
 
-'''
+```
 	<project name="CI-Test" default="status" basedir=".">
 		<description>
 			This is a POC for SVN Wrap.
@@ -108,4 +108,4 @@ The complete code listing of the build file is as follows.
           		</exec>
 		</target>
  	</project>
-'''
+```

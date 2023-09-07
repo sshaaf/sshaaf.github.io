@@ -12,7 +12,7 @@ Lets see how that is done here.
 
 1. First lets create a OneListener class that should be able to listen to ActionEvents and also be able to add Commands to itself. Please refer to my previous post on Command,Singleton if you would like to see more about this patterns and there usage.
 
-'''
+```
 	package com.shaafshah.jmenus;
 
 	import java.awt.event.ActionEvent;
@@ -55,22 +55,22 @@ Lets see how that is done here.
 		}
 
 	}
-'''
+```
 
 
 In the above code, the addCommand method adds the command Object and adds a listener to it.
 Now how is that possible.
 Basically because I am categorizing my UI objects as Commands with in the system having some UI. And I am also assuming that these commands are Currently AbstractButton i.e. JMenuItem, JButton. Lets have a look at the Command Interface and its Implementation.
 
-'''
+```
 	public interface Command {
 		public void execute();
 	}
-'''
+```
 
 And the implementation, note that the Command is an interface where as the class is still extending a UI object.
 
-'''
+```
 	import javax.swing.JMenuItem;
 
 	public class TestCmd extends JMenuItem implements Command{
@@ -85,7 +85,7 @@ And the implementation, note that the Command is an interface where as the class
 		System.out.println("HelloWorld");
 		}
 	}
-'''
+```
 
 Personally don't like calling the OneListener in the constructor of the class but just for the sake of simplicity of this post I have left it that way. There are many different ways to omit it.
 
@@ -95,6 +95,6 @@ As this commads Listener is also OneListener all ActionEvents are thrown there a
 So now you dont have to worry about what listeners are you in. The only thing you know is that when execute is called you need to do your stuff.
 
 You can download the code from
-[Here](Uploads/2008/11/jmenus.zip)
+[Here](images/2008/11/jmenus.zip)
 
 Hope this helps.

@@ -32,7 +32,7 @@ UserWantsToShop.java
 
 Add the following code to it
 
-'''
+```
 	import org.jbehave.scenario.PropertyBasedConfiguration;
 	import org.jbehave.scenario.Scenario;
 	import org.jbehave.scenario.parser.ClasspathScenarioDefiner;
@@ -60,18 +60,18 @@ Add the following code to it
     	}
 
 	}
-'''
+```
 
 5. Just that we now have steps we need some place to put the logic for the Steps in the Scenarios. So we create a new Steps class ShoppingSteps.java
 
-'''
+```
 	import org.jbehave.scenario.annotations.Given;
 	import org.jbehave.scenario.annotations.Then;
 	import org.jbehave.scenario.annotations.When;
 	import org.jbehave.scenario.steps.Steps;
 
 	public class ShoppingSteps extends Steps {}
-'''
+```
 
 6. Now you can run the Scenario by running it as a Junit Test.
 
@@ -90,7 +90,7 @@ Now lets add the implementation to the tests.
 
 7. Add the body to the ShoppingSteps. I have added the comments with the methods.
 
-'''
+```
         // Given that a user(param) is loggen in
 	@ Given("user $username is logged in")
 	public void logIn(String userName){
@@ -108,7 +108,7 @@ Now lets add the implementation to the tests.
 	public void getMyCart(String userName, String cart){
 		getUserCart(userName);
 	}
-'''
+```
 
 
 8. Now you should try to run the scenario again. And all of the test should be green. I have not implemented the actual methods so they will be red. :-)

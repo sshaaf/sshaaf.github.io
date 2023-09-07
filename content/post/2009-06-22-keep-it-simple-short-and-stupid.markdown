@@ -31,6 +31,6 @@ Most importantly keep everything short, simple and stupid.
 
 I recently had to deliver a few minutes inspirational presentation on Test Driven Development and especially about KISS. Attached is some of the material. Feel free to explore.
 
-[What is the KISS principle?](http://www.syedmshaaf.net/uploads/2009/06/what-is-kiss.pdf)
+[What is the KISS principle?](http://www.syedmshaaf.net/images/2009/06/what-is-kiss.pdf)
 
 Could be more simpler :-)

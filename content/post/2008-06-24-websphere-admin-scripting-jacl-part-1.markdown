@@ -39,9 +39,9 @@ You would already have some of the details of the queues but some you will need 
 *Step 1.
 *Identify the Provider for your Factory. By default this is the name for it. If you have created a new provider with a different name then specify it here.
 
-'''
+```
 	set tmp1 "WebSphere MQ JMS Provider"
-'''
+```
 
 *Step 2.*
 Now you would need to find the CELL NAME and the NODE NAME of your server
@@ -50,9 +50,9 @@ C:\Programs\IBM\Rational\SDP\6.0\runtimes\base_v6\profiles\test_wsp\config\cells
 The cell name in this location is after \cells\ i.e. BNode05Cell
 And the node name is at the end after \nodes\ i.e. BNode05
 
-'''
+```
 	set newjmsp [$AdminConfig getid /Cell:CELLNAMECell/Node:NODENAME/JMSProvider:$tmp1/]
-'''
+```
 
 *Step 3.*
 Now you need to specify the Factories properties.
@@ -62,7 +62,7 @@ The properties I plan to setup are as follows.
 
 To check what are the required parameters for the Factory you can run the following command on the wsadmin console.
 
-'''
+```
 	$AdminConfig required WASQueueConnectionFactory
 	Example output:
 	wsadmin $AdminConfig required WASQueueConnectionFactory
@@ -70,7 +70,7 @@ To check what are the required parameters for the Factory you can run the follow
 	name                            String
 	jndiName                        String
 
-'''
+```
 
 *Where will I find the wsadmin?*
 It is typically placed in the bin directory of your server.
@@ -81,7 +81,7 @@ To invoke the wasadmin, just open your terminal and move to the bin dir where yo
 
 To see the all parameters required and optional write the following command on the console.
 
-'''
+```
 	$AdminConfig attributes WASQueueConnectionFactory
 	Example output:
 	wsadmin $AdminConfig attributes WASQueueConnectionFactory
@@ -104,11 +104,11 @@ To see the all parameters required and optional write the following command on t
 	"serverName String"
 	"sessionPool ConnectionPool"
 	"xaRecoveryAuthAlias String"
-'''
+```
 
 I have added some extra optional parameters for those of us who are using extra options.
 
-'''
+```
 	set name [list name NAME]
 
 	set jndi [list jndiName jms/JNDINAME]
@@ -124,37 +124,37 @@ I have added some extra optional parameters for those of us who are using extra 
 	set ttype [list transportType CLIENT]
 
 	set xa [list XAEnabled True|false]
-'''
+```
 
 *Step 4.*
 Now set all parameters in one string so that they can be passed to the command as one.
 
-'''
+```
 	set mqcfAttrs [list $name $jndi $qManager $sname $port $channel $ttype $xa]
-'''
+```
 
 *Step 5.*
 Now to create the Factory use the following command. This will add the factory to the node and cell mentioned earlier in step 2.
 
-'''
+```
 	$AdminConfig create MQQueueConnectionFactory $newjmsp $mqcfAttrs
-'''
+```
 
 Once it is created it is not saved and only stays in the current session. So to save it run the following command. And you should be all set.
 
-'''
+```
 	$AdminConfig save
-'''
+```
 
 You can alternatively also save this script in a file on your local system. And run it by passing it to the wasadmin. Follwing is a sample command.
 
-'''
+```
 	wsadmin -profileName test_wsp -f $SCRIPT_FILENAME_LOCATION$
-'''
+```
 
 Complete code listing is as follows.
 
-'''
+```
 	set tmp1 "WebSphere MQ JMS Provider"
 
 	set newjmsp [$AdminConfig getid /Cell:CELLNAMECell/Node:NODENAME/JMSProvider:$tmp1/]
@@ -180,6 +180,6 @@ Complete code listing is as follows.
 	$AdminConfig create MQQueueConnectionFactory $newjmsp $mqcfAttrs
 
 	$AdminConfig save
-'''
+```
 
  

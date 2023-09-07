@@ -48,9 +48,9 @@ It took some time for developers to realize that how important the following wer
     * Defect tracking - Making sure every defect has traceability back to the source
 
 And after all it takes some time but the day to day flow looked like the figure below.
-![Alt text](/uploads/2008/11/build-300x221.png)
+![Alt text](/images/2008/11/build-300x221.png)
 
-[Download Image] (/uploads/2008/11/build.png)
+[Download Image] (/images/2008/11/build.png)
 
 Importantly
 	+ Developers are distributed on different locations in different teams.

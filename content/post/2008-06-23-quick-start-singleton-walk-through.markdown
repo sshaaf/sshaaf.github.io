@@ -29,31 +29,31 @@ There must be exactly once instance of a class
 
 1. Create a class
 
-'''
+```
 	public class SimplySingleton{}
-'''
+```
 
 2. Declare a member variable. This variable will be used for keeping the singleton instance.
 
 It has to be private so that it is not accessible from anywhere else. It has to be static so that it holds only one instance in all entirety.
 
-'''
+```
 	private static SimplySingleton simplySingleton = null;
-'''
+```
 
 3. Declare a private constructor.
 
 Creating a private constructor would mean no one else can instantiate this class.
 
-'''
+```
 	private SimplySingleton(){}
-'''
+```
 
 4. So now everything seems private how do we access it. Create a global access point.
 
-'''
+```
 	public static SimplySingleton getInstance(){}
-'''
+```
 
 How would I access it from outside SimplySingleton.getInstance();
 
@@ -61,17 +61,17 @@ This method should return a SimplySingleton instance.
 
 So here comes the logic to create the one and only instance.
 
-'''
+```
 	// 4a. is the variable null?
 	if(simplySingleton != null)
 	return simplySingleton;
 	// 4b. if not assign it an instance.
 	else return simplySingleton = new SimplySingleton();
-'''
+```
 
 Following is the complete code listing for writing a Singleton.
 
-'''
+```
 	// Declaring the class
 	public class SimplySingleton {
 	// 1. a private and a static member variable
@@ -89,7 +89,7 @@ Following is the complete code listing for writing a Singleton.
 		}
 
 	}
-	'''
+	```
 
 Following are some good resources for in depth peek into the Singleton Pattern.
 

@@ -33,21 +33,21 @@ Not shown.
 + ProductB is a Product
 
 Diagram
-![Alt text](/uploads/2008/10/abstractfactory.jpeg)
+![Alt text](/images/2008/10/abstractfactory.jpeg)
 
 Creating a simple factory that returns products.
 
-'''
+```
 	public abstract class ComputerFactory {
 		public abstract String getName();
 		public abstract Product[] getProducts();
 		public abstract Product getProduct(int ProductID);
 	}
-'''
+```
 
 Implementation of the ComputerFactory
 
-'''
+```
 	public class AFactory extends ComputerFactory {
 
 		public String getName(){
@@ -71,20 +71,20 @@ Implementation of the ComputerFactory
 			}
 		}
 	}
-'''
+```
 
 A register base for factories. Refer to the main method for use later in this post.
 
-'''
+```
 	public interface FactoryConstants {
 		public int A = 1;
  		public int B = 2;
 	}
-'''
+```
 
 The main Entrant class. the Factory Manager that will give the ComputerFactory resultant. Its assumed to be a Singleton as it registers as a Creator in the system (assumption).
 
-'''
+```
 	public class FactoryManager{
 		private static FactoryManager factoryManager = null;
 		private FactoryManager(){}
@@ -106,18 +106,18 @@ The main Entrant class. the Factory Manager that will give the ComputerFactory r
   			} 
  	     	}
 	}
-'''
+```
 
 A main method to test the AbstractFactory
 
-'''
+```
 	public static void main(String args[]){
   		System.out.println(FactoryManager.getInstance().getFactory(FactoryConstants.A).getName());
   		System.out.println(FactoryManager.getInstance().getFactory(FactoryConstants.B).getName());
   		System.out.println(FactoryManager.getInstance().getFactory(3).getName());
 	}
-'''
+```
 
 
 You can find the complete code listing
-[here](/uploads/2008/10/abstractfactory.zip)
+[here](/images/2008/10/abstractfactory.zip)

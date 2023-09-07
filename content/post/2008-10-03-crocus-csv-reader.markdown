@@ -19,16 +19,16 @@ How To Use:
 
 Reading a Single CSVFile into a RecordManager
 
-'''
+```
 	// Creating a single file interface
 	CSVSingleFileInterface fileInterface = new CSVSingleFileInterface("/media/data/dev/workspace/crocus/testData/drupal-sample.csv",CSVConstants.COMMA);
 	// Calling the read returns a CSVRecordManager i.e. in memory
 	AbstractCSVRecordManager manager = fileInterface.read();
-'''
+```
 
 Reading multiple files into one RecordManager
 
-'''
+```
 	// Specify a FileSet
 	AbstractCSVFileSet fileSet = new CSVFileSet();
 
@@ -41,7 +41,7 @@ Reading multiple files into one RecordManager
 
 	//  Reading returns a manager same as in a Single file case.
 	AbstractCSVRecordManager manager = fileSetInterface.read();
-'''
+```
 
 This functionality is not complete but a peak is available.
 You can now specify a Listener to Pre, Post and On Add of a record.
@@ -50,7 +50,7 @@ Setting up a Listener.
 
 To add you listener simply implement the RecordListener class
 
-'''
+```
 	// Get a Record Manager
 	AbstractCSVRecordManager manager = fileInterface.getRecordManager();
 
@@ -61,7 +61,7 @@ To add you listener simply implement the RecordListener class
 	System.out.println(recordEvent.toString());
 
 	}
-'''
+```
 
 The Build System:
 

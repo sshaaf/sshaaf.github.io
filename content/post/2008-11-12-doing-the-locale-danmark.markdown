@@ -7,7 +7,7 @@ date: 2008-11-12 14:52:08 +01:00
 
 The following illustrates how to get the Number format working with a danish locale.
 
-'''
+```
 	import java.text.NumberFormat;
 	import java.util.Currency;
 	import java.util.Locale;
@@ -32,4 +32,4 @@ The following illustrates how to get the Number format working with a danish loc
  		System.out.println(krFormat.format(amount));
  		}
 	}
-'''
+```
