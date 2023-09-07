@@ -16,7 +16,7 @@ home = ["HTML", "RSS", "Algolia"]
 
 
 [params]
-  header_image = "images/jupiter.png"
+  header_image = "images/jupiter.jpeg"
   SEOTitle = "A developers blog | Shaaf, Syed Blog"
   description = "A technical blog about Java, Kubernetes and things that matter"
   keyword = "Java, developers, devops, , kubernetes, redhat, Shaaf Blog, Web, keycloak, PaaS, Istio, Kubernetes, infinispan, Microservice"
@@ -41,7 +41,7 @@ home = ["HTML", "RSS", "Algolia"]
   # Sidebar settings
   sidebar_about_description = "Software developer, architect, opensource enthusiast, cricket coach"
   #sidebar_avatar = "images/sshaaf_avatar.png"      # use absolute URL, seeing it's used in both `/` and `/about/`
-  sidebar_avatar = "images/sshaaf_avatar.png"      # use absolute URL, seeing it's used in both `/` and `/about/`
+  sidebar_avatar = "images/sshaaf_avatar.jpeg"      # use absolute URL, seeing it's used in both `/` and `/about/`
 
   featured_tags = true 
   featured_condition_size = 1 
