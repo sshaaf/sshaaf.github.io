@@ -1,7 +1,6 @@
 ---
-title: "Keycloak Operator for Kubernetes - a Tutorial"
+title: "Keycloak Operator for Kubernetes - a Basic Tutorial"
 date: 2023-09-07T17:29:48+02:00
-draft: true
 image: /images/2023/09/08/security.jpeg
 ---
 
@@ -13,11 +12,11 @@ If you arent familiar with [Keycloak](https://keycloak.org); its an opensource i
 Let's get cracking on installing a basic keycloak instance backed by a PostgreSQL database. 
 
 So heres the plan
- - Install Operator on OpenShift cluster (a distribution of Kubernetes by Red Hat)
+ - Install Operator on [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift) cluster (a distribution of Kubernetes by Red Hat)
  - Install database for the Keycloak backend.
  - Create SSL certificate for use with keycloak backend.
  - Install the first Keycloak instance. 
- - Test with a basic Java Script client. 
+ - Importing a realm 
 
 
 ### Installing the Operator
@@ -155,9 +154,30 @@ Assuming we have the password, lets go back to the route and click on `Adminstra
 
 Login and ` Viola! ` we have landed on our freshly installed Keycloak server. 
 
+
+### Importing a realm
 At this moment we only have the master realm. Typically one should leave the master realm intact without much changes. The logic behind that would be not to lock ourselves out. How about we import a realm. And here the power of Operator comes into play. We will create a RealmImportCR and that will add a new realm to Keycloak. Imagine if the Keycloak pod goes down at some point, the operator will ensure that its brought back to the same state it was and where is that state going to be? in the CRs and the database.
 
-I had a [realm json](https://github.com/sshaaf/book-service/blob/main/src/main/resources/quarkus-realm.json) file. And obviously operators and most of the stuff in K8s expects yaml so I had to make a conversion. I used the following [tool](https://www.json2yaml.com/). If I had secrets I probably wouldnt use an online tool and wouldnt recommend either. 
+Okay lets test this out further, how about adding a new realm via the KCImportRealmCR
+
+Let's go back to the Operator view
+
+Click on KeycloakRealmImport -> `Create instance`
+![alt_text](/images/2023/09/08/KCRealmImport.jpeg "Keycloak server realm import")
+
+I had a [realm json](https://github.com/sshaaf/book-service/blob/main/src/main/resources/quarkus-realm.json) file. And obviously operators and most of the stuff in K8s expects yaml so I had to make a conversion. I used the following [yq](https://github.com/mikefarah/yq/) for conversion. There are also online tools available, but given the sensitive nature of realms I wouldnt suggest using a random online tool to convert to yaml. 
+
 So here is the resultant [CR](https://gist.github.com/sshaaf/7b5a0fc6c81289440cb797e049b99472)
 
+Load the yaml and press create
+![alt_text](/images/2023/09/08/CR-realm-import.jpeg "Keycloak server realm import")
 
+It can take a couple of seconds to that it will come up. As soon as we create the CR, the Keycloak Operator will pick it up and add it to the running Keycloak instance. If you log back into the admin console it should look like this.
+
+![alt_text](/images/2023/09/08/realm-imported.jpeg "Keycloak server realm import")
+
+And if we explore further and look into the clients there is a `backend-service`. Its a Cient config for a Quarkus based REST service written in Java. Thats for another post. There is alot more that can be done with Operators. 
+
+If you are looking for more in depth details the Keycloak [docs](https://www.keycloak.org/documentation) is a great resource. If you are looking to explore more and try this installation you can also use the following [Keycloak tutorial](https://shaaf.dev/keycloak-tutorial)
+
+More to come on Keycloak in later posts.
