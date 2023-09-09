@@ -176,7 +176,7 @@ It can take a couple of seconds to that it will come up. As soon as we create th
 
 ![alt_text](/images/2023/09/08/realm-imported.jpeg "Keycloak server realm import")
 
-And if we explore further and look into the clients there is a `backend-service`. Its a Cient config for a Quarkus based REST service written in Java. Thats for another post. There is alot more that can be done with Operators. 
+And if we explore further and look into the clients there is a `backend-service`. Its a Client config for a Quarkus based REST service written in Java. Thats for another post. There is alot more that can be done with Operators. 
 
 If you are looking for more in depth details the Keycloak [docs](https://www.keycloak.org/documentation) is a great resource. If you are looking to explore more and try this installation you can also use the following [Keycloak tutorial](https://shaaf.dev/keycloak-tutorial)
 
