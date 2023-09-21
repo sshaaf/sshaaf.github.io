@@ -1,6 +1,7 @@
 ---
 title: "Keycloak Operator for Kubernetes - a Basic Tutorial"
 date: 2023-09-07T17:29:48+02:00
+tags: [kubernetes, openshift, keycloak, operator]
 image: /images/2023/09/08/security.jpeg
 ---
 
