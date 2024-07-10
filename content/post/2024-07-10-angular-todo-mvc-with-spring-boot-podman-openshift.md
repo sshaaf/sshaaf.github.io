@@ -1,7 +1,7 @@
 ---
 title:       "Angular TodoMVC with Spring boot backend, deploy to Kubernetes"
 date:        2024-07-10
-image:       "/images/2024/07/angular-todo-spring-tomcat-kubernetes.jpeg"
+image:       "/images/2023/09/08/security.jpeg"
 tags: [kubernetes, openshift, angular, spring]
 categories:  ["Java" ]
 ---
