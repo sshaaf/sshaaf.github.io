@@ -76,7 +76,7 @@ So here is an interesing output. The module [rest-angular](https://github.com/ap
 The output is nice and clean.
 `Dependency` name, and `version`, and the last uploaded to maven repo. 
 
-I did run into an issue though. Where I am running Java 17. But the plugin is complied with the latest Java LTS version 21. 
+I did run into an [issue](https://github.com/Giovds/outdated-maven-plugin/issues/18) though. Where I am running Java 17. But the plugin is complied with the latest Java LTS version 21. 
 
 ```
     Execution default-cli of goal com.giovds:outdated-maven-plugin:1.0.0:check failed: 
