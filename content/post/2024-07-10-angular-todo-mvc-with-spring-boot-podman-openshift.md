@@ -6,7 +6,7 @@ tags: [kubernetes, openshift, angular, spring]
 categories:  ["Java" ]
 ---
 
-![TODO Demo App - Spring / Angular](/images/2024/07/todo-demo-app-spring3-jws-tomcat.jpeg)
+![TODO Demo App - Spring / Angular](/images/2024/07/10/todo-demo-app-spring3-jws-tomcat.jpeg)
 
 This article guides you through building a Spring Boot demo application and deploying it on Kubernetes using the JBoss Web Server Operator. The application uses the TodoMVC Angular front-end, integrated with a Spring Boot backend. The Todo entity is defined with JPA annotations for database mapping. The TodoController handles CRUD operations, and TodoRepository extends JpaRepository for database interactions. The application can be run locally or packaged with Tomcat as an embedded server. The deployment process includes building a Docker image, pushing it to a repository, and deploying on OpenShift. Configuration details for both H2 and PostgreSQL databases are provided.
 
@@ -263,7 +263,7 @@ oc new-app -e POSTGRESQL_USER=jws \                                             
 
 ### The Operator
 There are multiple ways to install the operator. The Operator is searchable and installable in the OpenShift Console via the `OperatorHub`
-![JWS Operator](/images/2024/07/jws-operator.jpeg)
+![JWS Operator](/images/2024/07/10/jws-operator.jpeg)
 
 
 ## Creating a new Webserver instance
@@ -304,7 +304,7 @@ jws-app   jws-app-xx.apps.red.demoshift.com          jws-app    <all>           
 
 ````
 You can now use your awesome TODO app running on JWS using Spring boot 3 and AngularJS.
-![JWS Operator](/images/2024/07/todo-mvc-angular.jpeg)
+![JWS Operator](/images/2024/07/10/todo-mvc-angular.jpeg)
 
 More configuration to play with
 - **replicas:**: This specifies the desired number of replicas (instances) of the application to run.
