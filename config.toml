@@ -72,7 +72,7 @@ home = ["HTML", "RSS", "Algolia"]
   #email          = "youremail@gmail.com"
   #facebook      = "full profile url in facebook"
   #googleplus    = "full profile url in googleplus"
-  #twitter       = "https://twitter.com/syshaaf"
+  twitter        = "https://twitter.com/syshaaf"
   linkedin       = "https://www.linkedin.com/in/shaaf/"
   stackoverflow  = "https://stackoverflow.com/users/243185/syed-m-shaaf"
   #instagram     = "full profile url in instagram"
@@ -140,7 +140,6 @@ data_emit_metadata = "0"
 data_theme = "light"
 data_lang = "en"
 crossorigin = "anonymous"
-
 
 [outputFormats.Algolia]
 baseName = "algolia"
