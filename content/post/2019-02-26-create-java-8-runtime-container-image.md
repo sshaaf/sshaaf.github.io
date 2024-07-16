@@ -3,6 +3,7 @@ title: Creating and deploying a Java 8 runtime container image
 tags: [microprofile, java, redhat, rhel, programming, docker, container]
 Category: Image Processing
 date: 2019-02-26 07:07:22 +02:00
+categories: ["Java"]
 ---
 
 >  *Orignally posted at* [Red Hat Developers](https://developers.redhat.com/blog/2019/02/26/create-java-8-runtime-container-image)

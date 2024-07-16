@@ -3,6 +3,7 @@ title: Quick start Singleton - Walk through
 tags: [computers, design, design-patterns, gof, howto, java, patterns, programming, singleton, singleton-pattern, software, software-development]
 category: Software Design
 date: 2008-06-23 03:56:37 +02:00
+categories: ["Java"]
 ---
 
 

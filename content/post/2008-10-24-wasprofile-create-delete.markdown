@@ -2,6 +2,7 @@
 title: wasprofile -create -delete
 tags: [howto, java, programming, websphere, wsadmin, administrator, scripting, sysadmin, ibm, jython, jdbc, wasprofile]
 date: 2008-10-24 13:38:00 +02:00
+categories: ["Java"]
 ---
 
 

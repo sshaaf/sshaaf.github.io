@@ -3,6 +3,7 @@ title: "Building a REST API in Java"
 date: 2023-09-13 07:07:22 +02:00
 image: /images/2023/09/14/quarkus-computer.jpeg
 draft: true
+categories: ["Java"]
 ---
 
 Its 2023 and wondering about creating a REST API in Java. This tutorial will walk through some of the basics, how to build, document and test a REST API and I think the most awesome takeaway is *developing with [joy](https://quarkus.io/developer-joy/)*. So many frameworks claim bringing that joy. In this blog I will demonstrate the real Joy for all my Java developer friends. Atleast it should bring smiles to our faces for the ones who havent been touched by it yet ;)

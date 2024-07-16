@@ -2,6 +2,7 @@
 title: Crocus - CSV Reader
 tags: [java, programming, software, csv, utils, how-to, api]
 date: 2008-10-03 23:38:42 +02:00
+categories: ["Java"]
 ---
 
 

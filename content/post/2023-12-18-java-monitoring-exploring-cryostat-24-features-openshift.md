@@ -3,6 +3,7 @@ title: "Java monitoring: Exploring Cryostat 2.4 features on OpenShift"
 date: 2023-12-18T09:28:11+02:00
 tags: [jfr, monitoring, java, jdk-21, release, openjdk]
 image: /images/2023/12/18/java-monitoring-exploring-cryostat-24-features-openshift.jpeg
+categories: ["Java"]
 ---
 
 >  *Orignally posted at* [Red Hat Developers](https://developers.redhat.com/articles/2023/12/18/java-monitoring-exploring-cryostat-24-features-openshift)

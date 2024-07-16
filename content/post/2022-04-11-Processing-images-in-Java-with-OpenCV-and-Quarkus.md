@@ -4,6 +4,7 @@ tags: [java, opencv, programming, quarkus]
 Category: Java
 date: 2022-04-11 07:07:22 +02:00
 image: /images/testImage.jpg
+categories: ["Java"]
 ---
 
 If you are into Computer vision, you probably are familiar with [OpenCV](https://opencv.org/). Its an amazing library that has almost everything one needs to do 2D and 3D processing and much more. Gesture recognition, face detection, Motion tracking, think of anything related to image processing and OpenCV can be your goto. Its based on the BSD license, so you can just download it and start using it. 

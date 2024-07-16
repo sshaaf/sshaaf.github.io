@@ -2,6 +2,7 @@
 title: How to read a file from the JAR?
 tags: [howto, java, programming, software, software-development, utils, tips, jar]
 date: 2008-10-31 20:57:54 +01:00
+categories: ["Java"]
 ---
 
 

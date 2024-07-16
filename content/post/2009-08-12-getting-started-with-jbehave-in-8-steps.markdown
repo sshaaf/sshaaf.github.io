@@ -2,6 +2,7 @@
 title: Getting started with JBehave in 8 steps.
 tags: [java, jbehave, unit-testing]
 date: 2009-08-12 16:13:30 +02:00
+categories: ["Java"]
 ---
 
 
