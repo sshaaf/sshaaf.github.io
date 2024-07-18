@@ -88,4 +88,7 @@ I did run into an [issue](https://github.com/Giovds/outdated-maven-plugin/issues
 ``` 
 
 
-I do think that there will be projects out there using versions 17 or earlier. [State of the Java ecosystem report by New Relic](https://newrelic.com/sites/default/files/2024-05/new-relic-state-of-the-java-ecosystem-2024-05-29.pdf) also points out some of the versions in use. And I do think alot of older Java environments are the kind of environments where a tool like this will be be super useful to help aid users further. 
+I do think that there will be many projects out there using versions 17 or earlier. [State of the Java ecosystem report by New Relic](https://newrelic.com/sites/default/files/2024-05/new-relic-state-of-the-java-ecosystem-2024-05-29.pdf) also points out some of the versions in use. And I do think alot of older Java environments are the kind of environments where a tool like this will be be super useful to help aid users further. 
+
+Update as of `18th July 2024`
+> The project author has [added support for LTS -1 release](https://github.com/Giovds/outdated-maven-plugin/issues/18#issuecomment-2235569893) i.e. Java 17.
