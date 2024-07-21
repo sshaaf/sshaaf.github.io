@@ -19,7 +19,7 @@
 {{ end }}{{ end }}
 
 {{- if .IsPage -}}
-  {{ $base := resources.Get "og_base.png" }}
+  {{ $base := resources.Get ((index .Params.image)) }}
   {{ $boldFont := resources.Get "/0xProtoNerdFont-Regular.ttf"}}
   {{ $mediumFont := resources.Get "/0xProtoNerdFont-Regular.ttf"}}
   {{ $img := $base.Filter (images.Text .Site.Title (dict
@@ -48,4 +48,4 @@
   <meta name="twitter:title" content="{{ .Title }}" />
   <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end -}}"/>
   <meta name="twitter:image" content="{{$img.Permalink}}" />
-  {{ end }}
+{{ end }}
