@@ -19,7 +19,7 @@
 {{ end }}{{ end }}
 
 {{- if .IsPage -}}
-  {{ $base := resources.Get ((index .Params.image)) }}
+  {{ $base := resources.Get "og_base.png" }}
   {{ $boldFont := resources.Get "/0xProtoNerdFont-Regular.ttf"}}
   {{ $mediumFont := resources.Get "/0xProtoNerdFont-Regular.ttf"}}
   {{ $img := $base.Filter (images.Text .Site.Title (dict
