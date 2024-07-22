@@ -15,7 +15,7 @@ The article also addresses schema management and implementing fault tolerance wi
 > Infinispan is an open-source in-memory database that can hold nearly any type of data, from plain-text to structured objects. Retrieve your data with lightning-fast speeds with Infinispan's powerful full-text and vector search capabilities. Guarantee reliability and integrity by distributing your data across elastically scalable Infinispan clusters that offer high availability, fault tolerance, and the ability to replicate between multiple geographic sites. Connect to Infinispan using either a native, high-performance protocol or a Redis or Memcached client of your choice. 
 
 
-Infinispan is a great tool for setting up distributed caching, using Quarkus we can enhance that experience. This article is a thorough walkthrough for developing a cart service using Quarkus and Red Hat Data Grid/Infinispan. If you are a developer looking to quickly create a Kubernetes friendly multicore caching system that spans across clusters and sites, read on.. 
+Infinispan is a great tool for setting up distributed caching, using Quarkus we can enhance that experience. This article is a thorough walkthrough for developing a cart service using Quarkus and Infinispan. If you are a developer looking to quickly create a Kubernetes friendly multicore caching system that spans across clusters and sites, read on.. 
 The article is a long overdue follow up from a talk demo I did for the Devnation Day ([playlist](https://www.youtube.com/watch?v=6-bcVni0ej8&list=PLf3vm0UK6HKpNrHaILLCMitayjfnCAy41)).
 {{< youtube KT5yWwGEaDk >}}
 
