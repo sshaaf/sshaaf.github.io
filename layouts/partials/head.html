@@ -58,6 +58,13 @@
     -->
 
     {{- template "_internal/opengraph.html" . -}}
+
+    <!-- layouts/partials/head.html -->
+    {{ if .Params.image }}
+    <meta property="og:image" content="{{ index .Params.image | absURL }}" />
+    {{ else }}
+    <meta property="og:image" content="{{ .Site.Params.og_image | absURL }}" />
+    {{ end }}
     {{- template "_internal/twitter_cards.html" . -}}
 </head>
 

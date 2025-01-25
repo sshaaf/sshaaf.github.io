@@ -16,6 +16,7 @@ home = ["HTML", "RSS", "Algolia"]
 
 [params]
   header_image = "images/jupiter.jpeg"
+  og_image =  "images/jupiter.jpeg"
   SEOTitle = "Syed M Shaaf's Blog | All about software development and encouters there about"
   description = "A technical blog about Java, Kubernetes and things that matter"
   keyword = "Java, developers, devops, , kubernetes, redhat, Shaaf Blog, Web, keycloak, PaaS, Istio, Kubernetes, infinispan, Microservice"
