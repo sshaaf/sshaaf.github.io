@@ -5,7 +5,7 @@ languageCode = "en-us"
 # Enable comments by entering your Disqus shortname
 #disqusShortname = "https-shaaf-dev"
 googleAnalytics = "G-72FCXF4TY5"
-preserveTaxonomyNames = true
+preserveTaxonomyNames = false
 paginate = 5 #frontpage pagination
 hasCJKLanguage = true
 
