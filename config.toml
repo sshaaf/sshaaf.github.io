@@ -2,8 +2,6 @@ baseurl = "https://shaaf.dev"
 title = "Shaaf's blog"
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
-# Enable comments by entering your Disqus shortname
-#disqusShortname = "https-shaaf-dev"
 googleAnalytics = "G-72FCXF4TY5"
 preserveTaxonomyNames = false
 paginate = 5 #frontpage pagination
@@ -40,23 +38,10 @@ home = ["HTML", "RSS", "Algolia"]
 
   # Sidebar settings
   sidebar_about_description = "Software developer, architect, opensource enthusiast, cricket coach"
-  #sidebar_avatar = "images/sshaaf_avatar.png"      # use absolute URL, seeing it's used in both `/` and `/about/`
   sidebar_avatar = "images/sshaaf_avatar.jpeg"      # use absolute URL, seeing it's used in both `/` and `/about/`
 
   featured_tags = true 
   featured_condition_size = 1 
-
-  # Baidu Analytics
-  ba_track_id = ""
-  
-  # We need a proxy to access Disqus api in China
-  # Follow https://github.com/zhaohuabing/disqus-php-api to set up your own disqus proxy
-  disqus_proxy = ""
-  disqus_site = ""
-
-  # Twikoo comments
-  # Follow https://twikoo.js.org/ to set up your own env_id
-  twikoo_env_id = ""
 
   #Enable wechat pay & alipay to allow readers send reward money if they like the articles 
   reward = false
@@ -66,48 +51,19 @@ home = ["HTML", "RSS", "Algolia"]
   bookmarks = false
   about_me = true
 
-  # Include any custom CSS and/or JS files, url or relative to /static folder
-  #custom_css = ["css/lightbox.css", "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css", "css/main.css"]
-  #custom_js = ["js/lightbox.js", "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js", "js/main.js"]
-
   [params.social]
   rss            = true 
-  #email          = "youremail@gmail.com"
-  #facebook      = "full profile url in facebook"
-  #googleplus    = "full profile url in googleplus"
   twitter        = "https://twitter.com/syshaaf"
   linkedin       = "https://www.linkedin.com/in/shaaf/"
   stackoverflow  = "https://stackoverflow.com/users/243185/syed-m-shaaf"
-  #instagram     = "full profile url in instagram"
   github         = "https://github.com/sshaaf"
-  #wechat         = "your wechat qr code image"
-  #medium        = "full profile url in medium"
-  #slack         = "full workspace url in slack"
-  #pinterest     = "full profile url in pinterest"
-  #reddit        = "full profile url in reddit"
-  #gitlab        = "full profile url in gitlab"
   mastodon      = "https://fosstodon.org/@shaaf"
-  #keybase       = "full profile url in keybase"
-  #xing          = "https://www.xing.com/profile/yourxingid"
-  #git           = "full profile url for git user"
   
-#  [[params.friend_link]]
-#  title = "Linda的博客"
-#  href =  "https://zhaozhihan.com"
 
-#  [[params.bookmark_link]]
-#  title =  "Martin Fowler"
-#  href =  "https://martinfowler.com"
-#  [[params.bookmark_link]]
-#  title = "ServiceMesher"
-#  href =  "http://www.servicemesher.com"
-#  [[params.bookmark_link]]
-#  title =  "Pxhere"
-#  href = "https://pxhere.com"
-#  [[params.bookmark_link]]
-#  title = "unsplash"
-#  href = "https://unsplash.com"
-  
+  [[params.addtional_menus]]
+  title =  "Articles"
+  href =  "/articles"
+
   [[params.addtional_menus]]
   title =  "ARCHIVE"
   href =  "/archive"
@@ -115,14 +71,6 @@ home = ["HTML", "RSS", "Algolia"]
   [[params.addtional_menus]]
   title =  "WORKSHOPS"
   href =  "/workshops"
-
-#  [[params.addtional_menus]]
-#  title =  "NOTES"
-#  href =  "/notes"
-
-#  [[params.addtional_menus]]
-#  title =  "PHOTOS"
-#  href =  "/photos"
 
   [[params.addtional_menus]]
   title =  "ABOUT"
