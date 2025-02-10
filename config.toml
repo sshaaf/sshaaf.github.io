@@ -65,6 +65,10 @@ home = ["HTML", "RSS", "Algolia"]
   href =  "/articles"
 
   [[params.addtional_menus]]
+  title =  "Talks"
+  href =  "/conferences"
+
+  [[params.addtional_menus]]
   title =  "ARCHIVE"
   href =  "/archive"
   
