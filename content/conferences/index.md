@@ -3,7 +3,7 @@ title: "Conferences, talks and web events"
 layout: Events
 type: Events
 description: Event talks and web events
-image:       "/images/computer-old.jpeg"
+image:       "/images/computer-old1.jpeg"
 date:        2025-02-04
 ---
 ## 2025
