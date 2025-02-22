@@ -20,6 +20,7 @@ There is an [awesome blog post](https://www.konveyor.io/blog/kai-deep-dive-2024/
 One of the standout features of Kai is its model-agnostic approach. Unlike other solutions, Kai doesn’t bundle any specific large language model (LLM). Instead, it extends Konveyor to interact with various LLMs, providing the flexibility to use the best-suited model for each specific migration context. This approach ensures that organizations can optimize their migration strategies without being locked into a single technology.
 
 ## Practical usecase: From Java EE to Quarkus
+> The demo in the following video has changed. View this post for [installation instructions](https://shaaf.dev/post/2025-02-22-migrating-javaee-to-quarkus-using-konveyor-ai/)
 
 {{< youtube cXJPHdETwcY >}}
 
