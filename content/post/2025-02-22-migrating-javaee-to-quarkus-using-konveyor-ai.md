@@ -25,7 +25,9 @@ Here is a short video explaining the installation process, configuration, and a 
 {{< youtube MHKbNYZyRVk >}}
 
 
-Before you go, don't forget to provide feedback, or if you are interested in contributing, join us in the [Kubernetes Slack community](https://www.konveyor.io/slack/) (`#Konveyor`) 
+We are shipping weekly releases at this point, and theres alot of great work at play. Don't forget to provide [feedback](https://github.com/konveyor/editor-extensions/issues), or if you are interested in contributing, join us in the [Kubernetes Slack community](https://www.konveyor.io/slack/) (`#Konveyor`) 
+
+
 
  
 
