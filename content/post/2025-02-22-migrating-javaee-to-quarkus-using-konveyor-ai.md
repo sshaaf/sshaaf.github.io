@@ -9,7 +9,7 @@ categories:  ["Java" ]
 
 [Konveyor AI](https://github.com/konveyor/kai) is a tool used to migrate Java applications to different Java frameworks, such as from JavaEE to [Quarkus](https://quarkus.io/) or [Spring](https://spring.io/) or from Spring 5 to 6, using Generative AI and static code analysis. I wrote a detailed post about this last year for the [Java Advent Calendar](https://www.javaadvent.com/2024/12/java-migrations-argh-and-now-large-language-models.html). 
 
-Most recently, we have all been hard at work, bringing a preview for our community of users. In this post, I will outline how you can install and configure Konveyor AI using [OpenAI](https://openai.com/) and make meaningful generations. However, I have chosen OpenAI for the sake of simplicity in this post. Users can choose many other models, which are documented here.
+Most recently, we have all been hard at work, bringing a preview for our community of users. In this post, I will outline how you can install and configure Konveyor AI using [OpenAI](https://openai.com/) and make meaningful generations. However, I have chosen OpenAI for the sake of simplicity in this post. Users can choose many other models, which are documented [here](https://github.com/konveyor/kai/blob/main/docs/llm_selection.md).
 
 One of the major changes in the new release is the use of agents. Kai now uses agents to recalibrate the codebase. For example, once a fixed is received from the LLM, Kai checks its validity and whether it's in line with the static code analysis. It also checks for compilation errors, and finally, it compiles the code using, e.g., Maven, so the project is intact. 
 
