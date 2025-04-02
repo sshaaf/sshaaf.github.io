@@ -9,6 +9,8 @@ date:        2025-02-04
 ## 2025
 | Event | Title       |
 |-----|-----------|
+| JDConf  | **[Building LLM Apps in Java with LangChain4j and Jakarta EE](https://jdconf.com/agenda.html#apac-session-01)** |
+| JDConf  | **[Building LLM Apps in Java with LangChain4j and Jakarta EE](https://jdconf.com/agenda.html#apac-session-01)** |
 | Devnexus  | **[Java + LLMs: A hands-on guide to building LLM Apps in Java with JakartaEE](https://devnexus.org/presentations/java-llms-a-hands-on-guide-to-building-llm-apps-in-java-with-jakartaee)** |
 | JChampionsConf  | **[Java + LLMs: A hands-on guide to building LLM Apps in Java with Jakarta](https://shaaf.dev/post/2025-02-05-a-handson-guide-to-building-llm-apps-in-java-with-jakarta/)**    |
 
