@@ -10,7 +10,6 @@ date:        2025-02-04
 - [InfoQ](https://www.infoq.com/profile/Shaaf-Syed/#allActivity)
 - [Red Hat Developers](https://developers.redhat.com/author/syed-m-shaaf)
 
-
 ## InfoQ
 ### **[WildFly 34 Adds Preview of Jakarta EE 11 and Support for Jakarta Data](https://www.infoq.com/news/2024/11/wildfly-34-jakarta-ee)**
 
