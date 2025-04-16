@@ -9,6 +9,7 @@ date:        2025-02-04
 ## 2025
 | Event | Title       |
 |-----|-----------|
+| Red Hat Summit   | **[Assess and prioritize your applications at scale to modernize with Red Hat OpenShift](https://events.experiences.redhat.com/widget/redhat/sum25/SessionCatalog2025/session/1731431623934001huUr)** |
 | Geecon   | **[Java + LLMs: A hands-on guide to building LLM Apps in Java](https://2025.geecon.org/)** |
 | Krakow Elastic Meetup  | **[Building and deploying AI infused apps with Elasticsearch using Podman and OpenShift AI](https://www.meetup.com/elastic-krakow/events/306936101/)** |
 | Houston Java Users Group  | **[Building LLM Apps in Java with LangChain4j and Jakarta EE](https://www.eventbrite.com/e/java-llms-a-hands-on-guide-with-bazlur-rahman-syed-m-shaaf-tickets-1309355159529?utm_experiment=test_share_listing&aff=ebdsshios)** |
