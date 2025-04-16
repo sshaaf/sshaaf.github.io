@@ -10,7 +10,12 @@ date:        2025-02-04
 | Event | Title       |
 |-----|-----------|
 | Geecon   | **[Java + LLMs: A hands-on guide to building LLM Apps in Java](https://2025.geecon.org/)** |
+| Krakow Elastic Meetup  | **[Building and deploying AI infused apps with Elasticsearch using Podman and OpenShift AI](https://www.meetup.com/elastic-krakow/events/306936101/)** |
+| Houston Java Users Group  | **[Building LLM Apps in Java with LangChain4j and Jakarta EE](https://www.eventbrite.com/e/java-llms-a-hands-on-guide-with-bazlur-rahman-syed-m-shaaf-tickets-1309355159529?utm_experiment=test_share_listing&aff=ebdsshios)** |
+| Copenhagen Elastic Meetup  | **[Building and deploying AI infused apps with Elasticsearch using Podman and OpenShift AI](https://www.meetup.com/copenhagen-elastic-fantastics/events/306913140/ )** |
+| Jakarta TechTalk  | **[Java + LLMs: A hands-on guide to building LLM Apps in Java with Jakarta](https://hubs.la/Q03fYLk00 )** |
 | JDConf  | **[Building LLM Apps in Java with LangChain4j and Jakarta EE](https://jdconf.com/agenda.html#apac-session-01)** |
+| Atlanta Elastic Meetup  | **[Building and deploying AI infused apps with Elasticsearch using Podman and OpenShift AI](https://www.meetup.com/elastic-atlanta-user-group/events/306110138/ )** |
 | Devnexus  | **[Java + LLMs: A hands-on guide to building LLM Apps in Java with JakartaEE](https://devnexus.org/presentations/java-llms-a-hands-on-guide-to-building-llm-apps-in-java-with-jakartaee)** |
 | JChampionsConf  | **[Java + LLMs: A hands-on guide to building LLM Apps in Java with Jakarta](https://shaaf.dev/post/2025-02-05-a-handson-guide-to-building-llm-apps-in-java-with-jakarta/)**    |
 
