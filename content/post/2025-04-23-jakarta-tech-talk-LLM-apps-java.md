@@ -9,15 +9,15 @@ categories:  ["Java" ]
 
 We now have so much demo code on the topic that we cannot present all the variations in one hour. We are still building along as we learn [here](https://github.com/learnj-ai/llm-jakarta).
 
-Last October, I presented and told folks about LLMs and how to get started. Within six months, I already saw that the general understanding of LLMs was much higher. I cannot explain how exciting the learning journey to learning LLMs has become. I am sure many feel the same way. 
+Last October, I presented and was telling folks about LLMs and how to get started. Within six months, I the general understanding of LLMs seems to be way much higher. I cannot explain how exciting the journey to learning LLMs has become. I am sure many feel the same way. 
 
 Therefore, this time, we gave a 7-minute presentation, basically trying to explain what it was. Then, for the rest of the 50 minutes, we did a demo, which was enjoyable for the audience. 
 
 We covered the following demos
-  - Prompt engineering
-  - Tools
-  - RAG
-  - Model Context Protocol 
+- Prompt engineering
+- Tools
+- RAG
+- Model Context Protocol 
 
 {{< youtube 3RM1mtX0O4U >}}
 
