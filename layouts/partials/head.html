@@ -65,6 +65,12 @@
     <meta property="og:image" content="{{ .Site.Params.og_image | absURL }}" />
     {{ end }}
     {{- template "_internal/twitter_cards.html" . -}}
+    {{ if .Page.Store.Get "hasMermaid" }}
+        <script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    {{ end }}
 </head>
 
 {{ if .Site.Config.Services.GoogleAnalytics.ID }}
