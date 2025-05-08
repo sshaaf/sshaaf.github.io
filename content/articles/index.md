@@ -11,6 +11,9 @@ date:        2025-02-04
 - [Red Hat Developers](https://developers.redhat.com/author/syed-m-shaaf)
 
 ## InfoQ
+### **[Adoption of the Model Context Protocol Within the Java Ecosystem](https://www.infoq.com/news/2025/05/mcp-within-java-ecosystem/)**
+The Model Context Protocol (MCP), an open standard for LLM tool integration, is gaining adoption in Java (Quarkus, Spring AI, etc.). Developers can now run MCP servers more easily using tools like JBang and the MCP Java catalog. 
+
 ### **[WildFly 34 Adds Preview of Jakarta EE 11 and Support for Jakarta Data](https://www.infoq.com/news/2024/11/wildfly-34-jakarta-ee)**
 
 The WildFly community announced the latest release of WildFly 34, emphasizing the significant changes made to the WildFly Preview, including support for Jakarta Data 1.0, MicroProfile REST Client 4.0, and MicroProfile Telemetry 2.0. Other minor updates include ORM 6.6.x, Hibernate search 7.2, and FasterXML Jackson 2.17.
