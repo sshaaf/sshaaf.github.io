@@ -291,7 +291,7 @@ Next up, Lets create a Tool that the MCP server can expose
 - **2** - All the different parameters required for the successful execution of this Tool. 
 - **3** - And finally once the UserService returns I pass the result to the LLM for further processing.
 
-### Packiging
+### Packaging
 We should add the following properties to the `application.properties`
 
 ```properties
