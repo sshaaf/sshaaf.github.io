@@ -1,7 +1,7 @@
 ---
 title:       "A Keycloak example - building my first MCP server Tools with Quarkus"
 date:        2025-05-12
-image:       "/images/2023/09/08/security.jpeg"
+image:       "/images/2025/05/keycloak-mcp.jpg"
 tags:        ["java", "llm", "mcp", "tools"]
 categories:  ["Java" ]
 ---
