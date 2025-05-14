@@ -355,6 +355,10 @@ Here are the users in the "quarkus" realm:
 
 Okay, so that sums it up. hope you enjoyed it and ready to write your first MCP server implementation as well. 
 
+## Summary
+The article explores creating a practical Model Context Protocol (MCP) server for Keycloak, aiming to learn and demonstrate its potential for AI-powered administration. MCP, standardizes how LLMs interact with external tools, prompts, and resources, addressing the issue of fragmented custom integrations. The article details building this experimental Keycloak MCP server using Quarkus and the Keycloak Admin REST client, focusing on user management operations within specified realms. It provides code snippets for a UserService and an MCP UserTool, explaining how to define tools and their arguments for LLM consumption via Stdio. Finally, the article shows how to package the Quarkus application and run it with "Goose," an AI agent CLI, to interact with Keycloak using natural language queries.
+
+
 ## Resources
 - Goose - https://github.com/block/goose
 - MCP - https://modelcontextprotocol.io/docs/concepts/tools
