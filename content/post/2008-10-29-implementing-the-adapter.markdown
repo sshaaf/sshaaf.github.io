@@ -3,6 +3,8 @@ title: Implementing the adapter
 tags: [computers, design, design-patterns, gof, howto, java, patterns, programming, software, software-development, adapter-pattern, adapter]
 date: 2008-10-29 20:47:56 +01:00
 categories: ["Java"]
+layout: post
+type: post
 ---
 
 

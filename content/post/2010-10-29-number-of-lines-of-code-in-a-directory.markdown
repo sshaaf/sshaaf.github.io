@@ -2,6 +2,8 @@
 title: number of lines of code in a directory
 tags: [programming, linux, wc, find, code, shell]
 date: 2010-10-29 15:25:39 +02:00
+layout: post
+type: post
 ---
 
 

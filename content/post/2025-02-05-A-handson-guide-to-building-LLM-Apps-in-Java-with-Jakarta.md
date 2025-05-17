@@ -4,6 +4,8 @@ date:        2025-02-04
 image:       "/images/2023/09/21/java-21.jpeg"
 tags:        ["java", "llm", langchain4j]
 categories:  ["Java" ]
+layout: post
+type: post
 ---
 
 [Java](https://foojay.io/) is an amazing language to work with. Millions of developers use it for daily work routines, and many mission-critical applications run on Java today. Whether we talk about banks, stock exchanges, or space, Java is prevalent and a language of choice. 

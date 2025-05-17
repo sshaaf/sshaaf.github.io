@@ -3,6 +3,8 @@ title: Command
 tags: [computers, design, design-patterns, gof, howto, java, patterns, programming, software, software-development, command]
 date: 2008-10-31 20:45:04 +01:00
 categories: ["Java"]
+layout: post
+type: post
 ---
 
 

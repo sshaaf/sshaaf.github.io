@@ -3,6 +3,8 @@ title: That thing about CI - Continous Integration
 tags: [software, build, engineering, continous, ci, integration]
 category: DevOps
 date: 2008-11-12 14:11:18 +01:00
+layout: post
+type: post
 ---
 
 

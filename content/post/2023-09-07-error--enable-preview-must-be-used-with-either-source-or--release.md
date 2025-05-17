@@ -2,6 +2,8 @@
 title: "error: --enable-preview must be used with either -source or --release"
 tags: [java, jdk21]
 date: 2023-09-07T15:00:48+02:00
+layout: post
+type: post
 ---
 
 The JDK 21 release is well underway likely to drop around September 19th, and its not GA yet. further more it provides preview features. 

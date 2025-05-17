@@ -3,6 +3,8 @@ title: Get on Jekyll with Jekyll bootstrap
 tags: [blog, static-sites, ruby, jekyll, jekyll-bootstrap, wordpress]
 date: 2012-08-01
 Description: "Jekyll-Bootstrap makes it easy to get started with Jekyll, if you are looking for a static site generator then you are at the right place"
+layout: post
+type: post
 ---
 
 

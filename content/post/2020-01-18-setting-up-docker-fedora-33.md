@@ -3,6 +3,8 @@ title: "Setup docker on Fedora 33"
 images:
 tags: [config, docker, fedora, install]
 date: 2020-01-18
+layout: post
+type: post
 ---
 
 I use Fedora as my regular Linux. And I have been doing that for years now, even though I am a developer its simple and straight forward enough to get my way around. It has some great features and spins. You should check it out at [Fedora project](https://getfedora.org/)

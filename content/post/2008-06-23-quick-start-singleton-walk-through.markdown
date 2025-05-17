@@ -4,6 +4,8 @@ tags: [computers, design, design-patterns, gof, howto, java, patterns, programmi
 category: Software Design
 date: 2008-06-23 03:56:37 +02:00
 categories: ["Java"]
+layout: post
+type: post
 ---
 
 

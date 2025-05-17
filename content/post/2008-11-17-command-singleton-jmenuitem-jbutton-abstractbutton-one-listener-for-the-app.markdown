@@ -3,6 +3,8 @@ date: 2008-11-17 21:17:24 +01:00
 title: Command, Singleton, JMenuItem, JButton, AbstractButton - One Listener for the app
 tags: [computers, design, patterns, gof, howto, java, patterns, programming, singleton, software, command, jmenuitem, jbutton, abstractbutton, swing]
 categories: ["Java"]
+layout: post
+type: post
 ---
 
 

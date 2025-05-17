@@ -3,6 +3,8 @@ title: Logging with log4J isDebugEnabled
 tags: [java, programming, log4j, logging, best-practise]
 date: 2009-08-12 14:39:52 +02:00
 categories: ["Java"]
+layout: post
+type: post
 ---
 
 

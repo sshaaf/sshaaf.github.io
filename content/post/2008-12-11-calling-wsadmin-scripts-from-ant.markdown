@@ -2,6 +2,8 @@
 title: Calling wsadmin scripts from ant
 tags: [howto, java, programming, websphere, wsadmin, administrator, scripting, sysadmin, ibm, ant, jython, jdbc, script]
 date: 2008-12-11 10:17:46 +01:00
+layout: post
+type: post
 ---
 
 

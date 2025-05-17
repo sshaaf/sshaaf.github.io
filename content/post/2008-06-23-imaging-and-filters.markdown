@@ -3,6 +3,8 @@ title: Imaging and filters
 tags: [image-processing, image, imaging, java2d, filters, dip]
 Category: Image Processing
 date: 2008-06-23 07:07:22 +02:00
+layout: post
+type: post
 ---
 
 

@@ -3,6 +3,8 @@ title: Creating the MQQueueConnectionFactory with wsadmin scripting  - JACL Part
 tags: [howto, java, programming, websphere, wsadmin, jacl, mq, administrator, scripting, sysadmin, ibm]
 category: Configuration
 date: 2008-06-24 15:44:31 +02:00
+layout: post
+type: post
 ---
 
 

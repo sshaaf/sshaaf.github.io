@@ -3,6 +3,8 @@ title: Doing the Locale - Danmark
 tags: [howto, java, programming, software, software-development, utils, tips, locale, internationalization]
 date: 2008-11-12 14:52:08 +01:00
 categories: ["Java"]
+layout: post
+type: post
 ---
 
 

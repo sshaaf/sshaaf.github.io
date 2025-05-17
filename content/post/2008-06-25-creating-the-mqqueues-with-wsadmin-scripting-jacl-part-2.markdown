@@ -3,6 +3,8 @@ title: Creating the MQQueues with wsadmin scripting - JACL Part 2
 tags: [howto, java, programming, websphere, wsadmin, jacl, mq, administrator, scripting, sysadmin, ibm, mqqueue]
 category: Configuration
 date: 2008-06-25 14:40:47 +02:00
+layout: post
+type: post
 ---
 
 

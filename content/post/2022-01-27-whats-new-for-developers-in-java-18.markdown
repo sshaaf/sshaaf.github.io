@@ -4,6 +4,8 @@ tags: [java, redhat, programming]
 Category: Java
 date: 2022-01-27 07:07:22 +02:00
 categories: ["Java"]
+layout: post
+type: post
 ---
 
 >  *Orignally posted at* [Red Hat Developers](https://developers.redhat.com/articles/2022/01/27/whats-new-developers-java-18#)

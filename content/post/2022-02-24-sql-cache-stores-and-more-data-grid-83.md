@@ -3,6 +3,8 @@ title: SQL cache stores and more in Data Grid 8.3
 tags: [java, cache, redhat, programming, infinispan]
 Category: Java
 date: 2022-02-24 07:07:22 +02:00
+layout: post
+type: post
 ---
 
 >  *Orignally posted at* [Red Hat Developers](https://developers.redhat.com/articles/2022/02/24/sql-cache-stores-and-more-data-grid-83)

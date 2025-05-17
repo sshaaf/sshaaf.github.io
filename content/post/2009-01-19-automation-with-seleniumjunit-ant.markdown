@@ -2,6 +2,8 @@
 title: Automation with Selenium,Junit, Ant
 tags: [software, ant, build, engineering, continous, ci, integration, scm, selenium, testing, automated-testing, junit]
 date: 2009-01-19 16:31:52 +01:00
+layout: post
+type: post
 ---
 
 

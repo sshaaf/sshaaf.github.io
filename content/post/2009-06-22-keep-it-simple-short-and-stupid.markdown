@@ -2,6 +2,8 @@
 title: Keep it simple, short and stupid (KISS)
 tags: [software, practise]
 date: 2009-06-22 15:59:07 +02:00
+layout: post
+type: post
 ---
 
 

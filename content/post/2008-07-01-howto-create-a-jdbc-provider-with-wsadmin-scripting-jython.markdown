@@ -2,6 +2,8 @@
 title: HowTo create a JDBC provider with wsadmin scripting - Jython
 tags: [howto, java, programming, websphere, wsadmin, administrator, scripting, sysadmin, ibm, jython, jdbc]
 date: 2008-07-01 14:21:48 +02:00
+layout: post
+type: post
 ---
 
 

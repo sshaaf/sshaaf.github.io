@@ -2,6 +2,8 @@
 title: Continous Integration - A blast from the past
 tags: [software, build, engineering, continous, ci, integration, scm]
 date: 2008-11-12 20:00:16 +01:00
+layout: post
+type: post
 ---
 
 
