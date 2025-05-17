@@ -4,6 +4,8 @@ date:        2024-07-10
 image:       "/images/2023/09/08/security.jpeg"
 tags: [kubernetes, openshift, angular, spring]
 categories:  ["Java" ]
+layout: post
+type: post
 ---
 
 ![TODO Demo App - Spring / Angular](/images/2024/07/10/todo-demo-app-spring3-jws-tomcat.jpeg)

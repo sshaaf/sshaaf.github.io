@@ -4,6 +4,8 @@ date:        2025-04-23
 image:       "/images/2023/09/08/security.jpeg"
 tags:        ["java", "llm"]
 categories:  ["Java" ]
+layout: post
+type: post
 ---
 [Langchain4j](https://docs.langchain4j.dev/) is my favorite framework for working with large language models and [Java](https://dev.java/learn/). In the last couple of weeks, both [Bazlur](https://x.com/bazlur_rahman) and I have presented to multiple user groups and [conferences](https://shaaf.dev/conferences/). This week, we had the privilege of presenting at the Jakarta Tech Talk, which both of us were looking very much forward to. 
 

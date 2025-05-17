@@ -2,6 +2,8 @@
 title: FedUp and Fedora 18
 tags: [fedora, fc17, fc18, upgrade]
 date: 2013-04-19 07:07:22 +02:00
+layout: post
+type: post
 ---
 
 

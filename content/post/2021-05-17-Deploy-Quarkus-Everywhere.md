@@ -4,6 +4,8 @@ tags: [quarkus, java, redhat, rhel, programming]
 Category: Image Processing
 date: 2021-05-07 07:07:22 +02:00
 categories: ["Java"]
+layout: post
+type: post
 ---
 
 >  *Orignally posted at* [Red Hat Developers](https://developers.redhat.com/blog/2021/04/07/deploy-quarkus-everywhere-with-red-hat-enterprise-linux-rhel#)

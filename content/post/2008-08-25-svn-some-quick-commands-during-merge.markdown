@@ -2,6 +2,8 @@
 title: SVN - some quick commands during merge
 tags: [howto, scripting, svn, build, automation]
 date: 2008-08-25 15:55:54 +02:00
+layout: post
+type: post
 ---
 
 

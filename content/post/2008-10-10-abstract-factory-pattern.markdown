@@ -3,6 +3,8 @@ title: Abstract Factory pattern
 tags: [homputers, design, design-patterns, gof, howto, java, patterns, programming, singleton, singleton-pattern, software, software-development]
 date: 2008-10-10 10:20:10 +02:00
 categories: ["Java"]
+layout: post
+type: post
 ---
 
 

@@ -3,6 +3,8 @@ title: "Keycloak Operator for Kubernetes - a Basic Tutorial"
 date: 2023-09-07T17:29:48+02:00
 tags: [kubernetes, openshift, keycloak, operator]
 image: /images/2023/09/08/security.jpeg
+layout: post
+type: post
 ---
 
 The Keycloak team [announced](https://www.keycloak.org/2022/09/operator-crs.html) that they were going to move to a new Operator framework that will effictevely manage Keycloak installatons on a Kubernetes cluster. 

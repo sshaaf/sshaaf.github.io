@@ -4,6 +4,8 @@ date: 2023-09-21T09:28:11+02:00
 tags: [java, jdk-21, release, openjdk]
 image: /images/2023/09/21/java-21.jpeg
 categories: ["Java"]
+layout: post
+type: post
 ---
 
 >  *Orignally posted at* [Red Hat Developers](hhttps://developers.redhat.com/articles/2023/09/21/whats-new-developers-jdk-21)

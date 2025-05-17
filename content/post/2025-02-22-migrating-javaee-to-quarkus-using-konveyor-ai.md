@@ -5,6 +5,8 @@ date:        2025-02-22
 image:       "/images/2025/02/22/kai-migration-javaee-quarkus-spring.jpeg"
 tags:        ["java", "llm", "migration", "konveyor", "gen-ai"]
 categories:  ["Java" ]
+layout: post
+type: post
 ---
 
 [Konveyor AI](https://github.com/konveyor/kai) is a tool used to migrate Java applications to different Java frameworks, such as from JavaEE to [Quarkus](https://quarkus.io/) or [Spring](https://spring.io/) or from Spring 5 to 6, using Generative AI and static code analysis. I wrote a detailed post about this last year for the [Java Advent Calendar](https://www.javaadvent.com/2024/12/java-migrations-argh-and-now-large-language-models.html). 

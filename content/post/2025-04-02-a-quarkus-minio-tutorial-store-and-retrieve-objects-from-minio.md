@@ -4,6 +4,8 @@ date:        2025-03-14
 image:       "/images/2025/04/02/electric-circuit.jpeg"
 tags:        ["java", "minio"]
 categories:  ["Java" ]
+layout: post
+type: post
 ---
 Consider a web application that needs to store user-generated content, such as images, videos, and documents. Instead of storing them in a file systems or using a database, the web application can use an object store. An object store can handle objects as a single unit, providing metadata about each object and abstracting away from the underlying storage which can be local or distributed. In this blog post I will explain a local setup for minio using docker. I also use Quarkus as the framework of choice for cloud native applications. and I use the minio SDK which is pretty awesome to work with together with Quarkus. Let's do this :) 
 

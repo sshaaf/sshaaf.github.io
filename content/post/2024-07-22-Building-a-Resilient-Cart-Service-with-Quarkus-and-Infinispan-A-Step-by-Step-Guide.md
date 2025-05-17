@@ -4,6 +4,8 @@ date: 2024-07-22
 image: "/images/2024/07/22/vaporware-old-school-pentium.jpeg"
 tags: ["java", "cache", "infinispan", "high-availability"]
 categories: ["Java"]
+layout: post
+type: post
 ---
 
 The article is a comprehensive guide on creating, deploying, and managing the [coolstore](https://github.com/sshaaf/coolstore-quarkus) cart service using Quarkus and [Infinispan](https://infinispan.org/). The guide details building the cart-service with [Quarkus](https://quarkus.io/), packaging it, and deploying it to [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift). 

@@ -2,6 +2,8 @@
 title: Generate XML - DBMS_XMLGEN
 tags: [howto, programming, software, software,development, utils, tips, sql, dbms_xmlgen]
 date: 2008-12-10 16:58:04 +01:00
+layout: post
+type: post
 ---
 
 

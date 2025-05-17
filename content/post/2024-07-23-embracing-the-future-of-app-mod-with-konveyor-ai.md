@@ -4,6 +4,8 @@ date:        2024-07-23
 image:       "/images/2024/07/23/kai-application-migration-with-llm.jpeg"
 tags:        ["java", "migration"]
 categories:  ["Java" ]
+layout: post
+type: post
 ---
 
 [Konveyor’s](https://www.konveyor.io) main strength lies in its comprehensive approach to migration and modernization. At the core of [Konveyor’s](https://www.konveyor.io) functionality is its powerful analysis engine. This engine performs static source code analysis, identifying anti-patterns and issues that might hinder the application’s operation on a target platform. Utilizing community standards like the Language Server Protocol, Konveyor's analysis engine uses rules designed to aid in various migration scenarios. Users can also create custom rules to address specific migration needs, enhancing Konveyor's flexibility and adaptability.

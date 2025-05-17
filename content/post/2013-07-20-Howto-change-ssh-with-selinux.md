@@ -2,6 +2,8 @@
 title: Howto setup ssh with selinux and firewalld
 tags: [how-to, fedora, ssh, firewalld, firewall, selinux, yum]
 date: 2013-07-20 14:40:47 +02:00
+layout: post
+type: post
 ---
 
 

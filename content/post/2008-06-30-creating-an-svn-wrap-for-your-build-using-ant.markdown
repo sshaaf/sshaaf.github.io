@@ -2,7 +2,8 @@
 title: Creating an SVN wrap for your build using Ant
 tags: [howto, java, programming, scripting, svn, ant, build, automation]
 date: 2008-06-30 14:45:32 +02:00
-
+layout: post
+type: post
 ---
 
 

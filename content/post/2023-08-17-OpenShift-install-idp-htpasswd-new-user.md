@@ -4,6 +4,8 @@ tags: [kubernetes, openshift, configuration, htpasswd]
 Category: Java
 date: 2023-08-17 09:15:22 +02:00
 image: /images/2023/08/17/brett-jordan-D44kHt8Ex14-unsplash.jpg
+layout: post
+type: post
 ---
 
 There are multiple options to configure OpenShift integration with an IDP. Usually one would use something like an LDAP, AD (Active Directory) for use in a production cluster or a corporate environment. This guide is a basic how-to in configuring using the htpasswd file which is one of the IDP integration options in Openshift 4.x. 

@@ -4,6 +4,8 @@ date: 2024-07-14
 image: "/images/2024/07/14/serverfarm-vaporware.jpeg"
 tags: ["java", "maven"]
 categories: ["Java"]
+layout: post
+type: post
 ---
 
 It's not an early Sunday morning. Sipping some Coffee and going through my feed and I find this gem that [@Markus Eisele](https://mastodon.online/@myfear/112783939377718420) just posted. 

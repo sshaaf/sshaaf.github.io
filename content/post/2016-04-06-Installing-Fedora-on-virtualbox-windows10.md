@@ -3,6 +3,8 @@ title: Install log; fedora 23, Virtualbox and windows 10
 tags : [ virtualization, beginner, admin, tutorial ]
 category : How-to
 date: 2016-04-06
+layout: post
+type: post
 ---
 
 

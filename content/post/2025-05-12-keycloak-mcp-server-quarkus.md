@@ -4,6 +4,8 @@ date:        2025-05-12
 image:       "/images/2025/05/keycloak-mcp.jpg"
 tags:        ["java", "llm", "mcp", "tools"]
 categories:  ["Java" ]
+layout: post
+type: post
 ---
 
 Recently I wrote an article about "[Adoption of the Model Context Protocol Within the Java Ecosystem](https://www.infoq.com/news/2025/05/mcp-within-java-ecosystem/)". Now it was also time to start experimenting with writing an MCP Server myself (well maybe not the [first time](https://youtu.be/LCzeb61bU9A?si=7mwaSEcaoEWuUB2z&t=5255)).

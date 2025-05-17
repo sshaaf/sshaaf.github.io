@@ -1,10 +1,10 @@
 ---
 title: "Published Articles and blogs"
-layout: articles
-type: articles
 description: Published Articles and blogs on external sites
 image:       "/images/computer-old2.jpeg"
 date:        2025-02-04
+layout: externalcontent
+type: externalcontent
 ---
 
 - [InfoQ](https://www.infoq.com/profile/Shaaf-Syed/#allActivity)
