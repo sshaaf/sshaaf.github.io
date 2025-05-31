@@ -17,7 +17,7 @@ hasCJKLanguage = true
 home = ["HTML", "RSS", "Algolia"]
 
 [params]
-  header_image = "images/jupiter.jpeg"
+  header_image = "images/geecon2025.jpeg"
   #og_image =  "images/jupiter.jpeg"
   SEOTitle = "Shaaf's Blog | All about software development and encouters there about"
   description = "A technical blog about Java, Kubernetes and things that matter"
