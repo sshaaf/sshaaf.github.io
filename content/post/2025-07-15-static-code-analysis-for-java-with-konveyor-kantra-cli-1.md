@@ -202,4 +202,4 @@ As you can see, the Kantra CLI acts as the orchestrator. It takes your instructi
 
 The Kantra CLI is your essential tool for interacting with Kantra. You use it to initiate code analysis, specify which rules to apply, control input and output, and run tests for your custom rules. By understanding the basic `analyze` and `test` commands and their common flags, you have the foundation to start using Kantra on your own projects.
 
-In the next blog, we'll dive deeper into the concept mentioned frequently: the **Ruleset**. You'll learn how rules are organized and how Kantra finds and uses them.
+In the next blog, we'll dive deeper into the concept mentioned frequently: the **Ruleset**. You'll learn how rules are organized and how Kantra finds and uses them. We will also develop and understand custom rules and how they work. Until next time ;)
