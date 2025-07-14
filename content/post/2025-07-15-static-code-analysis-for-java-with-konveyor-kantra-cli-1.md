@@ -116,7 +116,7 @@ INFO[0000] creating provider config
 INFO[0000] setting provider from provider config         provider=java
 INFO[0000] setting provider from provider config         provider=builtin
 INFO[0000] parsing rules for analysis                    rules=rules
-INFO[0000] parsing rules for analysis                    rules=/Users/sshaaf/.kantra/rulesets
+INFO[0000] parsing rules for analysis                    rules=/Users/../.kantra/rulesets
 INFO[0001] starting provider                             provider=builtin
 INFO[0001] starting provider                             provider=java
 INFO[0003] running depencency analysis                  
