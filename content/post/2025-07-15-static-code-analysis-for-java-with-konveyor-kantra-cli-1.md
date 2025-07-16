@@ -37,16 +37,14 @@ In simple terms, the CLI is how you talk to the Kantra analysis engine.
 >* NOTE: Mac user will likely need to run the following command before running the cli.
 `sudo xattr -dr com.apple.quarantine kantra`
 
-The most common thing you'll do with the Kantra CLI is run an analysis on your code. This is how you discover potential issues based on the rules you provide.
 
 ```bash
 kantra analyze --input=tests/data/ssti-test-project --output=output --overwrite  --target openjdk17
  --rules rules
 ``` 
 
-This blog provides examples and tests for creating custom analysis rules using the Kantra tool. It focuses on identifying potentially vulnerable usage patterns of the Apache Commons Text StringSubstitutor library [reported in 2022](https://www.infoq.com/news/2022/11/apache-commons-vulnerability/), Although this vulnerability has been fixed this is a mere demonstaration of how Kantra works. For example demonstrating how Kantra rules can scan source code and configuration files to find specific security issues (like SSTI) and how Kantra tests can verify that these rules correctly detect or ignore patterns in example analysis data.
-
-Source code for this example can be found here on [git](https://github.com/sshaaf/kantra-examples)
+Lets take a look at an example of Apache Commons Text StringSubstitutor vulnerability [reported in 2022](https://www.infoq.com/news/2022/11/apache-commons-vulnerability/).
+Just to be clear there is already a fix for this Vulnerability, the code is just to illustrate how Kantra works. Source code for this example can be found here on [git](https://github.com/sshaaf/kantra-examples)
 
 ## Visual Overview
 
@@ -200,6 +198,6 @@ As you can see, the Kantra CLI acts as the orchestrator. It takes your instructi
 
 ### Conclusion
 
-The Kantra CLI is your essential tool for interacting with Kantra. You use it to initiate code analysis, specify which rules to apply, control input and output, and run tests for your custom rules. By understanding the basic `analyze` and `test` commands and their common flags, you have the foundation to start using Kantra on your own projects.
+The Kantra CLI is your essential tool for interacting with Kantra. You use it to initiate code analysis, specify which rules to apply, control input and output, and run tests for your custom rules. By understanding the basic `analyze` and `test` commands and their common flags, you have the foundation to start using Kantra in your own projects.
 
 In the next blog, we'll dive deeper into the concept mentioned frequently: the **Ruleset**. You'll learn how rules are organized and how Kantra finds and uses them. We will also develop and understand custom rules and how they work. Until next time ;)
