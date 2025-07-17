@@ -11,7 +11,7 @@ type: post
 Are you a Java developer who is mesmerized by the power and efficiency of Vim? Do you want to try your development experience to the next level? I mean hands-off the mouse style! If so, you're in for a treat! In this post, I am going to dive into the world of [Neovim](https://neovim.io/) and explore how you can transform it into a Java IDE. To be honest its a learning journey. And the more I experience learning it, I feel like I really need to share how cool this thing really is!
 
 I have created a new repo called `neovim4j` for anyone looking to get started with it. A fantastic start for the configuration that showcases the power of Neovim for Java development but mind you, I am still learning and there are still some rough edges. So if you have ideas please fork, contribute, discuss or just feel free to use..⭐⭐
-![Neovim for Java](/images/2025/07/neovim-4j-screenshot.jpg)
+![Neovim for Java](/images/2025/07/neovim-4j-screenshot-orig.jpg)
 ## Why Neovim?
 
 For years, Vim has been the go-to editor for developers who value speed and efficiency. With its modal editing and powerful keybindings, it allows you to keep your hands on the keyboard and your focus on the code. Neovim, a fork of Vim, takes this a step further. It's a hyper-extensible platform that has a vibrant and active community.
