@@ -11,6 +11,7 @@ type: externalcontent
 |-----|-----------|
 | London Java Community  | **[Navigating Application Modernization - Leveraging Gen-AI](https://www.eventbrite.co.uk/e/ljc-meet-up-at-couchbase-tickets-1416714875329?aff=erelexpmlt)** |
 | WeAreDevelopers  | **[Navigating Application Modernization - Leveraging Gen-AI](https://www.wearedevelopers.com/world-congressr)** |
+| Tech Journey  | **[Unlock cloud-native Java performance and efficiency with Quarkus on Red Hat OpenShift](https://events.redhat.com/profile/form/index.cfm?PKformID=0x1323351abcd)** |
 | Red Hat Summit   | **[Assess and prioritize your applications at scale to modernize with Red Hat OpenShift](https://events.experiences.redhat.com/widget/redhat/sum25/SessionCatalog2025/session/1731431623934001huUr)** |
 | Geecon   | **[Java + LLMs: A hands-on guide to building LLM Apps in Java](https://2025.geecon.org/)** |
 | Krakow Elastic Meetup  | **[Building and deploying AI infused apps with Elasticsearch using Podman and OpenShift AI](https://www.meetup.com/elastic-krakow/events/306936101/)** |
