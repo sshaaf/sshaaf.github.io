@@ -11,7 +11,7 @@ type: post
 **JGraphlet** is a tiny, zero-dependency library for building task pipelines in Java. Its power comes not from a long list of features, but from a small set of core design principles that work together in harmony.
 
 At the heart of JGraphlet is simplicity, backed by a **Graph**, Add Tasks to a pipeline and connect them to create your graph. 
-Each `Task` has an input and ouput, A `TaskPipeline` builds and executes a pipeline while managing the I/O for each `Task`. For example a `Map` for Fan-in, a `Record` for your own data model etc. A Taskpipeline also has a `PipelineContext` to share the data between Tasks, and further more Tasks can also be cached, so the computation doenst need to take place again and again. 
+Each `Task` has an input and ouput, A `TaskPipeline` builds and executes a pipeline while managing the I/O for each `Task`. For example a `Map` for Fan-in, a `Record` for your own data model etc. A Taskpipeline also has a `PipelineContext` to share the data between Tasks, and furthermore Tasks can also be cached, so the computation doenst need to take place again and again. 
 You can choose how your Task pipeline flow should be, and you can choose whether it should be a `SyncTask` or Async. By default all Tasks are Async.
 
 Let's dive into the 8 core principles that define JGraphlet.
