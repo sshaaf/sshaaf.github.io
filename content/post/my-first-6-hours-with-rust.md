@@ -26,7 +26,7 @@ cd rust_example && cargo run
 ```
 
 ## Ownership!
-In Java objects are managed by the GC (Garbage collector), we all have a need and dislike relationship with somewhat (my opnion offcourse). And this also means that we primarily deal with references. The cool thing about references is that its easy to build up this amazing object model. The not so very cool thing it managing it and its use of memory. Hence the "Garbage collector 👽". While Java brings a particular reference/object for more accessibility, Rust takes a rather different approach and dictates that there is only one owner at a time. Take an example of the following code which takes a `String` similar to a `StringBuilder`:
+In Java objects are managed by the GC (Garbage collector), we all have a need and dislike relationship with somewhat (my opnion offcourse). And this also means that we primarily deal with references. The cool thing about references is that its easy to build up this amazing object model. The not so very cool thing is managing it and its use of memory. Hence the "Garbage collector 👽". While Java brings a particular reference/object for more accessibility, Rust takes a rather different approach and dictates that there is only one owner at a time. Take an example of the following code which takes a `String` similar to a `StringBuilder`:
 
 ```rust
 let s1 = String::from("hello"); // s1 owns the String data
@@ -39,7 +39,7 @@ In Java both s1 and s2 would point to the same reference. However in Rust you ca
 To sum up: in Java, when you pass an object, you're passing a reference. Multiple parts of your code can hold references to the same object. In Rust, things are different.
 Each value in Rust has an owner. There can only be one owner at a time. When the owner goes out of scope, the value will be dropped (memory is freed).
 
-> This is an interesting concept, I can see how this makes sense.Something I probably have to learn when I implement a complex project.
+> This is an interesting concept, I can see how this makes sense.Something I probably have to learn and experiment with in a broader project.
 
 
 ## References and borrowing
