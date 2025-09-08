@@ -9,7 +9,7 @@ type: post
 ---
 
 
-> *Build, test, and develop Kantra rules locally with full JDT-LS and multi-language provider support*
+> Build, test, and develop Kantra rules locally with full JDT-LS and multi-language provider support. Some content in this post was generated using an LLM.
 
 
 Modernizing large, complex codebases is a significant challenge. Identifying migration blockers, deprecated APIs, and technology-specific patterns requires deep, accurate code analysis. The Konveyor Analyzer LSP is engineered to solve this problem by providing a flexible and powerful static analysis engine. It uniquely leverages the Language Server Protocol (LSP) to tap into rich, IDE-level code intelligence for multiple languages.
