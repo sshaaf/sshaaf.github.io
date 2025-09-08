@@ -401,11 +401,11 @@ Following established best practices will help you write rules that are not only
 
 You now have a fully operational analyzer-lsp development environment with:
 
-- ✅ **Java code analysis** with JDT-LS
-- ✅ **Multi-language support** (Go, Python, Node.js, YAML)
-- ✅ **Rule development and testing** capabilities
-- ✅ **OpenAPI schema generation** for validation
-- ✅ **Comprehensive code analysis workflows**
+- **Java code analysis** with JDT-LS
+- **Multi-language support** (Go, Python, Node.js, YAML)
+- **Rule development and testing** capabilities
+- **OpenAPI schema generation** for validation
+- **Comprehensive code analysis workflows**
 
 Start building powerful migration and modernization rules for your codebase!
 
