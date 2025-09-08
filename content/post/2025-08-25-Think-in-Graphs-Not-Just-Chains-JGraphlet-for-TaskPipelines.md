@@ -3,7 +3,7 @@ title: "Think in Graphs, Not Just Chains: JGraphlet for TaskPipelines 🚀"
 date: 2025-08-25
 image: "/images/2025/08/jgraphlets.jpg"
 tags: ["java", "async", "pipeline", "library"]
-categories: ["Java", "Libraries"]
+categories: ["Java", "projects"]
 layout: post
 type: post
 ---

@@ -3,7 +3,7 @@ title:       "A Keycloak example - building my first MCP server Tools with Quark
 date:        2025-05-12
 image:       "/images/2025/05/keycloak-mcp.jpg"
 tags:        ["java", "llm", "mcp", "tools"]
-categories:  ["Java" ]
+categories:  ["Java", "projects" ]
 layout: post
 type: post
 ---
