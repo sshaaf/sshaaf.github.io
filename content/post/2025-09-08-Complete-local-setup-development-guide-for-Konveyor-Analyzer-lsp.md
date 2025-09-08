@@ -411,4 +411,4 @@ Start building powerful migration and modernization rules for your codebase!
 
 ---
 
-*For more information, visit the [Konveyor documentation](https://konveyor.io/docs/) or check out the [analyzer-lsp repository](https://github.com/konveyor/analyzer-lsp).*
+*For more information, visit the [Konveyor slack](https://kubernetes.slack.com/archives/CR85S82A2) or check out the [analyzer-lsp repository](https://github.com/konveyor/analyzer-lsp).*
