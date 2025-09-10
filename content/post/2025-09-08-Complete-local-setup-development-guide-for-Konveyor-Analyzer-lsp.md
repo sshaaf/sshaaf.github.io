@@ -200,8 +200,8 @@ Writing a rule is only the first step; ensuring it works correctly and doesn't p
 # Generate OpenAPI spec for schema validation
 ./konveyor-analyzer --get-openapi-spec openapi-spec.json
 
-# Check rule syntax
-./konveyor-analyzer --rules my-rules.yaml --dry-run
+# Check rule syntax (validate with OpenAPI spec)
+./konveyor-analyzer --get-openapi-spec schema.json
 ```
 
 ### Debugging Common Issues
@@ -228,7 +228,7 @@ yamllint my-rules.yaml
 3. **File Path Issues:**
 ```bash
 # Verify example files exist
-ls -la examples/java/
+ls -la examples/
 ls -la examples/golang/
 ```
 
@@ -336,8 +336,8 @@ cat test.yaml
 ### 2. Integration Testing
 
 ```bash
-# Test with multiple rule sets
-./konveyor-analyzer --rules "rule-example.yaml,my-rules.yaml" \
+# Test with multiple rule sets (use directory approach)
+./konveyor-analyzer --rules developer-guide/ \
   --output-file combined-results.yaml
 
 # Test with different provider configurations
