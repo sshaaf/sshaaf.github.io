@@ -222,7 +222,7 @@ This is just the beginning. On the roadmap:
 
 > A warm welcome to any ideas :) 
 
-## Built With ❤️ for the Keycloak and Java communities.
+##### Built With ❤️ for the Keycloak and Java communities.
 
 - **[Quarkus](https://quarkus.io/)** — Supersonic Subatomic Java
 - **[Keycloak Admin Client](https://www.keycloak.org/)** — Official Java client
