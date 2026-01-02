@@ -118,13 +118,13 @@ export ACCESS_TOKEN=$(curl -sk -X POST \
 ### 3. Configure Your MCP Client
 
 Add to your Cursor IDE config (`~/.cursor/mcp.json`):
-Remmeber to replace `TOKEN` with your token.
+Remmeber to replace `TOKEN` with your token and the KEYCLOAK_URL with the actual URL.
 ```json
 {
   "mcpServers": {
     "keycloak": {
       "transport": "sse",
-      "url": "https://keycloak-mcp-server-sso.apps.red.demoshift.com/mcp/sse",
+      "url": "KEYCLOAK_URL/mcp/sse",
       "headers": {
         "Authorization": "Bearer TOKEN"
       }
