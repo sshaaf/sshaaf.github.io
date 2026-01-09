@@ -323,4 +323,4 @@ I am sure there is more design patterns out there. These two gave me more clarit
 
 ---
 
-*The full implementation is available in the [Keycloak MCP Server](https://github.com/sshaaf/keycloak-mcp-server) repository. Contributions welcome!*
+*The full implementation is available in the [Keycloak MCP Server](https://github.com/sshaaf/keycloak-mcp-server/tree/commands-v1) repository. Contributions welcome!*
