@@ -1,9 +1,9 @@
 ---
-title:       "Neovim for Java Developers: A Match is made 🚀"
+title:       "Neovim for Java Developers: A Match is made"
 date:        2025-07-17
 image:       "/images/2025/07/neovim-4j-screenshot.jpg"
 tags:        ["java", "tools", neovim]
-categories:  ["Java" ]
+categories:  ["Java" , "projects"]
 layout: post
 type: post
 ---
