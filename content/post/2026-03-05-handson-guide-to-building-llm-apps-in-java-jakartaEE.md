@@ -10,7 +10,7 @@ type: post
 I had the pleasure to present about building [Java](https://dev.java/learn/) applications using LLMs together with [Bazlur](https://x.com/bazlur_rahman) at [GeeCon 2025](https://2025.geecon.org/). The weather was amazing and [Krakow](https://en.wikipedia.org/wiki/Krak%C3%B3w) is a beautiful historical city. 
 
 
-{{< youtube 3RM1mtXZm6uhQNki_Q0O4U >}}
+{{< youtube Zm6uhQNki_Q >}}
 
 
 # Key Topics Covered
