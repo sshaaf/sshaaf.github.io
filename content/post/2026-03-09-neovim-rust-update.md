@@ -3,7 +3,7 @@ title:       "Adding Rust Support and Some Major updates to My Neovim Config"
 date:        2026-03-09
 image:       "/images/2026/03/neovim-screenshot.jpg"
 tags:        ["neovim", "rust", "java", "tools"]
-categories:  ["Java", "Rust", "projects"]
+categories:  ["Java", "Rust"]
 layout: post
 type: post
 ---

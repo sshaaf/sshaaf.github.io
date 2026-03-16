@@ -37,7 +37,7 @@ home = ["HTML", "RSS", "Algolia"]
 
   # Sidebar settings
   sidebar_about_description = "Software developer, architect, opensource enthusiast, cricket coach"
-  sidebar_avatar = "images/Shaaf-Syed-gcc.jpg"      # use absolute URL, seeing it's used in both `/` and `/about/`
+  sidebar_avatar = "images/sshaaf_avatar.jpeg"      # use absolute URL, seeing it's used in both `/` and `/about/`
 
   featured_tags = true 
   featured_condition_size = 1 
@@ -71,10 +71,6 @@ home = ["HTML", "RSS", "Algolia"]
   title =  "ARCHIVE"
   href =  "/archive"
   
-  [[params.additional_menus]]
-  title =  "WORKSHOPS"
-  href =  "/workshops"
-
   [[params.additional_menus]]
   title =  "ABOUT"
   href =  "/about"
