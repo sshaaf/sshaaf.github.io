@@ -23,6 +23,10 @@ Here are some interesting examples of what an MCP server can help us achieve.
 This just completely changes the conversation from just simple rule generation to the user experience. As a rules developer now I have the capability to throw almost anything at the agent to build rules from. Generally speaking writing Kantra rules by hand is repetitive: every rule needs `ruleID`, `message`, `category`, `effort`, `when:` conditions (`java.referenced`, `go.referenced`, `builtin.filecontent`, `builtin.xml`, etc.), and optional `labels` / `links`. Scribe centralizes that in one MCP tool so an agent (Cursor, Claude Desktop, etc.) can generate valid rule fragments from migration guides, tickets, or ad-hoc prompts—without opening the Konveyor YAML reference every time. Furthermore, since Scribe generates rules based on a static model and not LLMs it is able to guide the LLM with the correct yaml structure. Some models have a knack for hallucination when it comes to Kantra rules as they mix up previous versions from the windup project. **`This is powerful!`**
 
 #### A look at the rule structure
+Konveyor Analyzer has the capability to analyze mutliple languages. For example it uses Java LSP to understand and analyze Java code. Where as it can also analyze C#, Python, NodeJS and Go-lang.
+
+![flow](/images/2026/03/konveyor-analyzer-rules.jpg)
+
 Before I go any further a brief intro about Konveyor.io a CNCF sandbox project aims at migration and modernization of applications. Its divided into multiple components that enable it to do that static code anaylsis for multiple languages. For the analyzer it requires a bunch of rules to understand what it needs to look for. These [rules](https://github.com/konveyor/rulesets) are all written in yaml. For example the following rule looks for Method calls e.g. `Thread.stop` and `Thread.destroy`.
 
 ```yaml
