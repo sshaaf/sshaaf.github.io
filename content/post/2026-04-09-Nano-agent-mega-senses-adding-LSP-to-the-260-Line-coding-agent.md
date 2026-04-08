@@ -8,6 +8,8 @@ layout: post
 type: post
 ---
 
+Learn, learn, and learn more—that’s the name of the game. Coding agents are innovating fast; things are getting bigger and, quite often, bloated. To understand what an agent is actually doing, I’ve found it’s best to go back to the basics. It takes a bit more time, but the expertise you gain along the way sets you up for the long haul." So here I read [Max's](https://xam.dk/blog/nanocode-coding-agent-in-260-lines-of-java/) post and thought, how about add some more things to this. Fetching ideas... done.. Lets add LSP support. 
+
 The original [nanocode](https://github.com/1rgs/nanocode) idea is easy to lose in the hype: **a coding agent is mostly a loop**. You send prompt plus tool definitions to the model; the model answers with text or tool calls; you execute tools, feed results back, and repeat. The heavy lifting is the model; your code is **hands** (write, edit, shell) and **eyes** (read, glob, grep).
 
 That pattern is how “real” agents are structured too — usually with more polish, safety rails, and often **richer senses** than plain text search.
