@@ -1,0 +1,71 @@
+# Syncs Markdown posts from content/post to dev.to (create or update by canonical URL).
+# Requires repository secret: DEVTO_API_KEY (https://dev.to/settings/extensions)
+#
+# Opt-in per file: add `devto: true` to front matter. To sync every post in content/post,
+# set workflow env DEVTO_SYNC_ALL to true (use with care on first run).
+
+name: Sync posts to dev.to
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/post/**"
+      - ".github/scripts/sync_devto.py"
+      - ".github/scripts/requirements-devto.txt"
+      - ".github/workflows/devto-sync.yml"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print actions only (no dev.to writes)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: devto-sync
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+      SITE_BASE_URL: https://shaaf.dev
+      # Set to true in the workflow file below if you want every content/post file synced without devto: true
+      DEVTO_SYNC_ALL: "false"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.147.3"
+          extended: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r .github/scripts/requirements-devto.txt
+
+      - name: Sync to dev.to (dry-run)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == true
+        run: python .github/scripts/sync_devto.py --dry-run
+
+      - name: Sync to dev.to
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.dry_run != true
+        run: |
+          set -euo pipefail
+          if [ -z "${DEVTO_API_KEY:-}" ]; then
+            echo "Missing secret DEVTO_API_KEY. Add it under Settings → Secrets → Actions." >&2
+            exit 1
+          fi
+          python .github/scripts/sync_devto.py
