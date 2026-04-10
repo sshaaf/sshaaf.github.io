@@ -16,6 +16,8 @@ That pattern is how “real” agents are structured too — usually with more p
 
 This [fork](https://github.com/sshaaf/nanocode) keeps that loop and the same six core tools. It adds an optional extra sense for Java workspaces: a **language server**, so the model can ask project-aware questions instead of inferring everything from raw files.
 
+![nanocode Java with LSP](/images/2026/04/nanocode-java-lsp.jpg)
+
 ## Does LSP fits the same architecture?
 
 `grep` and `read` are universal and powerful. They are also **syntax-blind**. A symbol might be a field, a local, an import alias, or a string that happens to match. For Java — especially with Maven or Gradle classpaths — the **compiler’s view** of the project is not the same as “all lines containing this word.”
