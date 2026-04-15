@@ -2,7 +2,7 @@
 title:       "Modernizing Legacy Code with Konveyor AI: From EJB to Kubernetes"
 subtitle:    ""
 description: ""
-date:        2026-04-15
+date:        2026-04-14
 image:       "/images/2026/04/kubcon-eu-project-lightning-talk-template.jpg"
 tags:        ["java", "llm", "tools"]
 categories:  ["Java"]
