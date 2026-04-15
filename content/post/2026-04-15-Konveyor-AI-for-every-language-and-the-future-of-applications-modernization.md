@@ -11,7 +11,7 @@ type: post
 devto: true
 ---
 
-I always enjoy participating in KubeCon. This time it was at the RAI center in Amsterdam. I have been to many conferences and the ones that are the best IMHO are the ones that are very community focused. For example DevNexus for Java, GeeCon for Geeks ;), and obviusly KubeCon for everything Kubernetes. And obvsiouly making new friends and connections is a great way of learning from all the cool stuff thats going on. Thats probably enough name dropping for a wednesday ;) 
+I always enjoy participating in KubeCon. This time it was at the RAI center in Amsterdam. I have been to many conferences and the ones that are the best IMHO are the ones that are very community focused. For example DevNexus for Java, GeeCon for Geeks ;), and obviously KubeCon for everything Kubernetes. And obvsiouly making new friends and connections is a great way of learning from all the cool stuff thats going on. Thats probably enough name dropping for a wednesday ;) 
 
 I had the opportunity to represent the [Konveyor Community](https://konveyor.io/) project update. 
 
