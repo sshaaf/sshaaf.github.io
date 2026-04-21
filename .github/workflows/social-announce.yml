@@ -1,0 +1,107 @@
+# Announces newly added blog posts on social channels.
+#
+# Required secrets by platform:
+# - Bluesky: BLUESKY_IDENTIFIER, BLUESKY_APP_PASSWORD
+# - Mastodon: MASTODON_BASE_URL, MASTODON_ACCESS_TOKEN
+# - Discord: DISCORD_WEBHOOK_URL
+#
+# Optional variables:
+# - SITE_BASE_URL (default: https://shaaf.dev)
+# - SOCIAL_DEFAULT_CHANNELS (comma-separated, default: bluesky,mastodon)
+#
+# Per-post front matter overrides (content/post/*.md):
+# - social: false                      # disable announcements for this post
+# - social_channels: [bluesky,discord] # channels for this post only
+# - social_text: "Custom teaser text"
+# - social_tags: ["java", "ai"]
+
+name: Announce new posts to social
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/post/**"
+      - ".github/scripts/announce_social.py"
+      - ".github/scripts/requirements-social.txt"
+      - ".github/workflows/social-announce.yml"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print actions only (no social API writes)"
+        type: boolean
+        default: false
+      post_path:
+        description: "Optional single post path (for example: content/post/my-post.md)"
+        required: false
+        type: string
+      force:
+        description: "Include modified files in push mode"
+        type: boolean
+        default: false
+
+concurrency:
+  group: social-announce
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    env:
+      SITE_BASE_URL: https://shaaf.dev
+      SOCIAL_DEFAULT_CHANNELS: bluesky,mastodon
+      BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
+      BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+      MASTODON_BASE_URL: ${{ secrets.MASTODON_BASE_URL }}
+      MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Install Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.147.3"
+          extended: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r .github/scripts/requirements-social.txt
+
+      - name: Announce social posts (manual dry-run)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == true
+        run: |
+          set -euo pipefail
+          args="--dry-run --wait-for-live"
+          if [ -n "${{ github.event.inputs.post_path }}" ]; then
+            args="$args --post ${{ github.event.inputs.post_path }}"
+          fi
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            args="$args --force"
+          fi
+          python .github/scripts/announce_social.py $args
+
+      - name: Announce social posts
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.dry_run != true
+        run: |
+          set -euo pipefail
+          args="--wait-for-live"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.post_path }}" ]; then
+            args="$args --post ${{ github.event.inputs.post_path }}"
+          fi
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.force }}" = "true" ]; then
+            args="$args --force"
+          fi
+          python .github/scripts/announce_social.py $args

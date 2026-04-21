@@ -103,6 +103,24 @@ def hugo_permalinks(repo_root: Path) -> dict[str, tuple[str, bool]]:
     return out
 
 
+def git_changed_post_files(repo_root: Path, before: str, after: str) -> set[str]:
+    run = subprocess.run(
+        ["git", "diff", "--name-only", before, after, "--", "content/post/*.md"],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+    )
+    if run.returncode != 0:
+        print(run.stderr, file=sys.stderr)
+        raise RuntimeError("git diff failed while resolving changed posts")
+    changed: set[str] = set()
+    for line in run.stdout.splitlines():
+        path = line.strip()
+        if path and path.endswith(".md"):
+            changed.add(path)
+    return changed
+
+
 def normalize_tags(raw: Any) -> list[str]:
     if raw is None:
         return []
@@ -319,6 +337,17 @@ def main() -> int:
         action="store_true",
         help="Print actions only; do not call write APIs",
     )
+    parser.add_argument(
+        "--post",
+        action="append",
+        default=[],
+        help="Specific content/post file(s) to sync, relative to repo root",
+    )
+    parser.add_argument(
+        "--changed-only",
+        action="store_true",
+        help="On push events, only sync files changed in this push",
+    )
     args = parser.parse_args()
     repo_root: Path = args.repo_root
 
@@ -338,10 +367,30 @@ def main() -> int:
         return 1
 
     md_files = sorted(post_dir.glob("*.md"))
+    selected_paths: set[str] | None = None
+    if args.post:
+        selected_paths = {p.strip() for p in args.post if p.strip()}
+    elif args.changed_only:
+        event_name = os.environ.get("GITHUB_EVENT_NAME", "").strip()
+        before = os.environ.get("GITHUB_EVENT_BEFORE", "").strip()
+        after = os.environ.get("GITHUB_SHA", "").strip()
+        if event_name == "push" and before and after:
+            selected_paths = git_changed_post_files(repo_root, before, after)
+            if not selected_paths:
+                print("No changed post files in this push. Nothing to sync.")
+                return 0
+        else:
+            print(
+                "changed-only requested but push SHA range was unavailable; falling back to full scan.",
+                file=sys.stderr,
+            )
+
     to_process: list[tuple[str, str, str, str, list[str], str | None, str | None]] = []
 
     for path in md_files:
         rel = str(path.relative_to(repo_root)).replace(os.sep, "/")
+        if selected_paths is not None and rel not in selected_paths:
+            continue
         loaded = load_front_matter_and_body(path)
         if not loaded:
             continue

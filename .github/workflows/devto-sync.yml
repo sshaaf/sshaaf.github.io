@@ -34,12 +34,14 @@ jobs:
     env:
       DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
       SITE_BASE_URL: https://shaaf.dev
+      GITHUB_EVENT_BEFORE: ${{ github.event.before }}
       # Set to true in the workflow file below if you want every content/post file synced without devto: true
       DEVTO_SYNC_ALL: "false"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           submodules: recursive
 
       - name: Install Hugo
@@ -58,7 +60,7 @@ jobs:
 
       - name: Sync to dev.to (dry-run)
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == true
-        run: python .github/scripts/sync_devto.py --dry-run
+        run: python .github/scripts/sync_devto.py --dry-run --changed-only
 
       - name: Sync to dev.to
         if: github.event_name != 'workflow_dispatch' || github.event.inputs.dry_run != true
@@ -68,4 +70,4 @@ jobs:
             echo "Missing secret DEVTO_API_KEY. Add it under Settings → Secrets → Actions." >&2
             exit 1
           fi
-          python .github/scripts/sync_devto.py
+          python .github/scripts/sync_devto.py --changed-only
