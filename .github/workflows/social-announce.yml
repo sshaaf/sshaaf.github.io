@@ -8,10 +8,14 @@
 # Optional variables:
 # - SITE_BASE_URL (default: https://shaaf.dev)
 # - SOCIAL_DEFAULT_CHANNELS (comma-separated, default: bluesky,mastodon)
+# - SOCIAL_ANNOUNCE_ALL (default: false; when true, announce all candidate posts)
 #
 # Per-post front matter overrides (content/post/*.md):
-# - social: false                      # disable announcements for this post
+# - social: false                      # disable announcements for this post (always respected)
 # - social_channels: [bluesky,discord] # channels for this post only
+# - social_bluesky: true               # enable Bluesky for this post
+# - social_mastodon: true              # enable Mastodon for this post
+# - social_discord: true               # enable Discord for this post
 # - social_text: "Custom teaser text"
 # - social_tags: ["java", "ai"]
 
@@ -53,6 +57,8 @@ jobs:
     env:
       SITE_BASE_URL: https://shaaf.dev
       SOCIAL_DEFAULT_CHANNELS: bluesky,mastodon
+      # Set to true to announce all candidate posts.
+      SOCIAL_ANNOUNCE_ALL: "false"
       BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
       BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
       MASTODON_BASE_URL: ${{ secrets.MASTODON_BASE_URL }}

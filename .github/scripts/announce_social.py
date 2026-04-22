@@ -9,6 +9,10 @@ Supported channels:
 
 By default, on push this script announces new files added under content/post/*.md.
 Use --force to include modified files.
+
+- Per-post channel toggles: `social_bluesky`, `social_mastodon`, `social_discord`.
+  (used as opt-in unless SOCIAL_ANNOUNCE_ALL is set)
+- Explicit `social: false` always skips a post.
 """
 
 from __future__ import annotations
@@ -172,21 +176,45 @@ def git_changed_post_files(repo_root: Path, before: str, after: str, force: bool
 
 
 def choose_channels(fm: dict[str, Any]) -> list[str]:
+    announce_all = truthy(os.environ.get("SOCIAL_ANNOUNCE_ALL"))
     fm_channels = fm.get("social_channels")
     if fm_channels is not None:
         channels = normalize_tags(fm_channels)
     else:
-        raw = os.environ.get("SOCIAL_DEFAULT_CHANNELS", ",".join(DEFAULT_CHANNELS))
-        channels = [x.strip() for x in raw.split(",") if x.strip()]
+        if announce_all:
+            raw = os.environ.get("SOCIAL_DEFAULT_CHANNELS", ",".join(DEFAULT_CHANNELS))
+            channels = [x.strip() for x in raw.split(",") if x.strip()]
+        else:
+            channels = []
+
+    # Per-post channel toggles. In non-global mode these act as opt-in switches.
+    # In global mode they can be used to add or remove specific channels.
+    channel_flags = {
+        "bluesky": fm.get("social_bluesky"),
+        "mastodon": fm.get("social_mastodon"),
+        "discord": fm.get("social_discord"),
+    }
+    for channel, flag in channel_flags.items():
+        if flag is True and channel not in channels:
+            channels.append(channel)
+        elif flag is False and channel in channels:
+            channels.remove(channel)
+
     valid = {"bluesky", "mastodon", "discord"}
     return [x.lower() for x in channels if x.lower() in valid]
 
 
 def should_announce(fm: dict[str, Any]) -> bool:
-    social = fm.get("social")
-    if social is False:
+    if fm.get("social") is False:
         return False
-    return True
+    if truthy(os.environ.get("SOCIAL_ANNOUNCE_ALL")):
+        return True
+    if fm.get("social_channels") is not None:
+        return True
+    return any(
+        fm.get(key) is True
+        for key in ("social_bluesky", "social_mastodon", "social_discord")
+    )
 
 
 def build_post_candidates(
@@ -476,6 +504,9 @@ def main() -> int:
     posts = build_post_candidates(repo_root, rel_files, base_url=base_url)
     if not posts:
         print("No eligible posts to announce after filtering.")
+        print(
+            "Tip: set social_bluesky/social_mastodon/social_discord: true (or set SOCIAL_ANNOUNCE_ALL=1)."
+        )
         return 0
 
     for post in posts:
