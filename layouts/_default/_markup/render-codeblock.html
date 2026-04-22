@@ -1,0 +1,14 @@
+{{- $result := transform.HighlightCodeBlock . -}}
+{{- $filename := or .Attributes.filename .Attributes.file .Attributes.title -}}
+{{- $language := or .Type "text" -}}
+
+<div class="code-block">
+  <div class="code-header">
+    <div class="code-dots">
+      <span class="d1"></span><span class="d2"></span><span class="d3"></span>
+    </div>
+    <span class="code-filename">{{ or $filename (printf "%s snippet" (lower $language)) }}</span>
+    <span class="code-lang">{{ upper $language }}</span>
+  </div>
+  {{- $result.Wrapped -}}
+</div>

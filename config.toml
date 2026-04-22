@@ -49,6 +49,7 @@ home = ["HTML", "RSS", "Algolia"]
   friends = false
   bookmarks = false
   about_me = true
+  custom_css = ["css/codeblocks.css"]
 
   [params.social]
   rss            = true 
