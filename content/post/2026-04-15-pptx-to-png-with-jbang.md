@@ -95,3 +95,4 @@ chmod +x pptx2png.java
 ```
 
 Well that made life a step easier. ;)
+Scritpt source available [here].(https://github.com/sshaaf/jbang-catalog/blob/main/src/pptx2png.java)
