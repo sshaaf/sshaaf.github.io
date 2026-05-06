@@ -3,7 +3,7 @@ title:       "Java + LLMs: A hands-on guide to building LLM Apps in Java with Ja
 date:        2025-02-04
 image:       "/images/2023/09/21/java-21.jpeg"
 tags:        ["java", "llm", langchain4j]
-categories:  ["Java" ]
+categories:  ["Java" , "AI"]
 layout: post
 type: post
 ---

@@ -4,7 +4,7 @@ subtitle:    "Static code analysis + Gen-AI"
 date:        2025-02-22
 image:       "/images/2025/02/22/kai-migration-javaee-quarkus-spring.jpeg"
 tags:        ["java", "llm", "migration", "konveyor", "gen-ai"]
-categories:  ["Java" ]
+categories:  ["Java" , "AI"]
 layout: post
 type: post
 ---

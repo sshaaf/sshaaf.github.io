@@ -3,7 +3,7 @@ title: "Complete local setup development guide for Konveyor Analyzer-lsp 🚀"
 date: 2025-09-01
 image: "/images/2025/09/konveyor-analyzer-lsp.jpg"
 tags: ["java", "migratons", ]
-categories: ["Java"]
+categories: ["Java", "AI"]
 layout: post
 type: post
 ---

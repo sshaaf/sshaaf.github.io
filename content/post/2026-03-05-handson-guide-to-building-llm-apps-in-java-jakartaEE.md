@@ -3,7 +3,7 @@ title:       "Java+LLMs: A hands-on guide to building LLM Apps in Java"
 date:        2026-03-05
 image:       "/images/2023/09/08/security.jpeg"
 tags:        ["java", "llm"]
-categories:  ["Java" ]
+categories:  ["Java", "AI" ]
 layout: post
 type: post
 ---

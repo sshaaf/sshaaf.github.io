@@ -3,7 +3,7 @@ title:       "Embracing the Future of Application Modernization with KAI"
 date:        2024-07-23
 image:       "/images/2024/07/23/kai-application-migration-with-llm.jpeg"
 tags:        ["java", "migration"]
-categories:  ["Java" ]
+categories:  ["Java" , "AI"]
 layout: post
 type: post
 ---

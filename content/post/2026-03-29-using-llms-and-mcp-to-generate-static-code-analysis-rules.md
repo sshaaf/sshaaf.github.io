@@ -3,7 +3,7 @@ title:       "Using LLMs and MCP to generate static code analysis rules"
 date:        2026-03-29
 image:       "/images/2026/03/using-llms-and-mcp-to-generate-static-code-analysis-rules.jpg"
 tags:        ["java", "mcp", "tools"]
-categories:  ["Java"]
+categories:  ["Java", "AI"]
 layout: post
 type: post
 ---

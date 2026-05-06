@@ -5,7 +5,7 @@ description: ""
 date:        2026-04-14
 image:       "/images/2026/04/kubcon-eu-project-lightning-talk-template.jpg"
 tags:        ["java", "llm", "tools"]
-categories:  ["Java"]
+categories:  ["Java", "AI"]
 layout: post
 type: post
 devto: true

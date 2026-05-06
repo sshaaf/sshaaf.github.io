@@ -3,7 +3,7 @@ title: "Keycloak MCP Server: Manage Identity with Natural Language"
 date:  2026-01-02
 image: "/images/2026/01/keycloak-mcp-server.jpg"
 tags: ["gen-ai", "java", "mcp"]
-categories: ["Java"]
+categories: ["Java", "AI"]
 layout: post
 type: post
 ---

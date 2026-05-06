@@ -3,7 +3,7 @@ title:       "TechTalk - Java + LLMs: A hands-on guide to building LLM Apps in J
 date:        2025-04-23
 image:       "/images/2023/09/08/security.jpeg"
 tags:        ["java", "llm"]
-categories:  ["Java" ]
+categories:  ["Java" , "AI"]
 layout: post
 type: post
 ---

@@ -3,7 +3,7 @@ title: "Two Essential Patterns for Building MCP Servers"
 date:  2026-01-08
 image: "/images/2026/01/mcp-design-patterns-intent-multiplexing.jpg"
 tags: ["gen-LLM", "java", "mcp"]
-categories: ["Java"]
+categories: ["Java", "AI"]
 layout: post
 type: post
 ---

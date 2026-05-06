@@ -3,7 +3,7 @@ title:       "Nano Agent, Mega Senses: Adding LSP to the 260-Line Coding Agent"
 date:        2026-04-08
 image:       "/images/2026/04/nanocode-java.jpg"
 tags:        ["java", "llm", "tools"]
-categories:  ["Java"]
+categories:  ["Java", "AI"]
 layout: post
 type: post
 devto: true

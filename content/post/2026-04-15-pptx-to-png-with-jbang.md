@@ -85,7 +85,7 @@ ImageIO.write(img, "PNG", new File(outputName));
 graphics.dispose();
 ```
 
-## Running the Script
+### Running the Script
 
 Once saved as `pptx2png.java`, make the script executable and run it directly. JBang will fetch the JARs on the first run and cache them at `~/.jbang`.
 
