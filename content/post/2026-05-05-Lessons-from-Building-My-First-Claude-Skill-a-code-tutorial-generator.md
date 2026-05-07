@@ -219,7 +219,9 @@ npx @sshaaf/tutorial-skill docs doctor --dir ./docs/tutorial
 SKILL works directly within Claude Code CLI - no separate tools needed, integrates into the developer workflow. No setup or installation and is pretty aware of the context. 
 Waver on the other hand complete control on which models are being used, can run parallel and join tasks with its use of JGraphlet, can easily integarte into CI and batch modes for multiple projects etc. 
 
-I am not entirely sure if there is an **either** or an **or** here, I would still prefer waver just because its a simplified CLI approach, which is pretty solid for multiple cases, however as soon as we speak about developer workflow a Skill makes a lot more sense when one is using Claude or OpenCode etc. I think there is another bit of optmization here that can be investigated where I can take the waver project and integrate it within the skill, so the skill can handover some of the work. A back an forth to take the best of the two.
+I am not entirely sure if there is an **either** or an **or** here, I would still prefer waver just because its a simplified CLI approach, which is pretty solid for multiple cases, however as soon as we speak about developer workflow a Skill makes a lot more sense when one is using Claude or OpenCode etc. I think there is another bit of optmization here that can be investigated where I can take the waver project and integrate it within the skill, so the skill can handover some of the work. A back an forth to take the best of the two. 
+
+I have to admit; defining constraints in plain English and letting a coding agent determine the implementation is quite daunting. It requires a significant mindset shift, and I’m eager to see how this scales and where the true limitations lie.
 
 The skill is live, and the journey from a standalone cli to an NPM-distributable skill is complete. Now, the real testing begins 😎😊
 
