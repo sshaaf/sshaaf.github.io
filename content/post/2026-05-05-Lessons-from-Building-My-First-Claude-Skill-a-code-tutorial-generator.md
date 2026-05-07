@@ -162,8 +162,8 @@ Currently the Skill is built into two modes. This is exactly what Waver also did
 - Creates multi-chapter Markdown tutorials
 - Time: 10-30 minutes
 
-### Commands
-While the above commands publish markdown onto disk, it can also be userful to preview them or even push them into github pages. Following will allow previewing locally and checking that it all works. 
+### More Commands
+While the above commands publish markdown onto disk, it can also be useful to preview them or even push them into github pages. Following will allow previewing locally and checking that it all works. 
 
 **`/tutorial preview`**
 - Local tutorial preview with HonKit
