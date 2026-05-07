@@ -148,30 +148,30 @@ npx @sshaaf/tutorial-skill install
 /tutorial preview
 ```
 
-#### Skill Modes
+### Skill Modes
 Currently the Skill is built into two modes. This is exactly what Waver also did, analyze the code base and then generte a contextual tutorial. Here I have broken down that process, so if users just want very basic documentation like the mermaid diagram above with some markdown of the analysis they can do that. Else building tutorial which is the second mode has more steps, to make in consumable and nice 😎
 
-###### Analyze Mode (`/tutorial analyze`)
+**`/tutorial analyze` - Analyze Mode**
 - 3-stage pipeline for quick codebase understanding
 - Generates architecture diagrams with Mermaid
 - **NEW**: Option to save diagrams to disk
 - Time: 2-5 minutes
 
-###### Build Mode (`/tutorial build`)
+**`/tutorial build` - Build Mode**
 - 6-stage pipeline for comprehensive tutorial generation
 - Creates multi-chapter Markdown tutorials
 - Time: 10-30 minutes
 
-#### Commands
+### Commands
 While the above commands publish markdown onto disk, it can also be userful to preview them or even push them into github pages. Following will allow previewing locally and checking that it all works. 
 
-###### `/tutorial preview`
+**`/tutorial preview`**
 - Local tutorial preview with HonKit
 - **Time**: 5-30 seconds to start
 - **Output**: Local docs site (usually `http://localhost:4000`)
 - **Use for**: Reviewing generated docs before publishing
 
-###### `/tutorial doctor`
+**`/tutorial doctor`**
 - Diagnostics for local preview/runtime + docs scaffolding
 - **Time**: ~10-30 seconds
 - **Output**: Pass/fail checklist
@@ -181,7 +181,7 @@ The markdown can also be pushed into github pages. Here is a [nice example](http
 ![Example](/images/2026/05/example-preview.jpg)
 
 
-#### How to use it: Tutorial Generator & Analyzer
+### How to use it: Tutorial Generator & Analyzer
 
 ```bash
 # Quick analysis
