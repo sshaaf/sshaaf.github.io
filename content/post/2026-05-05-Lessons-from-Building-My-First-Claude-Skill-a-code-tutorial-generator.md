@@ -10,7 +10,10 @@ layout: post
 type: post
 devto: true
 ---
-Sometime around last year, I started a project ([Waver](https://github.com/sshaaf/waver)) that would generate tutorials from a codebase. Easy to follow tutorials in pure markdown + mermaid diagrams, so any person could be onboarded with ease, projects could add it to project pipelines etc. The idea was simple, I chose Langchain4J to do this. If this wasnt amusing enough, I also ended up creating [JGraphlet](https://shaaf.dev/post/2025-08-25-think-in-graphs-not-just-chains-jgraphlet-for-taskpipelines/#undefined) while trying to optimize the performance of LLM communication. 
+
+About a year ago, I kicked off ([Waver](https://github.com/sshaaf/waver)), a project designed to analyze codebases and build developer friendly, readable tutorials. The goal was to generate clean Markdown and Mermaid diagrams so onboarding becomes frictionless and the docs can slide right into existing project pipelines.
+
+I chose [Langchain4J](https://docs.langchain4j.dev/intro/) for the LLM integration. And in a classic "engineers-quest", I actually ended up building [JGraphlet](https://shaaf.dev/post/2025-08-25-think-in-graphs-not-just-chains-jgraphlet-for-taskpipelines/#undefined) as well, which came to life while I was trying to squeeze better performance out of the LLM communication.
 
 Working in pure Java offers clear benefits, specifically regarding granular control and performance optimization. However, these implementations often become highly opinionated. In contrast, while SKILLS maintains a degree of opinionated design, its actual application depends entirely on the coding agent. Both methods have advantages, and I’m using this post to process what I’ve learned while writing my first SKILL. Here is a code example from my Java project.
 
