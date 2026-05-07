@@ -57,7 +57,7 @@ public class TutorialGenerator {
 
 ```
 
-All of these Tasks in the TaskPipeline above are backed by a prompt. So basically its prompt chaining. There wasnt much about `SKILLS.md` back then. Fast track to today. I have tried to take all the prompts and put them in a Skill instead. And atleast from the intial tests I am looking at its looking pretty good. For example here is a mermaid drawing generated from one of Scribe's code base (an MCP servers)
+All of these Tasks in the TaskPipeline above are backed by a prompt. So basically its prompt chaining. There wasnt much about `SKILLS.md` back then. Fast track to today. I have tried to take all the prompts and put them in a Skill instead. And atleast from the intial tests I am looking at its looking pretty good. For example here is a mermaid drawing generated from one of [Scribe's](https://github.com/sshaaf/scribe) code base (an MCP server)
 
 ```mermaid
 graph TD
