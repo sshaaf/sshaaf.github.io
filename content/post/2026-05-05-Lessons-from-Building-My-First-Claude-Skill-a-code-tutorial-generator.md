@@ -12,7 +12,7 @@ devto: true
 ---
 Sometime around last year, I started a project ([Waver](https://github.com/sshaaf/waver)) that would generate tutorials from a codebase. Easy to follow tutorials in pure markdown + mermaid diagrams, so any person could be onboarded with ease, projects could add it to project pipelines etc. The idea was simple, I chose Langchain4J to do this. If this wasnt amusing enough, I also ended up creating [JGraphlet](https://shaaf.dev/post/2025-08-25-think-in-graphs-not-just-chains-jgraphlet-for-taskpipelines/#undefined) while trying to optimize the performance of LLM communication. 
 
-There are certain advantages when this is done in pure Java, the obvious ones are control and optimizations such as performance. By that point it can also become highly opinionated. Anyways why am I writing this post today. Lets start with a code example from my Java project
+Working in pure Java offers clear benefits, specifically regarding granular control and performance optimization. However, these implementations often become highly opinionated. In contrast, while SKILLS maintains a degree of opinionated design, its actual application depends entirely on the coding agent. Both methods have advantages, and I’m using this post to process what I’ve learned while writing my first SKILL. Here is a code example from my Java project.
 
 ```java
 package dev.shaaf.waver.cli;
