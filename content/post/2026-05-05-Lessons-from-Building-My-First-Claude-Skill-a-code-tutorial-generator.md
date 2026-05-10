@@ -233,6 +233,8 @@ I have to admit; defining constraints in plain English and letting a coding agen
 
 The skill is live, and the journey from a standalone cli to an NPM-distributable skill is complete. Now, the real testing begins 😎😊
 
+> NPM package has been updated with some command deperecated (analyze, preveiw, doctor) and new features added e.g. asciidoc. 
+
 **View the project**: [github.com/sshaaf/tutorial-skill](https://github.com/sshaaf/tutorial-skill)
 
 **Try it out**: `npx @sshaaf/tutorial-skill`
