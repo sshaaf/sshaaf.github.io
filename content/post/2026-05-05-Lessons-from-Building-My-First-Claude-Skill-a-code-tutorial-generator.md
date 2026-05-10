@@ -222,6 +222,11 @@ npx @sshaaf/tutorial-skill docs doctor --dir ./docs/tutorial
 SKILL works directly within Claude Code CLI - no separate tools needed, integrates into the developer workflow. No setup or installation and is pretty aware of the context. 
 Waver on the other hand complete control on which models are being used, can run parallel and join tasks with its use of JGraphlet, can easily integarte into CI and batch modes for multiple projects etc. 
 
+What happens if I edit some files and regenerate? Well how Gen-AI is, it might not chosse the same chapter names or order again. So making a diff is perhaps not useful. Context at that point would mismatch. 
+So the real use is that the skill and prompt has nailed what it gets out of it. For me I think generating the first time is a good starting point, to start editing. I probably wont use Gen-AI over and over again for the same generation if I am happy with the first one. At its core, it gives a good structure to start with. 
+
+Furthermore in the prompt you can ask the agent to do some checks and verifications after the tutorial is generated. However evals could be done as well, likely with other skills or mcp tools etc. This is important incase of hallucinations. 
+
 I am not entirely sure if there is an **either** or an **or** here, I would still prefer waver just because its a simplified CLI approach, which is pretty solid for multiple cases, however as soon as we speak about developer workflow a Skill makes a lot more sense when one is using Claude or OpenCode etc. I think there is another bit of optmization here that can be investigated where I can take the waver project and integrate it within the skill, so the skill can handover some of the work. A back an forth to take the best of the two. 
 
 I have to admit; defining constraints in plain English and letting a coding agent determine the implementation is quite daunting. It requires a significant mindset shift, and I’m eager to see how this scales and where the true limitations lie.
