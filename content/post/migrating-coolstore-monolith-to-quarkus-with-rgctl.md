@@ -300,16 +300,16 @@ A few more blast radius checks to build the full picture:
 
 | Symbol | Score | Direct Callers | Impact Zone |
 |--------|-------|----------------|-------------|
-| `ShoppingCartService::getShoppingCart` | 40.5 | 6 | 10 |
-| `ShoppingCartService::priceShoppingCart` | 40.4 | 5 | 7 |
-| `ShoppingCartService::checkOutShoppingCart` | 25.1 | 1 | 2 |
-| `ProductService::getProducts` | 40.1 | 2 | 2 |
-| `PromoService::applyCartItemPromotions` | 25.4 | 1 | 8 |
-| `CatalogService::getCatalogItems` | 25.1 | 1 | 3 |
-| `OrderService::getOrders` | 25.1 | 1 | 1 |
-| `CartEndpoint::checkout` | 25.1 | 1 | 1 |
-| `OrderServiceMDB::onMessage` | 0.0 | 0 | 0 |
-| `ShippingService::calculateShipping` | 0.0 | 0 | 0 |
+| `ShoppingCartService::`<br>`getShoppingCart` | 40.5 | 6 | 10 |
+| `ShoppingCartService::`<br>`priceShoppingCart` | 40.4 | 5 | 7 |
+| `ShoppingCartService::`<br>`checkOutShoppingCart` | 25.1 | 1 | 2 |
+| `ProductService::`<br>`getProducts` | 40.1 | 2 | 2 |
+| `PromoService::`<br>`applyCartItemPromotions` | 25.4 | 1 | 8 |
+| `CatalogService::`<br>`getCatalogItems` | 25.1 | 1 | 3 |
+| `OrderService::`<br>`getOrders` | 25.1 | 1 | 1 |
+| `CartEndpoint::`<br>`checkout` | 25.1 | 1 | 1 |
+| `OrderServiceMDB::`<br>`onMessage` | 0.0 | 0 | 0 |
+| `ShippingService::`<br>`calculateShipping` | 0.0 | 0 | 0 |
 
 The pattern is clear: the `ShoppingCartService` methods have the highest blast
 radius because everything flows through the cart. The MDBs and
