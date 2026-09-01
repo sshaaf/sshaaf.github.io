@@ -1,5 +1,5 @@
 ---
-title:       "Migrating an application to Quarkus: A Graph-Driven Approach with rgctl"
+title:       "Application Migration using A Graph-Driven Approach with rgctl"
 subtitle:    "Using call-graph analysis to make migration decisions based on structural data"
 description: "A step-by-step walkthrough of migrating a Java EE 7 CoolStore monolith from WebLogic to Quarkus, using rgctl's blast radius, community detection, and migration planning to replace guesswork with graph-driven evidence."
 date:        2026-08-31
@@ -12,13 +12,15 @@ devto: true
 ---
 Migrating an application takes a lot of time and energy, which itself is on a collision course
 with complexity in codebases. Leaving aside the discussion on people and process. In this blog post
-I would like to highlight the journey of migrating and using a tool like [rgctl](https://github.com/sshaaf/rgctl) which understands the codebase, 
-from a Graph POV and also understands its semnatically. It isnt a community detector only but puts emphasis on
-mining the code details via Call graphs, dependenices, data flow in code, slicing, blast radius, harmonic centrality, betweeness and a little more of those things 😎.
-rgctl takes one more step forward, using centraility, cfg etc, it creates migration hints. So one can choose the different ways to migrate and application.
+I would like to highlight the journey of migration and using a tool like **Reachability Graph Control** - [rgctl](https://github.com/sshaaf/rgctl) which understands the codebase. Although I have taken an example of Java, the tool supports [multiple languages](https://shaaf.dev/rgctl/docs/languages/) like C, C#, Go, Node etc. 
 
 
-A common question in application modernization is "where do I start?" You have a
+By taking this approach I am able to mine the code details via [Call graphs](https://shaaf.dev/rgctl/docs/guides/hybrid-cpg/), [dependenices](https://shaaf.dev/rgctl/docs/guides/inspecting-cfg-pdg-dominance/), data flow in code, [slicing](https://shaaf.dev/rgctl/docs/guides/program-slicing/), [blast radius](https://shaaf.dev/rgctl/docs/guides/blast-radius-analysis/), [harmonic centrality](https://shaaf.dev/rgctl/docs/guides/migration-planning/), betweeness, [semantic search](https://shaaf.dev/rgctl/docs/guides/semantic-search/) and a little more of those things 😎.
+[rgctl](https://github.com/sshaaf/rgctl) takes one more step forward, using centraility, cfg etc, it creates migration hints. So one can choose the different ways to migrate and application.
+
+{{< youtube SXxI-w9pOR0 >}}
+
+A common question in application modernization is `where do I start?` You have a
 monolith with dozens of tightly-coupled EJBs, JMS resources, JNDI lookups, and
 vendor-specific descriptors. You need to get it onto Quarkus. The traditional
 answer is a spreadsheet, tribal knowledge, and hope. This post walks through a
@@ -864,31 +866,11 @@ to already be a CDI bean. The plan encodes this constraint automatically.
 For larger codebases -- hundreds of EJBs, nested module dependencies, shared
 libraries -- this kind of structural analysis scales where spreadsheets do not.
 
-## Commands Reference
+## Try it out
+Stop migrating by spreadsheet and tribal knowledge. If you are staring down a monolith and wondering where the hidden dependencies are, let the call graph tell you.
 
-```bash
-# Index the codebase
-rgctl discover <path> \
-  --with-cfg --with-harmonic --with-security \
-  --export-migration-hints --migration-preset risk_mitigation
+* **Get the tool:** Grab `rgctl` from [GitHub](https://github.com/sshaaf/rgctl).
+* **Test it on your own codebase:** Navigate to your project root and run `rgctl discover . --export-migration-hints` to index your application.
+* **Stop guessing:** Run `rgctl blast-radius` on your most heavily-used service and see exactly what you will break before you write a single line of code.
 
-# List all classes
-rgctl -f json gql "MATCH (c:Class) RETURN c"
-
-# Check blast radius for a method
-rgctl -f json blast-radius <method>
-rgctl -f json blast-radius <method> --file <ClassName>.java
-rgctl blast-radius <method>  # human-readable output
-
-# Read the migration plan
-cat .rgctl/migration_plan.json
-
-# CI policy check
-rgctl -f json check --policy-file policy.json
-
-# List communities (natural code clusters)
-rgctl -f json gql --macro-name all_communities unused
-
-# Centrality metrics
-rgctl -f json metrics --pagerank
-```
+If `rgctl` saves you from a broken build or a doomed migration sprint, star the repository. Drop into the GitHub Discussions to share your custom agent recipes—or just to show off your most horrifying circular dependency graph.
