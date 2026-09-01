@@ -10,6 +10,8 @@ layout: post
 type: post
 devto: true
 ---
+# Application Migration using A Graph-Driven Approach with rgctl
+
 Migrating an application takes a lot of time and energy, which itself is on a collision course
 with complexity in codebases. Leaving aside the discussion on people and process. In this blog post
 I would like to highlight the journey of migration and using a tool like **Reachability Graph Control** - [rgctl](https://github.com/sshaaf/rgctl) which understands the codebase. Although I have taken an example of Java, the tool supports [multiple languages](https://shaaf.dev/rgctl/docs/languages/) like C, C#, Go, Node etc. 

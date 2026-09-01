@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 430" role="img" aria-labelledby="title desc">
+  <title id="title">Proposed microservice boundaries from community detection</title>
+  <desc id="desc">Three proposed services mapped from call-graph communities</desc>
+  <defs>
+    <style>
+      .title { font: 700 18px ui-sans-serif, system-ui, sans-serif; fill: #111827; }
+      .item { font: 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #374151; }
+      .box { fill: #ffffff; stroke-width: 2; rx: 10; }
+      .cart { stroke: #2563eb; fill: #eff6ff; }
+      .catalog { stroke: #059669; fill: #ecfdf5; }
+      .order { stroke: #d97706; fill: #fffbeb; }
+    </style>
+  </defs>
+
+  <g transform="translate(20,20)">
+    <rect class="box cart" x="0" y="0" width="300" height="390" rx="10" ry="10"/>
+    <text class="title" x="20" y="34">Cart Service</text>
+    <text class="item" x="20" y="68">CartEndpoint</text>
+    <text class="item" x="20" y="92">ShoppingCartService</text>
+    <text class="item" x="20" y="116">ShoppingCart</text>
+    <text class="item" x="20" y="140">ShoppingCartItem</text>
+    <text class="item" x="20" y="164">PromoService</text>
+    <text class="item" x="20" y="188">ShippingService</text>
+    <text class="item" x="20" y="212">ShoppingCartOrderProcessor</text>
+    <text class="item" x="20" y="236">Promotion</text>
+    <text class="item" x="20" y="260">Transformers</text>
+    <text class="item" x="36" y="284">(shoppingCartToJson)</text>
+  </g>
+
+  <g transform="translate(340,20)">
+    <rect class="box catalog" x="0" y="0" width="300" height="390" rx="10" ry="10"/>
+    <text class="title" x="20" y="34">Catalog Service</text>
+    <text class="item" x="20" y="68">ProductEndpoint</text>
+    <text class="item" x="20" y="92">ProductService</text>
+    <text class="item" x="20" y="116">CatalogService</text>
+    <text class="item" x="20" y="140">CatalogItemEntity</text>
+    <text class="item" x="20" y="164">InventoryEntity</text>
+    <text class="item" x="20" y="188">Product</text>
+    <text class="item" x="20" y="212">Transformers</text>
+    <text class="item" x="36" y="236">(toProduct)</text>
+  </g>
+
+  <g transform="translate(660,20)">
+    <rect class="box order" x="0" y="0" width="300" height="390" rx="10" ry="10"/>
+    <text class="title" x="20" y="34">Order Service</text>
+    <text class="item" x="20" y="68">OrderEndpoint</text>
+    <text class="item" x="20" y="92">OrderService</text>
+    <text class="item" x="20" y="116">OrderServiceMDB</text>
+    <text class="item" x="20" y="140">InventoryNotificationMDB</text>
+    <text class="item" x="20" y="164">Order</text>
+    <text class="item" x="20" y="188">OrderItem</text>
+    <text class="item" x="20" y="212">Transformers</text>
+    <text class="item" x="36" y="236">(jsonToOrder)</text>
+  </g>
+</svg>

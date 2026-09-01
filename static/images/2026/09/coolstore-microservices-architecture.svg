@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 700" role="img" aria-labelledby="title desc">
+  <title id="title">CoolStore microservices architecture</title>
+  <desc id="desc">Decomposed CoolStore architecture with gateway, REST, and async messaging</desc>
+  <defs>
+    <style>
+      .title { font: 700 17px ui-sans-serif, system-ui, sans-serif; fill: #111827; }
+      .item { font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #374151; }
+      .label { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .gateway { fill: #f1f5f9; stroke: #64748b; stroke-width: 2; }
+      .cart { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+      .catalog { fill: #ecfdf5; stroke: #059669; stroke-width: 2; }
+      .order { fill: #fffbeb; stroke: #d97706; stroke-width: 2; }
+      .line { stroke: #64748b; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .async { stroke: #7c3aed; stroke-width: 2; fill: none; stroke-dasharray: 7 5; marker-end: url(#arrowAsync); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+    <marker id="arrowAsync" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <rect class="gateway" x="410" y="20" width="280" height="56" rx="10" ry="10"/>
+  <text class="title" x="550" y="54" text-anchor="middle">API Gateway / Load Balancer</text>
+
+  <line class="line" x1="550" y1="76" x2="550" y2="110"/>
+  <line class="line" x1="190" y1="110" x2="910" y2="110"/>
+  <line class="line" x1="190" y1="110" x2="190" y2="140"/>
+  <line class="line" x1="550" y1="110" x2="550" y2="140"/>
+  <line class="line" x1="910" y1="110" x2="910" y2="140"/>
+
+  <g>
+    <rect class="cart" x="40" y="140" width="300" height="300" rx="10" ry="10"/>
+    <text class="title" x="60" y="172">Cart Service</text>
+    <text class="item" x="60" y="200">CartEndpoint</text>
+    <text class="item" x="60" y="222">ShoppingCartService</text>
+    <text class="item" x="60" y="244">ShippingService</text>
+    <text class="item" x="60" y="266">PromoService</text>
+    <text class="item" x="60" y="288">ShoppingCartOrderProcessor</text>
+    <text class="item" x="60" y="310">ShoppingCart</text>
+    <text class="item" x="60" y="332">ShoppingCartItem</text>
+    <text class="item" x="60" y="354">Promotion</text>
+    <text class="item" x="60" y="376">Transformers::shoppingCartToJson</text>
+  </g>
+
+  <g>
+    <rect class="catalog" x="400" y="140" width="300" height="300" rx="10" ry="10"/>
+    <text class="title" x="420" y="172">Catalog Service</text>
+    <text class="item" x="420" y="200">ProductResource</text>
+    <text class="item" x="420" y="222">ProductService</text>
+    <text class="item" x="420" y="244">CatalogService</text>
+    <text class="item" x="420" y="266">CatalogItemEntity</text>
+    <text class="item" x="420" y="288">InventoryEntity</text>
+    <text class="item" x="420" y="310">Product</text>
+    <text class="item" x="420" y="332">Transformers::toProduct</text>
+  </g>
+
+  <g>
+    <rect class="order" x="760" y="140" width="300" height="300" rx="10" ry="10"/>
+    <text class="title" x="780" y="172">Order Service</text>
+    <text class="item" x="780" y="200">OrderEndpoint</text>
+    <text class="item" x="780" y="222">OrderService</text>
+    <text class="item" x="780" y="244">OrderEventConsumer</text>
+    <text class="item" x="780" y="266">InventoryAlertConsumer</text>
+    <text class="item" x="780" y="288">Order</text>
+    <text class="item" x="780" y="310">OrderItem</text>
+    <text class="item" x="780" y="332">Transformers::jsonToOrder</text>
+  </g>
+
+  <path class="line" d="M340 290 L400 290"/>
+  <text class="label" x="370" y="278" text-anchor="middle">REST getProduct</text>
+
+  <path class="async" d="M190 440 L190 455 L910 455 L910 440"/>
+  <text class="label" x="550" y="472" text-anchor="middle">Kafka / AMQP: orders-out &#8594; orders-in</text>
+
+  <path class="async" d="M760 440 L700 440"/>
+  <text class="label" x="730" y="428" text-anchor="middle">inventory-updates</text>
+</svg>

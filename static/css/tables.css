@@ -1,0 +1,31 @@
+.post-container .table-responsive.post-table,
+.entry-content .table-responsive.post-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.25rem 0;
+}
+
+.post-container .table-responsive.post-table table,
+.entry-content .table-responsive.post-table table {
+  table-layout: auto;
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
+}
+
+.post-container .table-responsive.post-table th,
+.post-container .table-responsive.post-table td,
+.entry-content .table-responsive.post-table th,
+.entry-content .table-responsive.post-table td {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-align: left;
+  vertical-align: top;
+  white-space: normal;
+}
+
+.post-container .table-responsive.post-table code,
+.entry-content .table-responsive.post-table code {
+  white-space: normal;
+  word-break: break-word;
+}
