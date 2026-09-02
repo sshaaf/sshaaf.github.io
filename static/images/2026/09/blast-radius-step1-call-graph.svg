@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 400" role="img" aria-labelledby="title desc">
+  <title id="title">Step 1: build the call graph</title>
+  <desc id="desc">discover parses source into function nodes and CALLS edges, then writes snapshot artifacts</desc>
+  <defs>
+    <style>
+      .step { font: 600 15px ui-sans-serif, system-ui, sans-serif; fill: #0f766e; }
+      .label { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .mono { font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+      .box { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; }
+      .fn { fill: #ecfeff; stroke: #67e8f9; stroke-width: 1.5; }
+      .artifact { fill: #fff7ed; stroke: #fdba74; stroke-width: 1.5; }
+      .arrow { stroke: #64748b; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .edge { stroke: #0ea5e9; stroke-width: 1.8; fill: none; marker-end: url(#call); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <marker id="call" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0ea5e9"/>
+    </marker>
+  </defs>
+
+  <text class="step" x="48" y="40">Step 1 - Build the call graph</text>
+
+  <!-- top row -->
+  <rect class="box" x="48" y="72" width="168" height="100" rx="8"/>
+  <text class="label" x="68" y="100">Source tree</text>
+  <text class="mono" x="68" y="124">pkg/kubelet/*.go</text>
+  <text class="mono" x="68" y="148">staging/.../client-go</text>
+
+  <path class="arrow" d="M 216 122 L 256 122"/>
+  <text class="label" x="222" y="108">discover</text>
+
+  <rect class="box" x="256" y="72" width="196" height="100" rx="8"/>
+  <text class="label" x="276" y="100">Parse + extract</text>
+  <text class="mono" x="276" y="124">:Function nodes</text>
+  <text class="mono" x="276" y="148">:CALLS edges</text>
+
+  <path class="arrow" d="M 452 122 L 492 122"/>
+
+  <rect class="box" x="492" y="64" width="380" height="132" rx="8"/>
+  <text class="label" x="512" y="92">Call graph (simplified)</text>
+
+  <circle class="fn" cx="548" cy="132" r="24"/>
+  <text class="mono" x="534" y="137">main</text>
+
+  <circle class="fn" cx="660" cy="104" r="24"/>
+  <text class="mono" x="632" y="109">RunKubelet</text>
+
+  <circle class="fn" cx="800" cy="132" r="24"/>
+  <text class="mono" x="762" y="137">newPodWorkers</text>
+
+  <circle class="fn" cx="660" cy="160" r="24"/>
+  <text class="mono" x="644" y="165">syncLoop</text>
+
+  <path class="edge" d="M 572 128 L 636 108"/>
+  <path class="edge" d="M 684 108 L 776 128"/>
+  <path class="edge" d="M 684 148 L 776 136"/>
+
+  <text class="label" x="620" y="188" style="font-size:11px">CALLS: caller -&gt; callee</text>
+
+  <!-- down to artifacts -->
+  <path class="arrow" d="M 682 196 L 682 248"/>
+  <path class="arrow" d="M 682 248 L 260 248"/>
+  <path class="arrow" d="M 682 248 L 682 288"/>
+
+  <rect class="artifact" x="108" y="288" width="280" height="52" rx="8"/>
+  <text class="mono" x="128" y="320">graph.snapshot.bin</text>
+
+  <rect class="artifact" x="492" y="288" width="380" height="52" rx="8"/>
+  <text class="mono" x="512" y="320">blast_engine.snapshot.bin</text>
+
+  <path class="arrow" d="M 260 248 L 248 288"/>
+
+  <text class="label" x="48" y="378">Written once at discover time; reused for every blast-radius query.</text>
+</svg>

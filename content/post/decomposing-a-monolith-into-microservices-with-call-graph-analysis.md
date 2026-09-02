@@ -4,8 +4,8 @@ subtitle:    "Finding service boundaries with community detection and blast radi
 description: "A concrete decomposition of a Java EE monolith into microservices using rgctl's community detection, blast radius analysis, and CPG field mutation tracking to identify natural service boundaries and quantify coupling at each cut."
 date:        2026-09-01
 image:       "/images/2026/09/decomposing-a-monolith-into-microservices-with-call-graph-analysis-1.jpg"
-tags:        ["java", "microservices", "rgctl", "call-graph", "architecture"]
-categories:  ["Modernization"]
+tags:        ["rust", "java", "microservices", "rgctl", "call-graph", "architecture"]
+categories:  ["Java", "Rust"]
 layout: post
 type: post
 devto: true

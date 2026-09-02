@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 340" role="img" aria-labelledby="title desc">
+  <title id="title">Step 3: precompute reverse reachability</title>
+  <desc id="desc">Reverse topological propagation stores upstream reachability as bitsets for O(1) blast-radius lookup</desc>
+  <defs>
+    <style>
+      .step { font: 600 14px ui-sans-serif, system-ui, sans-serif; fill: #0f766e; }
+      .label { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .mono { font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+      .box { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; }
+      .scc { fill: #eef2ff; stroke: #818cf8; stroke-width: 2; }
+      .target { fill: #ecfdf5; stroke: #34d399; stroke-width: 2.5; }
+      .bit { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.2; }
+      .on { fill: #dbeafe; stroke: #60a5fa; }
+      .arrow { stroke: #64748b; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .rev { stroke: #0ea5e9; stroke-width: 2; fill: none; marker-end: url(#blue); stroke-dasharray: 6 4; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <marker id="blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0ea5e9"/>
+    </marker>
+  </defs>
+
+  <text class="step" x="40" y="34">Step 3 - Precompute reverse reachability</text>
+
+  <rect class="box" x="40" y="56" width="360" height="210" rx="10"/>
+  <text class="label" x="56" y="82">Condensed DAG (call direction -&gt;)</text>
+
+  <rect class="scc" x="70" y="110" width="90" height="44" rx="8"/>
+  <text class="mono" x="88" y="138">SCC-1</text>
+
+  <rect class="scc" x="190" y="90" width="90" height="44" rx="8"/>
+  <text class="mono" x="208" y="118">SCC-2</text>
+
+  <rect class="target" x="310" y="130" width="70" height="44" rx="8"/>
+  <text class="mono" x="322" y="158">SCC-3</text>
+  <text class="label" x="314" y="188" style="font-size:11px">target</text>
+
+  <path class="arrow" d="M 160 132 L 190 112"/>
+  <path class="arrow" d="M 280 112 L 310 148"/>
+
+  <path class="rev" d="M 310 148 L 190 118"/>
+  <path class="rev" d="M 190 118 L 115 132"/>
+  <text class="label" x="132" y="176">reverse topo: union upstream bitsets</text>
+
+  <rect class="box" x="430" y="56" width="350" height="210" rx="10"/>
+  <text class="label" x="446" y="82">Reachability bitset per SCC</text>
+
+  <text class="mono" x="446" y="112">SCC-3 (target):</text>
+  <rect class="bit on" x="560" y="96" width="18" height="18" rx="3"/><text class="mono" x="564" y="109" style="font-size:10px">1</text>
+  <rect class="bit on" x="584" y="96" width="18" height="18" rx="3"/><text class="mono" x="588" y="109" style="font-size:10px">2</text>
+  <rect class="bit on" x="608" y="96" width="18" height="18" rx="3"/><text class="mono" x="612" y="109" style="font-size:10px">3</text>
+  <text class="label" x="636" y="110" style="font-size:11px">all upstream</text>
+
+  <text class="mono" x="446" y="152">SCC-2:</text>
+  <rect class="bit on" x="500" y="136" width="18" height="18" rx="3"/><text class="mono" x="504" y="149" style="font-size:10px">1</text>
+  <rect class="bit on" x="524" y="136" width="18" height="18" rx="3"/><text class="mono" x="528" y="149" style="font-size:10px">2</text>
+  <rect class="bit" x="548" y="136" width="18" height="18" rx="3"/>
+  <text class="label" x="580" y="150" style="font-size:11px">upstream + self</text>
+
+  <text class="mono" x="446" y="192">SCC-1:</text>
+  <rect class="bit on" x="500" y="176" width="18" height="18" rx="3"/><text class="mono" x="504" y="189" style="font-size:10px">1</text>
+  <rect class="bit" x="524" y="176" width="18" height="18" rx="3"/>
+  <rect class="bit" x="548" y="176" width="18" height="18" rx="3"/>
+  <text class="label" x="580" y="190" style="font-size:11px">self only (source)</text>
+
+  <rect class="box" x="40" y="278" width="740" height="48" rx="8"/>
+  <text class="label" x="56" y="308">Query blast-radius(SCC-3)</text>
+  <text class="mono" x="250" y="308">-&gt; read precomputed bitset</text>
+  <text class="label" x="500" y="308">O(1) lookup, not a per-request graph walk</text>
+</svg>

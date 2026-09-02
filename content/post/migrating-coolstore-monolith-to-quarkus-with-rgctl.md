@@ -4,8 +4,8 @@ subtitle:    "Using call-graph analysis to make migration decisions based on str
 description: "A step-by-step walkthrough of migrating a Java EE 7 CoolStore monolith from WebLogic to Quarkus, using rgctl's blast radius, community detection, and migration planning to replace guesswork with graph-driven evidence."
 date:        2026-08-31
 image:       "/images/2026/08/migrating-coolstore-to-quarkus-with-rgctl.jpg"
-tags:        ["java", "quarkus", "migration", "rgctl", "call-graph"]
-categories:  ["Modernization"]
+tags:        ["rust", "java", "quarkus", "migration", "rgctl", "call-graph"]
+categories:  ["Java", "Rust"]
 layout: post
 type: post
 devto: true

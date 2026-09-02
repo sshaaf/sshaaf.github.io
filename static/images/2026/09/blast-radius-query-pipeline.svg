@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 460" role="img" aria-labelledby="title desc">
+  <title id="title">rgctl blast-radius query pipeline</title>
+  <desc id="desc">Pre-computed discover artifacts feed tiered blast-radius queries on Kubernetes</desc>
+  <defs>
+    <style>
+      .group-title { font: 600 15px ui-sans-serif, system-ui, sans-serif; fill: #334155; }
+      .node { font: 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+      .group-box { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; }
+      .node-box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; }
+      .arrow { stroke: #64748b; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- discover subgraph -->
+  <rect class="group-box" x="40" y="24" width="740" height="200" rx="10" ry="10"/>
+  <text class="group-title" x="60" y="52">discover (once, ~13s on Kubernetes)</text>
+
+  <rect class="node-box" x="300" y="78" width="220" height="40" rx="6" ry="6"/>
+  <text class="node" x="310" y="104">graph.snapshot.bin</text>
+
+  <rect class="node-box" x="120" y="156" width="250" height="40" rx="6" ry="6"/>
+  <text class="node" x="130" y="182">blast_engine.snapshot.bin</text>
+
+  <rect class="node-box" x="450" y="156" width="220" height="40" rx="6" ry="6"/>
+  <text class="node" x="460" y="182">macro_call_index.db</text>
+
+  <path class="arrow" d="M 410 118 L 245 156"/>
+  <path class="arrow" d="M 410 118 L 560 156"/>
+
+  <!-- discover to query -->
+  <path class="arrow" d="M 410 224 L 410 258"/>
+
+  <!-- query subgraph -->
+  <rect class="group-box" x="40" y="258" width="740" height="170" rx="10" ry="10"/>
+  <text class="group-title" x="60" y="286">blast-radius SYMBOL (~1s)</text>
+
+  <rect class="node-box" x="90" y="318" width="170" height="40" rx="6" ry="6"/>
+  <text class="node" x="100" y="344">T0: lookup cache</text>
+
+  <rect class="node-box" x="325" y="318" width="170" height="40" rx="6" ry="6"/>
+  <text class="node" x="335" y="344">T1: mmap engine</text>
+
+  <rect class="node-box" x="560" y="318" width="170" height="40" rx="6" ry="6"/>
+  <text class="node" x="570" y="344">T3: full hydrate</text>
+
+  <path class="arrow" d="M 260 338 L 325 338"/>
+  <path class="arrow" d="M 495 338 L 560 338"/>
+</svg>
