@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" role="img" aria-labelledby="title desc">
+  <title id="title">Blast radius: reverse reachability walk</title>
+  <desc id="desc">Shows how blast-radius walks CALLS edges backwards from a changed function to find all upstream callers that could be affected</desc>
+  <defs>
+    <style>
+      .heading { font: 600 16px ui-sans-serif, system-ui, sans-serif; fill: #0f766e; }
+      .label { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .node-label { font: 600 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+      .note { font: italic 11px ui-sans-serif, system-ui, sans-serif; fill: #64748b; }
+      .safe { fill: #f1f5f9; stroke: #94a3b8; stroke-width: 2; }
+      .affected { fill: #fee2e2; stroke: #ef4444; stroke-width: 2.5; }
+      .changed { fill: #fca5a5; stroke: #dc2626; stroke-width: 3; }
+      .safe-text { font: 600 11px ui-sans-serif, system-ui, sans-serif; fill: #64748b; }
+      .affected-text { font: 600 11px ui-sans-serif, system-ui, sans-serif; fill: #dc2626; }
+      .calls-edge { stroke: #cbd5e1; stroke-width: 1.5; fill: none; marker-end: url(#call-gray); }
+      .impact-edge { stroke: #ef4444; stroke-width: 2.5; fill: none; marker-end: url(#impact); }
+      .depth-label { font: 600 10px ui-sans-serif, system-ui, sans-serif; fill: #ef4444; }
+      .badge { font: 600 10px ui-sans-serif, system-ui, sans-serif; fill: #fff; }
+    </style>
+    <marker id="call-gray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#cbd5e1"/>
+    </marker>
+    <marker id="impact" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ef4444"/>
+    </marker>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <text class="heading" x="48" y="36">Blast radius: what breaks if I change this function?</text>
+  <text class="label" x="48" y="56">Reverse walk along CALLS edges from the changed function (red) to find all affected callers</text>
+
+  <!-- Layer labels -->
+  <text class="depth-label" x="68" y="100">depth 3</text>
+  <text class="depth-label" x="248" y="100">depth 2</text>
+  <text class="depth-label" x="468" y="100">depth 1</text>
+  <text class="depth-label" x="668" y="100">CHANGED</text>
+
+  <!-- Depth 3 nodes (affected) -->
+  <rect class="affected" x="48" y="120" width="140" height="40" rx="20" opacity="0.7"/>
+  <text class="node-label" x="80" y="145">handleRequest</text>
+
+  <rect class="affected" x="48" y="200" width="140" height="40" rx="20" opacity="0.7"/>
+  <text class="node-label" x="82" y="225">apiController</text>
+
+  <rect class="affected" x="48" y="280" width="140" height="40" rx="20" opacity="0.7"/>
+  <text class="node-label" x="80" y="305">batchProcessor</text>
+
+  <!-- Depth 2 nodes (affected) -->
+  <rect class="affected" x="248" y="150" width="140" height="40" rx="20" opacity="0.85"/>
+  <text class="node-label" x="268" y="175">createOrder</text>
+
+  <rect class="affected" x="248" y="250" width="140" height="40" rx="20" opacity="0.85"/>
+  <text class="node-label" x="268" y="275">bulkCheckout</text>
+
+  <!-- Depth 1 nodes (affected, strong) -->
+  <rect class="affected" x="448" y="160" width="160" height="40" rx="20"/>
+  <text class="node-label" x="478" y="185">validateAndPay</text>
+
+  <rect class="affected" x="448" y="250" width="160" height="40" rx="20"/>
+  <text class="node-label" x="480" y="275">applyDiscount</text>
+
+  <!-- Changed function (center of impact) -->
+  <rect class="changed" x="668" y="200" width="150" height="44" rx="22" filter="url(#glow)"/>
+  <text class="node-label" x="693" y="227">processOrder</text>
+
+  <!-- Safe nodes (not in blast radius) -->
+  <rect class="safe" x="668" y="310" width="150" height="40" rx="20"/>
+  <text class="node-label" x="703" y="335">sendEmail</text>
+
+  <rect class="safe" x="668" y="120" width="150" height="40" rx="20"/>
+  <text class="node-label" x="697" y="145">listProducts</text>
+
+  <!-- Forward call edges (gray, these go downstream from changed) -->
+  <path class="calls-edge" d="M 743 244 L 743 310"/>
+  <path class="calls-edge" d="M 743 120 L 743 200"/>
+
+  <!-- Impact edges (red, reverse direction shown) -->
+  <path class="impact-edge" d="M 668 215 L 608 185"/>
+  <path class="impact-edge" d="M 668 228 L 608 265"/>
+
+  <path class="impact-edge" d="M 448 175 L 388 170"/>
+  <path class="impact-edge" d="M 448 265 L 388 265"/>
+
+  <path class="impact-edge" d="M 248 160 L 188 145"/>
+  <path class="impact-edge" d="M 248 170 L 188 215"/>
+  <path class="impact-edge" d="M 248 260 L 188 295"/>
+
+  <!-- Blast radius boundary -->
+  <rect x="36" y="84" width="800" height="260" rx="16" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="8 4" opacity="0.5"/>
+  <rect x="38" y="70" width="106" height="20" rx="4" fill="#ef4444"/>
+  <text class="badge" x="48" y="84">BLAST RADIUS</text>
+
+  <!-- Summary -->
+  <rect x="48" y="370" width="764" height="40" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+  <text class="label" x="68" y="395" fill="#991b1b">7 functions affected across 3 depths  --  pre-computed in bitsets, returned in &lt; 1ms</text>
+</svg>

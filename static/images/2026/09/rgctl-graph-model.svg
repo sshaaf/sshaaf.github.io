@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 440" role="img" aria-labelledby="title desc">
+  <title id="title">rgctl knowledge graph model</title>
+  <desc id="desc">Node types (Function, Class, Module, File) connected by typed edges (CALLS, CONTAINS, IMPORTS, INHERITS, REFERENCES)</desc>
+  <defs>
+    <style>
+      .heading { font: 600 16px ui-sans-serif, system-ui, sans-serif; fill: #0f766e; }
+      .label { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .node-label { font: 600 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+      .name-label { font: 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #64748b; }
+      .edge-label { font: 600 10px ui-sans-serif, system-ui, sans-serif; }
+      .fn-node { fill: #dbeafe; stroke: #3b82f6; stroke-width: 2; }
+      .class-node { fill: #fce7f3; stroke: #ec4899; stroke-width: 2; }
+      .mod-node { fill: #d1fae5; stroke: #10b981; stroke-width: 2; }
+      .file-node { fill: #fef3c7; stroke: #f59e0b; stroke-width: 2; }
+      .calls { stroke: #3b82f6; stroke-width: 2; fill: none; marker-end: url(#calls-arrow); }
+      .contains { stroke: #10b981; stroke-width: 1.8; fill: none; marker-end: url(#contains-arrow); stroke-dasharray: 6 3; }
+      .imports { stroke: #8b5cf6; stroke-width: 1.8; fill: none; marker-end: url(#imports-arrow); }
+      .inherits { stroke: #ec4899; stroke-width: 1.8; fill: none; marker-end: url(#inherits-arrow); stroke-dasharray: 4 4; }
+      .references { stroke: #f59e0b; stroke-width: 1.5; fill: none; marker-end: url(#ref-arrow); stroke-dasharray: 2 3; }
+      .legend-box { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1; }
+    </style>
+    <marker id="calls-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="contains-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#10b981"/>
+    </marker>
+    <marker id="imports-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#8b5cf6"/>
+    </marker>
+    <marker id="inherits-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ec4899"/>
+    </marker>
+    <marker id="ref-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <text class="heading" x="48" y="36">Knowledge graph model</text>
+  <text class="label" x="48" y="56">Typed nodes and edges extracted by tree-sitter parsing</text>
+
+  <!-- File node (top) -->
+  <rect class="file-node" x="340" y="80" width="180" height="48" rx="24"/>
+  <text class="node-label" x="395" y="100">:File</text>
+  <text class="name-label" x="382" y="118">OrderService.java</text>
+
+  <!-- Module node (left) -->
+  <rect class="mod-node" x="60" y="180" width="160" height="48" rx="24"/>
+  <text class="node-label" x="108" y="200">:Module</text>
+  <text class="name-label" x="98" y="218">com.shop.order</text>
+
+  <!-- Class nodes (center) -->
+  <rect class="class-node" x="320" y="180" width="180" height="48" rx="24"/>
+  <text class="node-label" x="372" y="200">:Class</text>
+  <text class="name-label" x="362" y="218">OrderService</text>
+
+  <rect class="class-node" x="600" y="180" width="180" height="48" rx="24"/>
+  <text class="node-label" x="656" y="200">:Class</text>
+  <text class="name-label" x="640" y="218">CartService</text>
+
+  <!-- Function nodes (bottom) -->
+  <rect class="fn-node" x="180" y="310" width="160" height="48" rx="24"/>
+  <text class="node-label" x="222" y="330">:Function</text>
+  <text class="name-label" x="216" y="348">processOrder</text>
+
+  <rect class="fn-node" x="420" y="310" width="160" height="48" rx="24"/>
+  <text class="node-label" x="460" y="330">:Function</text>
+  <text class="name-label" x="460" y="348">validateCart</text>
+
+  <rect class="fn-node" x="660" y="310" width="160" height="48" rx="24"/>
+  <text class="node-label" x="700" y="330">:Function</text>
+  <text class="name-label" x="703" y="348">getCartItems</text>
+
+  <!-- CONTAINS: File -> Class -->
+  <path class="contains" d="M 430 128 L 420 180"/>
+  <text class="edge-label" x="440" y="158" fill="#10b981">CONTAINS</text>
+
+  <!-- CONTAINS: Module -> Class -->
+  <path class="contains" d="M 220 204 L 320 204"/>
+  <text class="edge-label" x="242" y="196" fill="#10b981">CONTAINS</text>
+
+  <!-- CONTAINS: Class -> Function -->
+  <path class="contains" d="M 370 228 L 290 310"/>
+  <text class="edge-label" x="290" y="272" fill="#10b981">CONTAINS</text>
+
+  <path class="contains" d="M 690 228 L 740 310"/>
+  <text class="edge-label" x="720" y="272" fill="#10b981">CONTAINS</text>
+
+  <!-- IMPORTS: Class -> Class -->
+  <path class="imports" d="M 500 196 L 600 196"/>
+  <text class="edge-label" x="525" y="188" fill="#8b5cf6">IMPORTS</text>
+
+  <!-- INHERITS: Class -> Class (curved) -->
+  <path class="inherits" d="M 500 220 Q 550 260 600 220"/>
+  <text class="edge-label" x="525" y="248" fill="#ec4899">INHERITS</text>
+
+  <!-- CALLS: Function -> Function -->
+  <path class="calls" d="M 340 334 L 420 334"/>
+  <text class="edge-label" x="356" y="326" fill="#3b82f6">CALLS</text>
+
+  <path class="calls" d="M 580 334 L 660 334"/>
+  <text class="edge-label" x="596" y="326" fill="#3b82f6">CALLS</text>
+
+  <!-- REFERENCES: Function -> Class -->
+  <path class="references" d="M 520 310 L 650 228"/>
+  <text class="edge-label" x="588" y="260" fill="#f59e0b">REFERENCES</text>
+
+  <!-- Legend -->
+  <rect class="legend-box" x="48" y="384" width="764" height="44" rx="6"/>
+  <circle cx="80" cy="406" r="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text class="name-label" x="94" y="410">Function</text>
+  <circle cx="180" cy="406" r="8" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5"/>
+  <text class="name-label" x="194" y="410">Class</text>
+  <circle cx="260" cy="406" r="8" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text class="name-label" x="274" y="410">Module</text>
+  <circle cx="350" cy="406" r="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text class="name-label" x="364" y="410">File</text>
+
+  <line x1="420" y1="406" x2="450" y2="406" stroke="#3b82f6" stroke-width="2"/>
+  <text class="name-label" x="456" y="410">CALLS</text>
+  <line x1="510" y1="406" x2="540" y2="406" stroke="#10b981" stroke-width="2" stroke-dasharray="6 3"/>
+  <text class="name-label" x="546" y="410">CONTAINS</text>
+  <line x1="620" y1="406" x2="650" y2="406" stroke="#8b5cf6" stroke-width="2"/>
+  <text class="name-label" x="656" y="410">IMPORTS</text>
+  <line x1="720" y1="406" x2="750" y2="406" stroke="#ec4899" stroke-width="2" stroke-dasharray="4 4"/>
+  <text class="name-label" x="756" y="410">INHERITS</text>
+</svg>

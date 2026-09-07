@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" role="img" aria-labelledby="title desc">
+  <title id="title">rgctl: index once, query many times</title>
+  <desc id="desc">Two-phase pipeline: discover indexes the repository into .rgctl/ artifacts, then multiple queries read from the same cached graph</desc>
+  <defs>
+    <style>
+      .heading { font: 600 16px ui-sans-serif, system-ui, sans-serif; fill: #0f766e; }
+      .label { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .label-bold { font: 600 13px ui-sans-serif, system-ui, sans-serif; fill: #334155; }
+      .mono { font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+      .phase { font: 600 11px ui-sans-serif, system-ui, sans-serif; fill: #fff; }
+      .box { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; }
+      .repo { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1.5; }
+      .cache { fill: #fef3c7; stroke: #fbbf24; stroke-width: 2; }
+      .query { fill: #ecfdf5; stroke: #6ee7b7; stroke-width: 1.5; }
+      .result { fill: #f0f9ff; stroke: #7dd3fc; stroke-width: 1.5; }
+      .pill-index { fill: #0f766e; }
+      .pill-query { fill: #0369a1; }
+      .arrow { stroke: #64748b; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .arrow-fast { stroke: #059669; stroke-width: 2; fill: none; marker-end: url(#fast); stroke-dasharray: 6 3; }
+      .divider { stroke: #cbd5e1; stroke-width: 1; stroke-dasharray: 8 4; }
+      .note { font: italic 11px ui-sans-serif, system-ui, sans-serif; fill: #64748b; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <marker id="fast" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <!-- Phase 1: Indexing -->
+  <rect class="pill-index" x="48" y="28" width="100" height="22" rx="11"/>
+  <text class="phase" x="68" y="44">PHASE 1</text>
+  <text class="heading" x="160" y="44">Indexing (run once)</text>
+
+  <rect class="repo" x="48" y="68" width="160" height="88" rx="8"/>
+  <text class="label-bold" x="68" y="92">Your Repository</text>
+  <text class="mono" x="68" y="114">src/**/*.java</text>
+  <text class="mono" x="68" y="132">src/**/*.go</text>
+
+  <path class="arrow" d="M 208 112 L 268 112"/>
+  <text class="mono" x="216" y="100">rgctl discover .</text>
+
+  <rect class="box" x="268" y="68" width="200" height="88" rx="8"/>
+  <text class="label-bold" x="288" y="92">tree-sitter parsing</text>
+  <text class="mono" x="288" y="114">Functions, Classes</text>
+  <text class="mono" x="288" y="132">CALLS, IMPORTS edges</text>
+
+  <path class="arrow" d="M 468 112 L 528 112"/>
+
+  <rect class="cache" x="528" y="56" width="344" height="112" rx="10"/>
+  <text class="label-bold" x="556" y="84">.rgctl/ (persistent cache)</text>
+  <rect rx="4" x="548" y="96" width="148" height="28" fill="#fff8e1" stroke="#f59e0b" stroke-width="1"/>
+  <text class="mono" x="558" y="115">graph.snapshot.bin</text>
+  <rect rx="4" x="708" y="96" width="148" height="28" fill="#fff8e1" stroke="#f59e0b" stroke-width="1"/>
+  <text class="mono" x="718" y="115">blast_engine.bin</text>
+  <rect rx="4" x="548" y="132" width="148" height="28" fill="#fff8e1" stroke="#f59e0b" stroke-width="1"/>
+  <text class="mono" x="558" y="151">communities.json</text>
+  <rect rx="4" x="708" y="132" width="148" height="28" fill="#fff8e1" stroke="#f59e0b" stroke-width="1"/>
+  <text class="mono" x="718" y="151">reachability bits</text>
+
+  <text class="note" x="556" y="178">Seconds for small repos, minutes for 100k+ functions</text>
+
+  <!-- Divider -->
+  <line class="divider" x1="48" y1="200" x2="872" y2="200"/>
+
+  <!-- Phase 2: Querying -->
+  <rect class="pill-query" x="48" y="218" width="100" height="22" rx="11"/>
+  <text class="phase" x="68" y="234">PHASE 2</text>
+  <text class="heading" x="160" y="234">Querying (run many times)</text>
+
+  <!-- Query 1 -->
+  <rect class="query" x="48" y="256" width="180" height="44" rx="8"/>
+  <text class="mono" x="62" y="283">blast-radius X</text>
+
+  <!-- Query 2 -->
+  <rect class="query" x="48" y="312" width="180" height="44" rx="8"/>
+  <text class="mono" x="62" y="339">gql MATCH ...</text>
+
+  <!-- Query 3 -->
+  <rect class="query" x="48" y="368" width="180" height="44" rx="8"/>
+  <text class="mono" x="62" y="395">metrics --pagerank</text>
+
+  <!-- Arrows from queries to cache -->
+  <path class="arrow-fast" d="M 228 278 L 528 140"/>
+  <path class="arrow-fast" d="M 228 334 L 528 134"/>
+  <path class="arrow-fast" d="M 228 390 L 528 158"/>
+
+  <!-- Cache to Results -->
+  <rect class="cache" x="528" y="256" width="156" height="156" rx="10"/>
+  <text class="label-bold" x="548" y="280">.rgctl/</text>
+  <text class="label" x="548" y="300">mmap-backed</text>
+  <text class="label" x="548" y="320">graph snapshot</text>
+  <text class="note" x="548" y="352">No re-indexing</text>
+  <text class="note" x="548" y="372">No re-parsing</text>
+  <text class="note" x="548" y="392">Deterministic</text>
+
+  <path class="arrow-fast" d="M 684 284 L 728 284"/>
+  <path class="arrow-fast" d="M 684 334 L 728 334"/>
+  <path class="arrow-fast" d="M 684 384 L 728 384"/>
+
+  <!-- Results -->
+  <rect class="result" x="728" y="260" width="144" height="40" rx="8"/>
+  <text class="mono" x="742" y="285">JSON &lt; 1ms</text>
+
+  <rect class="result" x="728" y="314" width="144" height="40" rx="8"/>
+  <text class="mono" x="742" y="339">JSON &lt; 1ms</text>
+
+  <rect class="result" x="728" y="368" width="144" height="40" rx="8"/>
+  <text class="mono" x="742" y="393">JSON &lt; 1ms</text>
+</svg>

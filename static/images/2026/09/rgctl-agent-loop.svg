@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" role="img" aria-labelledby="title desc">
+  <title id="title">Agent interaction loop with rgctl</title>
+  <desc id="desc">How an LLM coding agent uses rgctl: natural language question goes through the skill layer, translates to CLI, queries the persistent graph, and returns structured JSON facts</desc>
+  <defs>
+    <style>
+      .heading { font: 600 16px ui-sans-serif, system-ui, sans-serif; fill: #0f766e; }
+      .label { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .label-bold { font: 600 13px ui-sans-serif, system-ui, sans-serif; fill: #334155; }
+      .mono { font: 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+      .note { font: italic 11px ui-sans-serif, system-ui, sans-serif; fill: #64748b; }
+      .step-num { font: 600 14px ui-sans-serif, system-ui, sans-serif; fill: #fff; }
+
+      .agent-box { fill: #eff6ff; stroke: #3b82f6; stroke-width: 2; }
+      .skill-box { fill: #f5f3ff; stroke: #8b5cf6; stroke-width: 2; }
+      .cli-box { fill: #ecfdf5; stroke: #10b981; stroke-width: 2; }
+      .graph-box { fill: #fef3c7; stroke: #f59e0b; stroke-width: 2; }
+      .result-box { fill: #f0f9ff; stroke: #0ea5e9; stroke-width: 2; }
+
+      .flow { stroke: #64748b; stroke-width: 2; fill: none; marker-end: url(#flow-arrow); }
+      .return-flow { stroke: #0ea5e9; stroke-width: 2; fill: none; marker-end: url(#return-arrow); stroke-dasharray: 6 3; }
+
+      .circle-blue { fill: #3b82f6; }
+      .circle-purple { fill: #8b5cf6; }
+      .circle-green { fill: #10b981; }
+      .circle-amber { fill: #f59e0b; }
+      .circle-cyan { fill: #0ea5e9; }
+    </style>
+    <marker id="flow-arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <marker id="return-arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0ea5e9"/>
+    </marker>
+  </defs>
+
+  <text class="heading" x="48" y="36">How agents use rgctl: structured facts, not confident guesses</text>
+
+  <!-- Step 1: User asks agent -->
+  <circle class="circle-blue" cx="68" cy="100" r="14"/>
+  <text class="step-num" x="62" y="106">1</text>
+
+  <rect class="agent-box" x="96" y="76" width="260" height="52" rx="10"/>
+  <text class="label-bold" x="116" y="98">LLM Agent</text>
+  <text class="mono" x="116" y="116">"What breaks if I change processOrder?"</text>
+
+  <!-- Step 2: Skill translates -->
+  <path class="flow" d="M 356 102 L 404 102"/>
+
+  <circle class="circle-purple" cx="420" cy="100" r="14"/>
+  <text class="step-num" x="414" y="106">2</text>
+
+  <rect class="skill-box" x="448" y="76" width="220" height="52" rx="10"/>
+  <text class="label-bold" x="468" y="98">SKILL.md layer</text>
+  <text class="mono" x="468" y="116">NL -> rgctl CLI translation</text>
+
+  <!-- Step 3: CLI command -->
+  <path class="flow" d="M 558 128 L 558 160"/>
+
+  <circle class="circle-green" cx="200" cy="192" r="14"/>
+  <text class="step-num" x="194" y="198">3</text>
+
+  <rect class="cli-box" x="228" y="168" width="380" height="52" rx="10"/>
+  <text class="label-bold" x="248" y="190">rgctl CLI</text>
+  <text class="mono" x="248" y="208">rgctl -f json blast-radius processOrder</text>
+
+  <!-- Step 4: Graph query -->
+  <path class="flow" d="M 418 220 L 418 256"/>
+
+  <circle class="circle-amber" cx="200" cy="290" r="14"/>
+  <text class="step-num" x="194" y="296">4</text>
+
+  <rect class="graph-box" x="228" y="264" width="380" height="60" rx="10"/>
+  <text class="label-bold" x="248" y="288">.rgctl/ persistent graph</text>
+  <text class="mono" x="248" y="306">mmap read -> bitset lookup -> O(1)</text>
+  <text class="note" x="248" y="318">No file re-reads. No re-indexing. Deterministic.</text>
+
+  <!-- Step 5: JSON result back to agent -->
+  <path class="return-flow" d="M 608 294 L 750 294 L 750 102 L 710 102"/>
+
+  <circle class="circle-cyan" cx="726" cy="192" r="14"/>
+  <text class="step-num" x="720" y="198">5</text>
+
+  <rect class="result-box" x="680" y="76" width="140" height="52" rx="10"/>
+  <text class="label-bold" x="700" y="98">JSON Facts</text>
+  <text class="mono" x="700" y="116">7 affected, 3 depth</text>
+
+  <!-- Benefits row -->
+  <rect x="48" y="346" width="180" height="44" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text class="label-bold" x="68" y="366" fill="#1d4ed8">Low token cost</text>
+  <text class="note" x="68" y="382">No file dumping needed</text>
+
+  <rect x="248" y="346" width="180" height="44" rx="8" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1"/>
+  <text class="label-bold" x="268" y="366" fill="#6d28d9">Deterministic</text>
+  <text class="note" x="268" y="382">Same query = same answer</text>
+
+  <rect x="448" y="346" width="180" height="44" rx="8" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text class="label-bold" x="468" y="366" fill="#047857">Persistent memory</text>
+  <text class="note" x="468" y="382">Graph survives sessions</text>
+
+  <rect x="648" y="346" width="180" height="44" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1"/>
+  <text class="label-bold" x="668" y="366" fill="#c2410c">Sub-millisecond</text>
+  <text class="note" x="668" y="382">Pre-computed bitsets</text>
+</svg>

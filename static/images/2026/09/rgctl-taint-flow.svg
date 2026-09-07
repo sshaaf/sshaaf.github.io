@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 360" role="img" aria-labelledby="title desc">
+  <title id="title">Taint analysis: tracing data from source to sink</title>
+  <desc id="desc">Forward propagation over the program dependence graph traces untrusted data from HTTP input through transformations to SQL queries, checking for sanitizer intervention</desc>
+  <defs>
+    <style>
+      .heading { font: 600 16px ui-sans-serif, system-ui, sans-serif; fill: #0f766e; }
+      .label { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .mono { font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+      .mono-sm { font: 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #475569; }
+      .note { font: italic 11px ui-sans-serif, system-ui, sans-serif; fill: #64748b; }
+      .badge-text { font: 600 10px ui-sans-serif, system-ui, sans-serif; fill: #fff; }
+      .source { fill: #fef2f2; stroke: #ef4444; stroke-width: 2; }
+      .tainted { fill: #fff7ed; stroke: #f97316; stroke-width: 2; }
+      .sanitizer { fill: #ecfdf5; stroke: #10b981; stroke-width: 2.5; }
+      .sink { fill: #fef2f2; stroke: #dc2626; stroke-width: 2.5; }
+      .safe-sink { fill: #f0fdf4; stroke: #22c55e; stroke-width: 2.5; }
+      .taint-flow { stroke: #ef4444; stroke-width: 2; fill: none; marker-end: url(#taint); }
+      .clean-flow { stroke: #22c55e; stroke-width: 2; fill: none; marker-end: url(#clean); }
+      .data-dep { stroke: #94a3b8; stroke-width: 1; fill: none; stroke-dasharray: 3 2; }
+    </style>
+    <marker id="taint" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ef4444"/>
+    </marker>
+    <marker id="clean" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#22c55e"/>
+    </marker>
+  </defs>
+
+  <text class="heading" x="48" y="36">Taint analysis: tracing untrusted data through the program</text>
+  <text class="label" x="48" y="56">Forward propagation over the PDG from sources to sinks, checking for sanitizers</text>
+
+  <!-- Path 1: Vulnerable (no sanitizer) -->
+  <rect x="38" y="76" width="784" height="118" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1" opacity="0.3"/>
+  <rect x="48" y="78" width="108" height="18" rx="4" fill="#dc2626"/>
+  <text class="badge-text" x="60" y="91">VULNERABLE</text>
+
+  <!-- Source -->
+  <rect class="source" x="48" y="104" width="140" height="52" rx="8"/>
+  <text class="mono" x="60" y="124">request.getParam</text>
+  <text class="mono-sm" x="60" y="142">SOURCE: HTTP input</text>
+
+  <path class="taint-flow" d="M 188 130 L 238 130"/>
+
+  <!-- Tainted step 1 -->
+  <rect class="tainted" x="238" y="104" width="140" height="52" rx="8"/>
+  <text class="mono" x="250" y="124">String query =</text>
+  <text class="mono-sm" x="250" y="142">"SELECT * " + input</text>
+
+  <path class="taint-flow" d="M 378 130 L 428 130"/>
+
+  <!-- No sanitizer, straight to sink -->
+  <rect class="tainted" x="428" y="104" width="140" height="52" rx="8"/>
+  <text class="mono" x="440" y="124">stmt.execute</text>
+  <text class="mono-sm" x="440" y="142">TAINTED string</text>
+
+  <path class="taint-flow" d="M 568 130 L 618 130"/>
+
+  <!-- Sink (vulnerable) -->
+  <rect class="sink" x="618" y="104" width="190" height="52" rx="8"/>
+  <text class="mono" x="630" y="124">db.executeQuery(q)</text>
+  <text class="mono-sm" x="630" y="142">SINK: SQL (CWE-89)</text>
+
+  <!-- Path 2: Safe (sanitizer present) -->
+  <rect x="38" y="210" width="784" height="118" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" opacity="0.3"/>
+  <rect x="48" y="212" width="64" height="18" rx="4" fill="#16a34a"/>
+  <text class="badge-text" x="60" y="225">SAFE</text>
+
+  <!-- Source -->
+  <rect class="source" x="48" y="240" width="140" height="52" rx="8"/>
+  <text class="mono" x="60" y="260">request.getParam</text>
+  <text class="mono-sm" x="60" y="278">SOURCE: HTTP input</text>
+
+  <path class="taint-flow" d="M 188 266 L 238 266"/>
+
+  <!-- Tainted step -->
+  <rect class="tainted" x="238" y="240" width="140" height="52" rx="8"/>
+  <text class="mono" x="250" y="260">rawInput = ...</text>
+  <text class="mono-sm" x="250" y="278">TAINTED</text>
+
+  <path class="taint-flow" d="M 378 266 L 428 266"/>
+
+  <!-- Sanitizer -->
+  <rect class="sanitizer" x="428" y="236" width="160" height="60" rx="8"/>
+  <text class="mono" x="444" y="260">preparedStmt</text>
+  <text class="mono-sm" x="444" y="278">SANITIZER: param bind</text>
+  <!-- Shield icon -->
+  <circle cx="572" cy="256" r="10" fill="#10b981" opacity="0.3"/>
+  <text x="567" y="261" style="font: 600 13px sans-serif; fill: #059669;">&#x2713;</text>
+
+  <path class="clean-flow" d="M 588 266 L 618 266"/>
+
+  <!-- Sink (safe) -->
+  <rect class="safe-sink" x="618" y="240" width="190" height="52" rx="8"/>
+  <text class="mono" x="630" y="260">db.executeQuery(q)</text>
+  <text class="mono-sm" x="630" y="278">SINK: SQL (clean)</text>
+
+  <!-- Footer -->
+  <text class="note" x="48" y="346">rgctl traces both paths and reports which flows reach sinks without sanitization -- CWE-aware patterns for SQL injection, XSS, command injection, and more.</text>
+</svg>
