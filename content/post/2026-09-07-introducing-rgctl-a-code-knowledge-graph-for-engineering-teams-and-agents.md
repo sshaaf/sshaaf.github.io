@@ -19,6 +19,12 @@ Modern codebases are too large to hold in your head. They are also too large for
 
 This post introduces what rgctl is, how it works, what problems it solves, and how to get started.
 
+### What the R stands for
+
+- **Rust:** Memory-safe, predictable performance at scale without blowing the heap.
+- **Reachability:** Pre-computed sparse bitsets keep "what breaks if I change this?" queries sub-second.
+- **Rich graph:** 30+ typed relations (CALLS, IMPORTS, CONTAINS), not just files and folders.
+
 ## The problem: structural questions deserve structural answers
 
 Consider a typical scenario. You are refactoring a function in a large Java monolith. You need to know:
