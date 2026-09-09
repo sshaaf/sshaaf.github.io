@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">
+  <title id="title">CoolStore WebLogic: application layers</title>
+  <desc id="desc">Java EE monolith with bundled JavaScript vendor libraries</desc>
+  <defs>
+    <style>
+      .heading  { font: 600 16px ui-sans-serif, system-ui, sans-serif; fill: #0f766e; }
+      .label    { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .node-label { font: 600 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+      .layer-tag  { font: 600 11px ui-sans-serif, system-ui, sans-serif; fill: #64748b; }
+      .note       { font: italic 11px ui-sans-serif, system-ui, sans-serif; fill: #64748b; }
+      .ann        { font: 600 10px ui-sans-serif, system-ui, sans-serif; fill: #64748b; }
+      .calls-edge { stroke: #cbd5e1; stroke-width: 1.5; fill: none; marker-end: url(#gray-arrow); }
+      .js-edge    { stroke: #94a3b8; stroke-width: 1.5; fill: none; stroke-dasharray: 6 4; marker-end: url(#gray-arrow); }
+    </style>
+    <marker id="gray-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <!-- ── Title ── -->
+  <text class="heading" x="24" y="30">CoolStore WebLogic: application layers</text>
+  <text class="label"   x="24" y="48">Java EE monolith with bundled JavaScript vendor libraries</text>
+
+  <!-- ══════════════════════════════════════════════════
+       LAYER 1 — REST  (y 64 … 124)
+       ══════════════════════════════════════════════════ -->
+  <rect x="16" y="60" width="598" height="72" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text class="layer-tag" x="24" y="76">REST</text>
+
+  <!-- CartEndpoint -->
+  <rect x="32"  y="84" width="130" height="36" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text class="node-label" x="97"  y="107" text-anchor="middle">CartEndpoint</text>
+
+  <!-- OrderEndpoint -->
+  <rect x="184" y="84" width="130" height="36" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text class="node-label" x="249" y="107" text-anchor="middle">OrderEndpoint</text>
+
+  <!-- ProductEndpoint -->
+  <rect x="336" y="84" width="140" height="36" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text class="node-label" x="406" y="107" text-anchor="middle">ProductEndpoint</text>
+
+  <!-- annotation -->
+  <text class="ann" x="492" y="107">~120 functions</text>
+
+  <!-- ══════════════════════════════════════════════════
+       LAYER 2 — Service  (y 148 … 218)
+       ══════════════════════════════════════════════════ -->
+  <rect x="16" y="144" width="598" height="82" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text class="layer-tag" x="24" y="162">Service</text>
+
+  <!-- ShoppingCartService -->
+  <rect x="32"  y="168" width="152" height="36" rx="8" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text class="node-label" x="108" y="190" text-anchor="middle">ShoppingCartService</text>
+
+  <!-- CatalogService -->
+  <rect x="198" y="168" width="108" height="36" rx="8" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text class="node-label" x="252" y="190" text-anchor="middle">CatalogService</text>
+
+  <!-- PromoService -->
+  <rect x="318" y="168" width="96"  height="36" rx="8" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text class="node-label" x="366" y="190" text-anchor="middle">PromoService</text>
+
+  <!-- OrderService -->
+  <rect x="426" y="168" width="96"  height="36" rx="8" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text class="node-label" x="474" y="190" text-anchor="middle">OrderService</text>
+
+  <!-- ShippingService -->
+  <rect x="534" y="168" width="68"  height="36" rx="8" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text class="node-label" x="568" y="190" text-anchor="middle">ShippingService</text>
+
+  <!-- ══════════════════════════════════════════════════
+       LAYER 3 — Model  (y 248 … 318)
+       ══════════════════════════════════════════════════ -->
+  <rect x="16" y="244" width="598" height="82" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text class="layer-tag" x="24" y="262">Model</text>
+
+  <!-- ShoppingCart -->
+  <rect x="32"  y="268" width="108" height="36" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5"/>
+  <text class="node-label" x="86"  y="290" text-anchor="middle">ShoppingCart</text>
+
+  <!-- Order -->
+  <rect x="152" y="268" width="64"  height="36" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5"/>
+  <text class="node-label" x="184" y="290" text-anchor="middle">Order</text>
+
+  <!-- Product -->
+  <rect x="228" y="268" width="72"  height="36" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5"/>
+  <text class="node-label" x="264" y="290" text-anchor="middle">Product</text>
+
+  <!-- CatalogItemEntity -->
+  <rect x="312" y="268" width="138" height="36" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5"/>
+  <text class="node-label" x="381" y="290" text-anchor="middle">CatalogItemEntity</text>
+
+  <!-- InventoryEntity -->
+  <rect x="462" y="268" width="118" height="36" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5"/>
+  <text class="node-label" x="521" y="290" text-anchor="middle">InventoryEntity</text>
+
+  <!-- ══════════════════════════════════════════════════
+       LAYER 4 — Persistence  (y 352 … 412)
+       ══════════════════════════════════════════════════ -->
+  <rect x="16" y="348" width="598" height="68" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text class="layer-tag" x="24" y="366">Persistence</text>
+
+  <!-- EntityManager -->
+  <rect x="32"  y="376" width="200" height="32" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text class="node-label" x="132" y="397" text-anchor="middle">Resources (EntityManager)</text>
+
+  <!-- ══════════════════════════════════════════════════
+       RIGHT COLUMN — JS Frontend & Vendor  (x 632 … 844)
+       ══════════════════════════════════════════════════ -->
+  <rect x="630" y="60" width="214" height="356" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text class="layer-tag" x="642" y="80">JavaScript Frontend &amp; Vendor</text>
+
+  <!-- controllers.js -->
+  <rect x="644" y="90"  width="186" height="34" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text class="node-label" x="737" y="112" text-anchor="middle">controllers.js</text>
+
+  <!-- cart.js / catalog.js -->
+  <rect x="644" y="136" width="186" height="34" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text class="node-label" x="737" y="158" text-anchor="middle">cart.js / catalog.js</text>
+
+  <!-- Vendor sub-section divider -->
+  <line x1="644" y1="184" x2="830" y2="184" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 3"/>
+  <text class="ann" x="650" y="197">Vendor libs</text>
+
+  <!-- lodash.js -->
+  <rect x="644" y="204" width="86"  height="30" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text class="node-label" x="687" y="224" text-anchor="middle">lodash.js</text>
+
+  <!-- d3.js -->
+  <rect x="742" y="204" width="86"  height="30" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text class="node-label" x="785" y="224" text-anchor="middle">d3.js</text>
+
+  <!-- jquery.dataTables -->
+  <rect x="644" y="246" width="184" height="30" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text class="node-label" x="736" y="266" text-anchor="middle">jquery.dataTables</text>
+
+  <!-- angular -->
+  <rect x="644" y="288" width="184" height="30" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text class="node-label" x="736" y="308" text-anchor="middle">angular</text>
+
+  <!-- 7400+ annotation -->
+  <rect x="644" y="330" width="184" height="26" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+  <text class="ann" x="736" y="347" text-anchor="middle" fill="#991b1b">7,400+ functions</text>
+
+  <!-- Vendor boundary label -->
+  <text class="note" x="736" y="388" text-anchor="middle">bundled third-party code</text>
+  <text class="note" x="736" y="402" text-anchor="middle">outside Java package scope</text>
+
+  <!-- ══════════════════════════════════════════════════
+       VERTICAL CALL ARROWS (Java layers)
+       ══════════════════════════════════════════════════ -->
+
+  <!-- REST -> Service (CartEndpoint -> ShoppingCartService) -->
+  <path class="calls-edge" d="M 97 120 L 97 140 L 108 140 L 108 168"/>
+  <!-- REST -> Service (OrderEndpoint -> OrderService) -->
+  <path class="calls-edge" d="M 249 120 L 249 140 L 474 140 L 474 168"/>
+  <!-- REST -> Service (ProductEndpoint -> CatalogService) -->
+  <path class="calls-edge" d="M 406 120 L 406 140 L 252 140 L 252 168"/>
+
+  <!-- Service -> Model (ShoppingCartService -> ShoppingCart) -->
+  <path class="calls-edge" d="M 108 204 L 108 230 L 86 230 L 86 268"/>
+  <!-- Service -> Model (CatalogService -> CatalogItemEntity) -->
+  <path class="calls-edge" d="M 252 204 L 252 230 L 381 230 L 381 268"/>
+  <!-- Service -> Model (OrderService -> Order) -->
+  <path class="calls-edge" d="M 474 204 L 474 230 L 184 230 L 184 268"/>
+
+  <!-- Model -> Persistence (ShoppingCart -> EntityManager) -->
+  <path class="calls-edge" d="M 86 304 L 86 340 L 132 340 L 132 376"/>
+  <!-- Model -> Persistence (Order -> EntityManager) -->
+  <path class="calls-edge" d="M 184 304 L 184 348"/>
+  <!-- Model -> Persistence (CatalogItemEntity -> EntityManager) -->
+  <path class="calls-edge" d="M 381 304 L 381 340 L 200 340 L 200 376"/>
+
+  <!-- ══════════════════════════════════════════════════
+       JS DASHED ARROWS -> REST endpoints
+       ══════════════════════════════════════════════════ -->
+
+  <!-- controllers.js -> CartEndpoint -->
+  <path class="js-edge" d="M 630 107 L 490 107 L 490 97 L 162 97"/>
+  <!-- cart.js -> OrderEndpoint -->
+  <path class="js-edge" d="M 630 153 L 490 153 L 490 142 L 314 102"/>
+
+  <!-- ══════════════════════════════════════════════════
+       LEGEND / SUMMARY BAR
+       ══════════════════════════════════════════════════ -->
+  <rect x="16" y="432" width="828" height="48" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="28"  y="448" width="14" height="3" fill="#cbd5e1"/>
+  <polygon points="42,444.5 46,447 42,449.5" fill="#cbd5e1"/>
+  <text class="label" x="52" y="455">Java layer call</text>
+
+  <line x1="160" y1="447" x2="178" y2="447" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <polygon points="178,444 182,447 178,450" fill="#cbd5e1"/>
+  <text class="label" x="186" y="455">JS → REST (cross-stack)</text>
+
+  <rect x="340" y="441" width="12" height="12" rx="3" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text class="label" x="358" y="453">REST</text>
+
+  <rect x="400" y="441" width="12" height="12" rx="3" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text class="label" x="418" y="453">Service</text>
+
+  <rect x="470" y="441" width="12" height="12" rx="3" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5"/>
+  <text class="label" x="488" y="453">Model</text>
+
+  <rect x="532" y="441" width="12" height="12" rx="3" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text class="label" x="550" y="453">Persistence</text>
+
+  <rect x="624" y="441" width="12" height="12" rx="3" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text class="label" x="642" y="453">JS vendor</text>
+
+  <!-- second row of legend -->
+  <rect x="28"  y="465" width="14" height="3" fill="#cbd5e1"/>
+  <polygon points="42,461.5 46,464 42,466.5" fill="#cbd5e1"/>
+  <text class="label" x="52" y="472">→ Model calls Persistence via EntityManager</text>
+</svg>

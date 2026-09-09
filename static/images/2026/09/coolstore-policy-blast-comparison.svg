@@ -1,0 +1,261 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 460" role="img" aria-labelledby="title desc">
+  <title id="title">Blast radius: pass vs fail</title>
+  <desc id="desc">priceShoppingCart (7 nodes) vs indexOf (648 nodes) at max_impact_nodes: 15 — same policy file, same threshold, structural facts decide pass or fail</desc>
+
+  <defs>
+    <style>
+      .heading { font: 600 16px ui-sans-serif, system-ui, sans-serif; fill: #0f766e; }
+      .label { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .node-label { font: 600 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+      .badge-text { font: 700 12px ui-sans-serif, system-ui, sans-serif; fill: #fff; }
+      .impact-text { font: 600 11px ui-sans-serif, system-ui, sans-serif; }
+      .summary-text { font: 600 12px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .subtitle { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #64748b; }
+      .panel-label { font: 700 13px ui-sans-serif, system-ui, sans-serif; }
+    </style>
+
+    <!-- Green arrow for pass panel -->
+    <marker id="arrow-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#10b981"/>
+    </marker>
+    <!-- Red arrow for violated panel -->
+    <marker id="arrow-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ef4444"/>
+    </marker>
+
+    <filter id="soft-shadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#00000020"/>
+    </filter>
+    <filter id="glow-green">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-red">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ── Background ─────────────────────────────────────────────── -->
+  <rect width="860" height="460" fill="#f8fafc"/>
+
+  <!-- ── Title area ─────────────────────────────────────────────── -->
+  <text class="heading" x="430" y="30" text-anchor="middle">Blast radius: pass vs fail</text>
+  <text class="subtitle" x="430" y="50" text-anchor="middle">priceShoppingCart (7 nodes) vs indexOf (648 nodes) at max_impact_nodes: 15</text>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       LEFT PANEL — PASS
+       ══════════════════════════════════════════════════════════════ -->
+
+  <!-- Panel background -->
+  <rect x="12" y="62" width="404" height="354" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5" filter="url(#soft-shadow)"/>
+
+  <!-- Panel heading -->
+  <text class="panel-label" x="214" y="84" text-anchor="middle" fill="#065f46">priceShoppingCart</text>
+
+  <!-- PASS badge -->
+  <rect x="96" y="92" width="90" height="24" rx="12" fill="#10b981"/>
+  <text class="badge-text" x="141" y="109" text-anchor="middle">✓ PASS</text>
+  <!-- Impact count -->
+  <rect x="196" y="92" width="134" height="24" rx="12" fill="#d1fae5" stroke="#10b981" stroke-width="1.2"/>
+  <text class="impact-text" x="263" y="109" text-anchor="middle" fill="#065f46">impact: 7 / max: 15</text>
+
+  <!-- ── Center node: priceShoppingCart ── -->
+  <rect x="134" y="217" width="158" height="38" rx="19" fill="#d1fae5" stroke="#10b981" stroke-width="3" filter="url(#glow-green)"/>
+  <text class="node-label" x="213" y="241" text-anchor="middle" fill="#065f46">priceShoppingCart</text>
+
+  <!-- ── Caller nodes around center ── -->
+
+  <!-- CartEndpoint.add  (top-left) -->
+  <rect x="22" y="142" width="138" height="32" rx="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.8"/>
+  <text class="node-label" x="91" y="163" text-anchor="middle">CartEndpoint.add</text>
+
+  <!-- CartEndpoint.set  (top-center-left) -->
+  <rect x="30" y="192" width="134" height="32" rx="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.8"/>
+  <text class="node-label" x="97" y="213" text-anchor="middle">CartEndpoint.set</text>
+
+  <!-- CartEndpoint.delete  (middle-left) -->
+  <rect x="22" y="242" width="148" height="32" rx="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.8"/>
+  <text class="node-label" x="96" y="263" text-anchor="middle">CartEndpoint.delete</text>
+
+  <!-- CartEndpoint.dedupeCartItems  (bottom-left) -->
+  <rect x="14" y="292" width="178" height="32" rx="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.8"/>
+  <text class="node-label" x="103" y="313" text-anchor="middle">CartEndpoint.dedupe…</text>
+
+  <!-- checkOutShoppingCart  (far left) -->
+  <rect x="14" y="342" width="178" height="32" rx="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.8"/>
+  <text class="node-label" x="103" y="363" text-anchor="middle">checkOutShoppingCart</text>
+
+  <!-- CartEndpoint.checkout  (right side, downstream) -->
+  <rect x="250" y="155" width="148" height="32" rx="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.8"/>
+  <text class="node-label" x="324" y="176" text-anchor="middle">CartEndpoint.checkout</text>
+
+  <!-- anonymous (JS)  (right side, downstream) -->
+  <rect x="266" y="292" width="126" height="32" rx="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.8"/>
+  <text class="node-label" x="329" y="313" text-anchor="middle">anonymous (JS)</text>
+
+  <!-- ── Edges: callers → center (inward arrows) ── -->
+
+  <!-- CartEndpoint.add → center -->
+  <line x1="160" y1="163" x2="170" y2="228" stroke="#10b981" stroke-width="1.8" fill="none" marker-end="url(#arrow-green)"/>
+
+  <!-- CartEndpoint.set → center -->
+  <line x1="164" y1="213" x2="172" y2="230" stroke="#10b981" stroke-width="1.8" fill="none" marker-end="url(#arrow-green)"/>
+
+  <!-- CartEndpoint.delete → center -->
+  <line x1="170" y1="258" x2="172" y2="248" stroke="#10b981" stroke-width="1.8" fill="none" marker-end="url(#arrow-green)"/>
+
+  <!-- CartEndpoint.dedupe → center -->
+  <line x1="192" y1="305" x2="196" y2="262" stroke="#10b981" stroke-width="1.8" fill="none" marker-end="url(#arrow-green)"/>
+
+  <!-- checkOutShoppingCart → center -->
+  <line x1="192" y1="348" x2="210" y2="258" stroke="#10b981" stroke-width="1.8" fill="none" marker-end="url(#arrow-green)"/>
+
+  <!-- CartEndpoint.checkout → center (right side) -->
+  <line x1="302" y1="187" x2="272" y2="228" stroke="#10b981" stroke-width="1.8" fill="none" marker-end="url(#arrow-green)"/>
+
+  <!-- anonymous (JS) → center (right side) -->
+  <line x1="294" y1="305" x2="276" y2="255" stroke="#10b981" stroke-width="1.8" fill="none" marker-end="url(#arrow-green)"/>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       DIVIDER
+       ══════════════════════════════════════════════════════════════ -->
+  <line x1="430" y1="68" x2="430" y2="410" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 3"/>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       RIGHT PANEL — VIOLATED
+       ══════════════════════════════════════════════════════════════ -->
+
+  <!-- Panel background -->
+  <rect x="444" y="62" width="404" height="354" rx="12" fill="#fff5f5" stroke="#fecaca" stroke-width="1.5" filter="url(#soft-shadow)"/>
+
+  <!-- Dashed blast-zone border -->
+  <rect x="456" y="118" width="380" height="288" rx="10" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="8 4" opacity="0.6"/>
+
+  <!-- Panel heading -->
+  <text class="panel-label" x="646" y="84" text-anchor="middle" fill="#991b1b">indexOf</text>
+
+  <!-- VIOLATED badge -->
+  <rect x="532" y="92" width="110" height="24" rx="12" fill="#dc2626"/>
+  <text class="badge-text" x="587" y="109" text-anchor="middle">✗ VIOLATED</text>
+  <!-- Impact count -->
+  <rect x="652" y="92" width="150" height="24" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="1.2"/>
+  <text class="impact-text" x="727" y="109" text-anchor="middle" fill="#991b1b">impact: 648 / max: 15</text>
+
+  <!-- ── Center node: indexOf ── -->
+  <rect x="586" y="217" width="120" height="38" rx="19" fill="#fca5a5" stroke="#dc2626" stroke-width="3" filter="url(#glow-red)"/>
+  <text class="node-label" x="646" y="241" text-anchor="middle" fill="#7f1d1d">indexOf</text>
+
+  <!-- ── Dense dot cloud representing ~232 direct callers ── -->
+  <!-- Ring 1 — tight inner ring (12 dots) -->
+  <circle cx="604" cy="200" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+  <circle cx="626" cy="192" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+  <circle cx="648" cy="190" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+  <circle cx="670" cy="193" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+  <circle cx="690" cy="203" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+  <circle cx="598" cy="218" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+  <circle cx="598" cy="238" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+  <circle cx="604" cy="256" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+  <circle cx="692" cy="222" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+  <circle cx="690" cy="242" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+  <circle cx="680" cy="258" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+  <circle cx="648" cy="267" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+  <circle cx="626" cy="265" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="1" opacity="0.85"/>
+
+  <!-- Ring 2 — mid ring (18 dots) -->
+  <circle cx="575" cy="183" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="596" cy="170" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="620" cy="164" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="646" cy="161" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="672" cy="165" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="696" cy="175" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="713" cy="192" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="718" cy="213" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="715" cy="236" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="706" cy="257" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="692" cy="273" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="673" cy="283" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="650" cy="287" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="626" cy="283" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="605" cy="272" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="572" cy="212" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="571" cy="234" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+  <circle cx="579" cy="255" r="4.5" fill="#fee2e2" stroke="#ef4444" stroke-width="1" opacity="0.75"/>
+
+  <!-- Ring 3 — outer ring scatter (24 dots) -->
+  <circle cx="554" cy="170" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="566" cy="148" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="585" cy="136" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="608" cy="130" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="632" cy="128" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="657" cy="129" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="681" cy="134" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="703" cy="145" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="720" cy="160" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="732" cy="180" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="736" cy="204" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="733" cy="228" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="724" cy="251" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="710" cy="271" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="692" cy="287" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="671" cy="298" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="647" cy="303" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="622" cy="301" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="598" cy="293" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="578" cy="279" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="561" cy="260" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="551" cy="238" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="548" cy="215" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+  <circle cx="551" cy="191" r="4" fill="#fee2e2" stroke="#ef4444" stroke-width="0.8" opacity="0.55"/>
+
+  <!-- ── Radiating red edges (fanned out from center) ── -->
+  <line x1="646" y1="217" x2="566" y2="148" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+  <line x1="646" y1="217" x2="608" y2="130" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+  <line x1="646" y1="217" x2="657" y2="129" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+  <line x1="646" y1="217" x2="703" y2="145" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+  <line x1="646" y1="217" x2="732" y2="180" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+  <line x1="646" y1="217" x2="736" y2="204" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+  <line x1="646" y1="217" x2="733" y2="228" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+  <line x1="646" y1="217" x2="710" y2="271" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+  <line x1="646" y1="217" x2="671" y2="298" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+  <line x1="646" y1="217" x2="622" y2="301" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+  <line x1="646" y1="217" x2="578" y2="279" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+  <line x1="646" y1="217" x2="548" y2="215" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+  <line x1="646" y1="217" x2="554" y2="170" stroke="#ef4444" stroke-width="1" opacity="0.35" marker-end="url(#arrow-red)"/>
+
+  <!-- ── Labeled nodes emerging from the cloud ── -->
+
+  <!-- baseIndexOf — top-left -->
+  <rect x="456" y="136" width="100" height="28" rx="14" fill="#fee2e2" stroke="#ef4444" stroke-width="1.6"/>
+  <text class="node-label" x="506" y="155" text-anchor="middle">baseIndexOf</text>
+  <line x1="586" y1="228" x2="556" y2="155" stroke="#ef4444" stroke-width="1.4" opacity="0.7" marker-end="url(#arrow-red)"/>
+
+  <!-- binaryIndex — top-right -->
+  <rect x="726" y="136" width="100" height="28" rx="14" fill="#fee2e2" stroke="#ef4444" stroke-width="1.6"/>
+  <text class="node-label" x="776" y="155" text-anchor="middle">binaryIndex</text>
+  <line x1="706" y1="228" x2="752" y2="155" stroke="#ef4444" stroke-width="1.4" opacity="0.7" marker-end="url(#arrow-red)"/>
+
+  <!-- slice — left -->
+  <rect x="456" y="222" width="68" height="28" rx="14" fill="#fee2e2" stroke="#ef4444" stroke-width="1.6"/>
+  <text class="node-label" x="490" y="241" text-anchor="middle">slice</text>
+  <line x1="586" y1="236" x2="524" y2="236" stroke="#ef4444" stroke-width="1.4" opacity="0.7" marker-end="url(#arrow-red)"/>
+
+  <!-- replace — bottom-left -->
+  <rect x="464" y="340" width="80" height="28" rx="14" fill="#fee2e2" stroke="#ef4444" stroke-width="1.6"/>
+  <text class="node-label" x="504" y="359" text-anchor="middle">replace</text>
+  <line x1="596" y1="253" x2="530" y2="350" stroke="#ef4444" stroke-width="1.4" opacity="0.7" marker-end="url(#arrow-red)"/>
+
+  <!-- isLength — bottom-right -->
+  <rect x="740" y="340" width="82" height="28" rx="14" fill="#fee2e2" stroke="#ef4444" stroke-width="1.6"/>
+  <text class="node-label" x="781" y="359" text-anchor="middle">isLength</text>
+  <line x1="700" y1="253" x2="766" y2="350" stroke="#ef4444" stroke-width="1.4" opacity="0.7" marker-end="url(#arrow-red)"/>
+
+  <!-- "232 more..." annotation -->
+  <text class="label" x="646" y="395" text-anchor="middle" fill="#dc2626" font-style="italic">+ 227 more callers not shown</text>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       BOTTOM SUMMARY BAR
+       ══════════════════════════════════════════════════════════════ -->
+  <rect x="12" y="420" width="836" height="34" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text class="summary-text" x="430" y="442" text-anchor="middle">Same policy file, same threshold — structural facts decide pass or fail</text>
+</svg>

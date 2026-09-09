@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" role="img" aria-labelledby="title desc">
+  <title id="title">Domain isolation: forbidden crossings</title>
+  <desc id="desc">Policy blocks blast-radius paths between service and rest layers</desc>
+
+  <defs>
+    <style>
+      .heading   { font: 600 16px ui-sans-serif, system-ui, sans-serif; fill: #0f766e; }
+      .label     { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .node-label{ font: 600 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+    </style>
+
+    <!-- arrowhead for the red violation arrow -->
+    <marker id="red-arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
+    </marker>
+  </defs>
+
+  <!-- ── Title block ──────────────────────────────────────────────── -->
+  <text class="heading" x="430" y="34" text-anchor="middle">Domain isolation: forbidden crossings</text>
+  <text class="label"   x="430" y="56" text-anchor="middle">Policy blocks blast-radius paths between service and rest layers</text>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       LEFT BOX — "service" domain
+  ════════════════════════════════════════════════════════════════ -->
+  <rect x="40" y="76" width="320" height="284" rx="12"
+        fill="#f0fdf4" stroke="#10b981" stroke-width="2" stroke-dasharray="8 4"/>
+
+  <!-- domain label -->
+  <text x="200" y="104" text-anchor="middle"
+        font="600 14px ui-sans-serif, system-ui, sans-serif"
+        font-size="14" font-weight="600"
+        fill="#059669" font-family="ui-sans-serif, system-ui, sans-serif">"service" domain</text>
+
+  <!-- node: priceShoppingCart -->
+  <rect x="72" y="124" width="256" height="44" rx="8"
+        fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text class="node-label" x="200" y="151" text-anchor="middle">priceShoppingCart</text>
+
+  <!-- node: checkOutShoppingCart -->
+  <rect x="72" y="188" width="256" height="44" rx="8"
+        fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text class="node-label" x="200" y="215" text-anchor="middle">checkOutShoppingCart</text>
+
+  <!-- node: getShoppingCart (source of the violation arrow) -->
+  <rect x="72" y="252" width="256" height="44" rx="8"
+        fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text class="node-label" x="200" y="279" text-anchor="middle">getShoppingCart</text>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       RIGHT BOX — "rest" domain
+  ════════════════════════════════════════════════════════════════ -->
+  <rect x="500" y="76" width="320" height="284" rx="12"
+        fill="#eff6ff" stroke="#3b82f6" stroke-width="2" stroke-dasharray="8 4"/>
+
+  <!-- domain label -->
+  <text x="660" y="104" text-anchor="middle"
+        font-size="14" font-weight="600"
+        fill="#2563eb" font-family="ui-sans-serif, system-ui, sans-serif">"rest" domain</text>
+
+  <!-- node: CartEndpoint.add -->
+  <rect x="532" y="124" width="256" height="44" rx="8"
+        fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text class="node-label" x="660" y="151" text-anchor="middle">CartEndpoint.add</text>
+
+  <!-- node: CartEndpoint.checkout -->
+  <rect x="532" y="188" width="256" height="44" rx="8"
+        fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text class="node-label" x="660" y="215" text-anchor="middle">CartEndpoint.checkout</text>
+
+  <!-- node: CartEndpoint.getCart (target of the violation arrow) -->
+  <rect x="532" y="252" width="256" height="44" rx="8"
+        fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text class="node-label" x="660" y="279" text-anchor="middle">CartEndpoint.getCart</text>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FORBIDDEN BOUNDARY
+  ════════════════════════════════════════════════════════════════ -->
+
+  <!-- thick red dashed vertical line -->
+  <line x1="430" y1="72" x2="430" y2="368"
+        stroke="#ef4444" stroke-width="3" stroke-dasharray="8 4"/>
+
+  <!-- "FORBIDDEN" badge centred on the boundary -->
+  <rect x="374" y="148" width="112" height="28" rx="6"
+        fill="#ef4444"/>
+  <text x="430" y="167" text-anchor="middle"
+        font-size="11" font-weight="700" letter-spacing="0.5"
+        fill="white" font-family="ui-sans-serif, system-ui, sans-serif">FORBIDDEN</text>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       VIOLATION ARROW: getShoppingCart → boundary (blocked)
+  ════════════════════════════════════════════════════════════════ -->
+
+  <!-- dashed red arrow from getShoppingCart rightward, stops before boundary -->
+  <line x1="328" y1="274" x2="416" y2="274"
+        stroke="#ef4444" stroke-width="2" stroke-dasharray="6 3"
+        marker-end="url(#red-arrow)"/>
+
+  <!-- red X circle at the boundary crossing point -->
+  <circle cx="430" cy="274" r="14" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+  <line x1="422" y1="266" x2="438" y2="282" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="438" y1="266" x2="422" y2="282" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- annotation label -->
+  <text x="430" y="310" text-anchor="middle"
+        font-size="11" font-weight="600"
+        fill="#dc2626" font-family="ui-sans-serif, system-ui, sans-serif">DomainIsolation violation</text>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       BOTTOM POLICY SNIPPET
+  ════════════════════════════════════════════════════════════════ -->
+  <rect x="192" y="374" width="476" height="22" rx="5" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+  <text x="430" y="389" text-anchor="middle"
+        font-size="11"
+        fill="#991b1b" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">forbidden_crossings: [["service", "rest"]]</text>
+
+</svg>

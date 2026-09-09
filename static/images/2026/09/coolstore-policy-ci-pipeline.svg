@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 320" role="img" aria-labelledby="title desc">
+  <title id="title">GitHub Actions: architecture policy gate</title>
+  <desc id="desc">Every pull request is checked against policy.json before merge</desc>
+
+  <defs>
+    <style>
+      .heading  { font: 600 16px ui-sans-serif, system-ui, sans-serif; fill: #0f766e; }
+      .label    { font: 13px ui-sans-serif, system-ui, sans-serif; fill: #475569; }
+      .node-label { font: 600 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+      .sub-label  { font: 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #64748b; }
+      .arrow    { stroke: #cbd5e1; stroke-width: 2; fill: none; marker-end: url(#ah-gray); }
+      .arrow-green { stroke: #10b981; stroke-width: 2; fill: none; marker-end: url(#ah-green); }
+      .arrow-red   { stroke: #ef4444; stroke-width: 2; fill: none; marker-end: url(#ah-red); }
+      .arrow-dash  { stroke: #94a3b8; stroke-width: 1.5; fill: none; stroke-dasharray: 5 3; marker-end: url(#ah-gray-sm); }
+    </style>
+
+    <!-- arrowhead markers -->
+    <marker id="ah-gray"    markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#cbd5e1"/>
+    </marker>
+    <marker id="ah-green"   markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#10b981"/>
+    </marker>
+    <marker id="ah-red"     markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#ef4444"/>
+    </marker>
+    <marker id="ah-gray-sm" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- ── Title block ── -->
+  <text class="heading" x="430" y="28" text-anchor="middle">GitHub Actions: architecture policy gate</text>
+  <text class="label"   x="430" y="48" text-anchor="middle">Every pull request is checked against policy.json before merge</text>
+
+  <!-- ════════════════════════════════════════════════════
+       Pipeline nodes  (y-center = 130)
+       x positions: 60, 210, 360, 510, 660 (width 110, height 64)
+       ════════════════════════════════════════════════════ -->
+
+  <!-- Step 1 · Pull Request -->
+  <!-- chevron-style left tab -->
+  <polygon points="18,110 34,98 34,162 18,150" fill="#94a3b8"/>
+  <rect x="34"  y="98" width="110" height="64" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text class="node-label" x="89"  y="123" text-anchor="middle">Pull Request</text>
+  <text class="sub-label"  x="89"  y="140" text-anchor="middle">PR opened</text>
+  <text class="sub-label"  x="89"  y="154" text-anchor="middle">&#x25B6; trigger</text>
+
+  <!-- arrow 1→2 -->
+  <path class="arrow" d="M 144 130 L 184 130"/>
+
+  <!-- Step 2 · Checkout -->
+  <rect x="184" y="98" width="110" height="64" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text class="node-label" x="239" y="121" text-anchor="middle">Checkout</text>
+  <text class="sub-label"  x="239" y="137" text-anchor="middle">git checkout</text>
+  <text class="sub-label"  x="239" y="151" text-anchor="middle">fetch-depth: 0</text>
+
+  <!-- arrow 2→3 -->
+  <path class="arrow" d="M 294 130 L 334 130"/>
+
+  <!-- Step 3 · Discover -->
+  <rect x="334" y="98" width="110" height="64" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text class="node-label" x="389" y="121" text-anchor="middle">Discover</text>
+  <text class="sub-label"  x="389" y="137" text-anchor="middle">rgctl discover .</text>
+  <text class="sub-label"  x="389" y="151" text-anchor="middle">build graph</text>
+
+  <!-- arrow 3→4 -->
+  <path class="arrow" d="M 444 130 L 484 130"/>
+
+  <!-- Step 4 · Policy Check -->
+  <rect x="484" y="98" width="110" height="64" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text class="node-label" x="539" y="121" text-anchor="middle">Policy Check</text>
+  <text class="sub-label"  x="539" y="137" text-anchor="middle">rgctl check</text>
+  <text class="sub-label"  x="539" y="151" text-anchor="middle">--policy-file *.json</text>
+
+  <!-- ── Split arrows from step 4 ── -->
+
+  <!-- PASS arrow: right then up to green box -->
+  <path class="arrow-green" d="M 594 115 Q 640 115 640 75 L 700 75"/>
+
+  <!-- FAIL arrow: right then down to red box -->
+  <path class="arrow-red"   d="M 594 145 Q 640 145 640 185 L 700 185"/>
+
+  <!-- Step 5a · PASS -->
+  <rect x="700" y="48"  width="140" height="54" rx="8" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text class="node-label" x="770" y="70"  text-anchor="middle" fill="#065f46">PASS</text>
+  <text class="sub-label"  x="770" y="85"  text-anchor="middle">exit 0</text>
+  <text class="sub-label"  x="770" y="98"  text-anchor="middle">PR mergeable</text>
+
+  <!-- Step 5b · FAIL -->
+  <rect x="700" y="158" width="140" height="54" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/>
+  <text class="node-label" x="770" y="180" text-anchor="middle" fill="#991b1b">FAIL</text>
+  <text class="sub-label"  x="770" y="195" text-anchor="middle">exit 1</text>
+  <text class="sub-label"  x="770" y="208" text-anchor="middle">PR blocked + comment</text>
+
+  <!-- ════════════════════════════════════════════════════
+       Cache annotation  (below step 3 · Discover)
+       ════════════════════════════════════════════════════ -->
+  <rect x="334" y="228" width="110" height="40" rx="6"
+        fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="5 3"/>
+  <text class="sub-label" x="389" y="245" text-anchor="middle" font-style="italic">.rgctl/ cached</text>
+  <text class="sub-label" x="389" y="260" text-anchor="middle" font-style="italic">artifacts</text>
+
+  <!-- dashed arrow from cache box up to Discover node -->
+  <path class="arrow-dash" d="M 389 228 L 389 163"/>
+
+</svg>
