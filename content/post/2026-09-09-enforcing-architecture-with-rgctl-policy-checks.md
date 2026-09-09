@@ -436,11 +436,11 @@ Each node in the response includes an `id` field (UUID). Collect the UUIDs for t
 
 The crossing check is bidirectional. Declaring `["service", "rest"]` blocks both directions.
 
-## Git-aware scoping
+## Git-aware scoping (local development)
 
-The `check` command is git-aware. When run inside a git repository, it extracts the list of changed files from `git diff --name-only HEAD` and only evaluates functions defined in those files. This keeps CI fast -- on a 7,500-function codebase like CoolStore, you only pay for the functions you actually changed.
+The `check` command has a local optimization: it runs `git diff --name-only HEAD` to detect **uncommitted changes in the working tree**. If you have modified files that are not yet committed, `check` evaluates only the functions defined in those files instead of the full graph. This makes the feedback loop fast during local development -- edit a file, run the check, see if your change introduces a policy violation.
 
-If git is unavailable or the diff is empty, the check falls back to evaluating every function in the graph.
+If the diff is empty (no uncommitted changes) or git is unavailable, the check falls back to evaluating every function in the graph. This is what happens in CI: a GitHub Actions checkout produces a clean working tree with no uncommitted changes, so `git diff --name-only HEAD` returns nothing and the full graph is evaluated. For CoolStore's 7,500 functions this is still fast (sub-second), but on very large codebases you may want to be aware of this.
 
 ## GitHub Actions integration
 
@@ -460,8 +460,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # full history for git diff
 
       - name: Install rgctl
         run: |
@@ -474,13 +472,13 @@ jobs:
       - name: Run policy check
         run: rgctl -f json check --policy-file policy.json
 ```
+> Today, rgctl does not checkout full git history. evaluation is on a clean tree. This means that `check` evaluates every function in the graph, not just the ones modified in the PR. Temporal updates and diffs are planned for a future release.
 
-The workflow does four things:
+The workflow does three things:
 
-1. **Checks out the full git history** (`fetch-depth: 0`). This is required for `git diff` to work correctly -- rgctl needs to compare the working tree against HEAD to identify changed files.
-2. **Installs rgctl** from the latest release.
-3. **Discovers the codebase** to build the knowledge graph. This step runs once and persists the graph to `.rgctl/`.
-4. **Runs the policy check** against `policy.json` at the repository root. If any violation is found, the step fails with exit code 1 and the pull request is blocked.
+1. **Checks out the PR branch.** The checkout is a clean tree, so `check` evaluates every function in the graph (the git-aware local optimization does not apply in CI -- see above).
+2. **Discovers the codebase** to build the knowledge graph. This step runs once and persists the graph to `.rgctl/`.
+3. **Runs the policy check** against `policy.json` at the repository root. If any violation is found, the step fails with exit code 1 and the pull request is blocked.
 
 ### Adding violation details to PR comments
 
