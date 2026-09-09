@@ -472,7 +472,7 @@ jobs:
       - name: Run policy check
         run: rgctl -f json check --policy-file policy.json
 ```
-> Today, rgctl does not checkout full git history. evaluation is on a clean tree. This means that `check` evaluates every function in the graph, not just the ones modified in the PR. Temporal updates and diffs are planned for a future release.
+> Update 09-09-2026: Today, rgctl does not checkout full git history. evaluation is on a clean tree. This means that `check` evaluates every function in the graph, not just the ones modified in the PR. Temporal updates and diffs are planned for a future release.
 
 The workflow does three things:
 
